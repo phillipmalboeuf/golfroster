@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { DefaultTheme, Provider as PaperProvider, Button, Colors, Theme } from 'react-native-paper'
 import { Appbar } from 'react-native-paper'
@@ -7,12 +7,10 @@ import firebase, { User } from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 
-import { Form } from './components/form'
-import { Input } from './components/input'
-
 import { FirebaseContext } from './contexts/firebase'
 import { Profile } from './routes/profile'
 import { Login } from './routes/login'
+import { StoreContext } from './contexts/store'
 
 
 const app = firebase.initializeApp({
@@ -39,6 +37,7 @@ const theme: Theme = {
 export default function App() {
   // const [players, setPlayers] = useState([])
   const [user, setUser] = useState<User>(undefined)
+  const { store } = useContext(StoreContext)
 
   useEffect(() => {
     // db.collection('players').where('club', '==', 'Fairway').onSnapshot(snapshot => {
@@ -47,6 +46,9 @@ export default function App() {
     //     id: doc.id,
     //   })))
     // })
+
+
+    store.login('O9MfbO7egDQIn6KmDHyA')
 
     auth.onAuthStateChanged(u => setUser(u))
   }, [])
