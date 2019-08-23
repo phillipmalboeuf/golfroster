@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { DefaultTheme, Provider as PaperProvider, Button, Colors, Theme } from 'react-native-paper'
+import { View } from 'react-native'
+import { DefaultTheme, Provider as PaperProvider, Colors, Theme } from 'react-native-paper'
 import { Appbar } from 'react-native-paper'
 
 import firebase, { User } from 'firebase'
@@ -34,7 +34,7 @@ const theme: Theme = {
 }
 
 
-export default function App() {
+const App = () => {
   // const [players, setPlayers] = useState([])
   const [user, setUser] = useState<User>(undefined)
   const { store } = useContext(StoreContext)
@@ -70,3 +70,5 @@ export default function App() {
     </FirebaseContext.Provider>
   </PaperProvider>
 }
+
+export default App
