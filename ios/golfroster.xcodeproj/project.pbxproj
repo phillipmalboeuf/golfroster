@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* golfrosterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* golfrosterTests.m */; };
-		070329CF45BE52F09E64DA6D /* libPods-golfroster-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B131F26C195EE764F5BF5D /* libPods-golfroster-tvOSTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		16D551CE723BBF975C309E54 /* libPods-golfroster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6251ED5E30A0CFE448A02341 /* libPods-golfroster.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* golfrosterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* golfrosterTests.m */; };
-		3A6024B035983FED297805E9 /* libPods-golfroster-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6F731D0BBA616F1A3B514D /* libPods-golfroster-tvOS.a */; };
-		CF26654970CEF77E504D9A8A /* libPods-golfrosterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B36D029395DC920A0A6DC2B7 /* libPods-golfrosterTests.a */; };
-		DFD5D7DF7CD15438071D6C2A /* libPods-golfroster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0FA6C50BE5176E89155E2C /* libPods-golfroster.a */; };
+		4C1DF4AED91D1774347B457C /* libPods-golfroster-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C66D6C924F81FB5F2111F8F1 /* libPods-golfroster-tvOSTests.a */; };
+		644AEE997B54C894BB81BD66 /* libPods-golfrosterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE7412F0A97A9224D2F1CAD9 /* libPods-golfrosterTests.a */; };
+		D89ED9A73513DC30A618E3F9 /* libPods-golfroster-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6197324982096E4B8F4AC145 /* libPods-golfroster-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,20 +51,20 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = golfroster/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = golfroster/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = golfroster/main.m; sourceTree = "<group>"; };
-		1734200D79D21A91EFA81F14 /* Pods-golfroster-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOSTests/Pods-golfroster-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* golfroster-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "golfroster-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* golfroster-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "golfroster-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4931FA52F248FFBB9EA11ECD /* Pods-golfroster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster.release.xcconfig"; path = "Target Support Files/Pods-golfroster/Pods-golfroster.release.xcconfig"; sourceTree = "<group>"; };
-		49DFEE317A9AFF2EB6B3D741 /* Pods-golfroster-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOS/Pods-golfroster-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		4F0FA6C50BE5176E89155E2C /* libPods-golfroster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfroster.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		50C1ECF3E8163D0F39F62378 /* Pods-golfroster-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOSTests/Pods-golfroster-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		940C834A523CC1B80C4408D8 /* Pods-golfrosterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfrosterTests.release.xcconfig"; path = "Target Support Files/Pods-golfrosterTests/Pods-golfrosterTests.release.xcconfig"; sourceTree = "<group>"; };
-		9475CB052062715F964380F6 /* Pods-golfroster-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOS.release.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOS/Pods-golfroster-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		99E87A86FC97B596C6AAA07D /* Pods-golfrosterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfrosterTests.debug.xcconfig"; path = "Target Support Files/Pods-golfrosterTests/Pods-golfrosterTests.debug.xcconfig"; sourceTree = "<group>"; };
-		AAEEBA75B9B7FB104EB77769 /* Pods-golfroster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster.debug.xcconfig"; path = "Target Support Files/Pods-golfroster/Pods-golfroster.debug.xcconfig"; sourceTree = "<group>"; };
-		B36D029395DC920A0A6DC2B7 /* libPods-golfrosterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfrosterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9B131F26C195EE764F5BF5D /* libPods-golfroster-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfroster-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF6F731D0BBA616F1A3B514D /* libPods-golfroster-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfroster-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CE527BFB07A5A6C95661EE8 /* Pods-golfroster-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOS.release.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOS/Pods-golfroster-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		5A3856D3EE6B75ED8E178042 /* Pods-golfroster-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOS/Pods-golfroster-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6197324982096E4B8F4AC145 /* libPods-golfroster-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfroster-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6251ED5E30A0CFE448A02341 /* libPods-golfroster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfroster.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D9FC6EC472E5BBB0374A0D6 /* Pods-golfroster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster.release.xcconfig"; path = "Target Support Files/Pods-golfroster/Pods-golfroster.release.xcconfig"; sourceTree = "<group>"; };
+		6F256217775359D4455954BC /* Pods-golfrosterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfrosterTests.debug.xcconfig"; path = "Target Support Files/Pods-golfrosterTests/Pods-golfrosterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		97770F1181D46AD64E13B6B5 /* Pods-golfroster-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOSTests/Pods-golfroster-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		977A870BDE7894FB89F98677 /* Pods-golfrosterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfrosterTests.release.xcconfig"; path = "Target Support Files/Pods-golfrosterTests/Pods-golfrosterTests.release.xcconfig"; sourceTree = "<group>"; };
+		C66D6C924F81FB5F2111F8F1 /* libPods-golfroster-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfroster-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C70F61286E8BF0A855F0911E /* Pods-golfroster-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOSTests/Pods-golfroster-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		D9BC03A3F99BB7AF3E3DFB88 /* Pods-golfroster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster.debug.xcconfig"; path = "Target Support Files/Pods-golfroster/Pods-golfroster.debug.xcconfig"; sourceTree = "<group>"; };
+		DE7412F0A97A9224D2F1CAD9 /* libPods-golfrosterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfrosterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF26654970CEF77E504D9A8A /* libPods-golfrosterTests.a in Frameworks */,
+				644AEE997B54C894BB81BD66 /* libPods-golfrosterTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFD5D7DF7CD15438071D6C2A /* libPods-golfroster.a in Frameworks */,
+				16D551CE723BBF975C309E54 /* libPods-golfroster.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6024B035983FED297805E9 /* libPods-golfroster-tvOS.a in Frameworks */,
+				D89ED9A73513DC30A618E3F9 /* libPods-golfroster-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070329CF45BE52F09E64DA6D /* libPods-golfroster-tvOSTests.a in Frameworks */,
+				4C1DF4AED91D1774347B457C /* libPods-golfroster-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,15 +136,31 @@
 			name = golfroster;
 			sourceTree = "<group>";
 		};
+		26069897CF674C91CFBB5213 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D9BC03A3F99BB7AF3E3DFB88 /* Pods-golfroster.debug.xcconfig */,
+				6D9FC6EC472E5BBB0374A0D6 /* Pods-golfroster.release.xcconfig */,
+				5A3856D3EE6B75ED8E178042 /* Pods-golfroster-tvOS.debug.xcconfig */,
+				4CE527BFB07A5A6C95661EE8 /* Pods-golfroster-tvOS.release.xcconfig */,
+				97770F1181D46AD64E13B6B5 /* Pods-golfroster-tvOSTests.debug.xcconfig */,
+				C70F61286E8BF0A855F0911E /* Pods-golfroster-tvOSTests.release.xcconfig */,
+				6F256217775359D4455954BC /* Pods-golfrosterTests.debug.xcconfig */,
+				977A870BDE7894FB89F98677 /* Pods-golfrosterTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				4F0FA6C50BE5176E89155E2C /* libPods-golfroster.a */,
-				CF6F731D0BBA616F1A3B514D /* libPods-golfroster-tvOS.a */,
-				B9B131F26C195EE764F5BF5D /* libPods-golfroster-tvOSTests.a */,
-				B36D029395DC920A0A6DC2B7 /* libPods-golfrosterTests.a */,
+				6251ED5E30A0CFE448A02341 /* libPods-golfroster.a */,
+				6197324982096E4B8F4AC145 /* libPods-golfroster-tvOS.a */,
+				C66D6C924F81FB5F2111F8F1 /* libPods-golfroster-tvOSTests.a */,
+				DE7412F0A97A9224D2F1CAD9 /* libPods-golfrosterTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -164,7 +180,7 @@
 				00E356EF1AD99517003FC87E /* golfrosterTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				DAC5F77F6AC500A432B0D4B7 /* Pods */,
+				26069897CF674C91CFBB5213 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -182,22 +198,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DAC5F77F6AC500A432B0D4B7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AAEEBA75B9B7FB104EB77769 /* Pods-golfroster.debug.xcconfig */,
-				4931FA52F248FFBB9EA11ECD /* Pods-golfroster.release.xcconfig */,
-				49DFEE317A9AFF2EB6B3D741 /* Pods-golfroster-tvOS.debug.xcconfig */,
-				9475CB052062715F964380F6 /* Pods-golfroster-tvOS.release.xcconfig */,
-				50C1ECF3E8163D0F39F62378 /* Pods-golfroster-tvOSTests.debug.xcconfig */,
-				1734200D79D21A91EFA81F14 /* Pods-golfroster-tvOSTests.release.xcconfig */,
-				99E87A86FC97B596C6AAA07D /* Pods-golfrosterTests.debug.xcconfig */,
-				940C834A523CC1B80C4408D8 /* Pods-golfrosterTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -205,7 +205,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "golfrosterTests" */;
 			buildPhases = (
-				D90D9B4FC1CAFCA1996CE67F /* [CP] Check Pods Manifest.lock */,
+				2CBEDCB4A55EBD03F7D62B2F /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -224,12 +224,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "golfroster" */;
 			buildPhases = (
-				20BF20362766073BC478461C /* [CP] Check Pods Manifest.lock */,
+				6D454CFADB4FAD9E7F95B4CA /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				501C4938FF91EE07B3BD9A5C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,7 +245,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "golfroster-tvOS" */;
 			buildPhases = (
-				7A76E90AC5C8769E533697E6 /* [CP] Check Pods Manifest.lock */,
+				3E704E5957D509F2EDA7AA9C /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -264,7 +265,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "golfroster-tvOSTests" */;
 			buildPhases = (
-				F85CBBAF864BBE113823C2EF /* [CP] Check Pods Manifest.lock */,
+				0C1CF516F26B4060C2CECC39 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -373,7 +374,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		20BF20362766073BC478461C /* [CP] Check Pods Manifest.lock */ = {
+		0C1CF516F26B4060C2CECC39 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -388,50 +389,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-golfroster-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-golfroster-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native Code And Images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		7A76E90AC5C8769E533697E6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-golfroster-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D90D9B4FC1CAFCA1996CE67F /* [CP] Check Pods Manifest.lock */ = {
+		2CBEDCB4A55EBD03F7D62B2F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -453,7 +418,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F85CBBAF864BBE113823C2EF /* [CP] Check Pods Manifest.lock */ = {
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		3E704E5957D509F2EDA7AA9C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -468,7 +447,77 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-golfroster-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-golfroster-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		501C4938FF91EE07B3BD9A5C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-golfroster/Pods-golfroster-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-golfroster/Pods-golfroster-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D454CFADB4FAD9E7F95B4CA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-golfroster-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -580,7 +629,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99E87A86FC97B596C6AAA07D /* Pods-golfrosterTests.debug.xcconfig */;
+			baseConfigurationReference = 6F256217775359D4455954BC /* Pods-golfrosterTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -603,7 +652,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 940C834A523CC1B80C4408D8 /* Pods-golfrosterTests.release.xcconfig */;
+			baseConfigurationReference = 977A870BDE7894FB89F98677 /* Pods-golfrosterTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -623,7 +672,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AAEEBA75B9B7FB104EB77769 /* Pods-golfroster.debug.xcconfig */;
+			baseConfigurationReference = D9BC03A3F99BB7AF3E3DFB88 /* Pods-golfroster.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -643,7 +692,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4931FA52F248FFBB9EA11ECD /* Pods-golfroster.release.xcconfig */;
+			baseConfigurationReference = 6D9FC6EC472E5BBB0374A0D6 /* Pods-golfroster.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -662,7 +711,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49DFEE317A9AFF2EB6B3D741 /* Pods-golfroster-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 5A3856D3EE6B75ED8E178042 /* Pods-golfroster-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -690,7 +739,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9475CB052062715F964380F6 /* Pods-golfroster-tvOS.release.xcconfig */;
+			baseConfigurationReference = 4CE527BFB07A5A6C95661EE8 /* Pods-golfroster-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -718,7 +767,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50C1ECF3E8163D0F39F62378 /* Pods-golfroster-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 97770F1181D46AD64E13B6B5 /* Pods-golfroster-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -745,7 +794,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1734200D79D21A91EFA81F14 /* Pods-golfroster-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = C70F61286E8BF0A855F0911E /* Pods-golfroster-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
