@@ -9,8 +9,9 @@ import 'firebase/firestore'
 
 import { FirebaseContext } from './contexts/firebase'
 import { Profile } from './routes/profile'
-import { Login } from './routes/login'
+import { GetStarted } from './routes/getstarted'
 import { StoreContext } from './contexts/store'
+import { Navigation } from './components/navigation'
 
 
 const app = firebase.initializeApp({
@@ -26,10 +27,14 @@ const auth = app.auth()
 
 const theme: Theme = {
   ...DefaultTheme,
+  dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primary: Colors.green500,
-    accent: Colors.blue500,
+    text: '#0F0F0F',
+    primary: '#007251',
+    accent: '#FEF200',
+    error: '#CF0F42',
+    surface: '#F5F5F5',
   },
 }
 
@@ -55,18 +60,17 @@ const App = () => {
   
   return <PaperProvider theme={theme}>
     <FirebaseContext.Provider value={{ db, auth, user }}>
-      <Appbar.Header>
+      {/* <Appbar.Header>
         <Appbar.Content
-          title='GolfRoster'
+          title='GolfRoster TEST'
         />
-      </Appbar.Header>
-      <View>
-        {/* {players.map(player => <Text key={player.id}>{JSON.stringify(player)}</Text>)} */}
-
-        {user
-          ? <Profile />
-          : <Login />}
-      </View>
+      </Appbar.Header> */}
+      
+      {user
+        ? <Navigation />
+        : <View>
+          <GetStarted />
+        </View>}
     </FirebaseContext.Provider>
   </PaperProvider>
 }

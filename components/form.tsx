@@ -25,13 +25,11 @@ interface State {
 
 export class Form extends React.Component<Props, State> {
 
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      values: {},
-      waiting: false,
-    }
+  public state: State = {
+    values: {},
+    waiting: false,
   }
+  
 
   private onSubmit() {
     this.setState({
@@ -39,8 +37,8 @@ export class Form extends React.Component<Props, State> {
       error: undefined,
     })
 
-    this.props.onSubmit(this.state.values).then(response => this.setState({
-        response: response || undefined,
+    this.props.onSubmit(this.state.values).then(response => response && this.setState({
+        response,
         waiting: false,
       })).catch(error => this.setState({
         error: error.message,
@@ -69,8 +67,8 @@ export class Form extends React.Component<Props, State> {
       </FormContext.Provider>
       {this.state.error && <HelperText type='error'>{this.state.error}</HelperText>}
       {this.state.waiting
-        ? <Button onPress={e => null} disabled>{'One moment...'}</Button>
-        : <Button onPress={e => this.onSubmit()}>{this.props.cta || 'Save'}</Button>}
+        ? <Button mode='contained' uppercase={false} onPress={e => null} disabled>{'One moment...'}</Button>
+        : <Button mode='contained' uppercase={false} onPress={e => this.onSubmit()}>{this.props.cta || 'Save'}</Button>}
     </View>
   }
 }

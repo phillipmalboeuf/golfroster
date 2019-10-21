@@ -22,6 +22,8 @@ export const Input: React.FunctionComponent<Props> = props => {
   return <FormContext.Consumer>
     {context => <>
       <TextInput
+        mode='outlined'
+        theme={{ colors: { background: 'white' } }}
         onChangeText={text => context.onChange(props.name, text)}
         defaultValue={props.value}
         label={props.label}
