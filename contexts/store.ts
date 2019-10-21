@@ -14,7 +14,7 @@ const Store = types
 
     login: flow(function* login(id: string) {
       self.player = Player.create({ id })
-      self.player.fetch()
+      yield self.player.fetch()
     }),
     exists: flow(function* exists(email: string) {
       return !(yield firebase.app().firestore().collection('players').where('email', '==', email).get()).empty

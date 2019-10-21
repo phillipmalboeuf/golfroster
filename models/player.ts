@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase, { firestore } from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { types, flow } from 'mobx-state-tree'
@@ -9,13 +9,19 @@ export const Player = types
   .model({
     id: types.maybe(types.identifier),
     email: types.maybe(types.string),
-    name: types.maybe(types.string),
+    first_name: types.maybe(types.string),
+    accepted_terms: types.maybe(types.boolean),
     clubs: types.optional(types.array(Club), []),
   })
   .actions(self => ({
     fetch: flow(function* fetch() {
-      const player = (yield firebase.app().firestore().collection('players').doc(self.id).get()).data()
-      self.email = player.email
-      self.name = player.name
+      const data = (yield firebase.app().firestore().collection('players').doc(self.id).get()).data()
+      
+      Object.keys(data).forEach(key => self[key] = data[key])
+    }),
+    save: flow(function* save(data: firestore.DocumentData) {
+      yield firebase.app().firestore().collection('players').doc(self.id).set(data, { merge: true })
+      
+      Object.keys(data).forEach(key => self[key] = data[key])
     }),
   }))

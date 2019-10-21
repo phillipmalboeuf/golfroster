@@ -13,7 +13,8 @@ export const FormContext = React.createContext({
 
 
 interface Props {
-  cta?: string,
+  cta?: string
+  hideButton?: boolean
   onSubmit: (values: { [key: string]: any }) => Promise<string | JSX.Element | void>
 }
 interface State {
@@ -31,7 +32,7 @@ export class Form extends React.Component<Props, State> {
   }
   
 
-  private onSubmit() {
+  public submit() {
     this.setState({
       waiting: true,
       error: undefined,
@@ -66,9 +67,9 @@ export class Form extends React.Component<Props, State> {
         {this.props.children}
       </FormContext.Provider>
       {this.state.error && <HelperText type='error'>{this.state.error}</HelperText>}
-      {this.state.waiting
-        ? <Button mode='contained' uppercase={false} onPress={e => null} disabled>{'One moment...'}</Button>
-        : <Button mode='contained' uppercase={false} onPress={e => this.onSubmit()}>{this.props.cta || 'Save'}</Button>}
+      {!this.props.hideButton && (this.state.waiting
+      ? <Button mode='contained' uppercase={false} onPress={e => null} disabled>{'One moment...'}</Button>
+      : <Button mode='contained' uppercase={false} onPress={e => this.submit()}>{this.props.cta || 'Save'}</Button>)}
     </View>
   }
 }

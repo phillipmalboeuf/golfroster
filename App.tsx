@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { View } from 'react-native'
-import { DefaultTheme, Provider as PaperProvider, Colors, Theme } from 'react-native-paper'
+import { View, Text } from 'react-native'
+import { DefaultTheme, Provider as PaperProvider, Colors, Theme, Headline } from 'react-native-paper'
 import { Appbar } from 'react-native-paper'
 
 import firebase, { User } from 'firebase'
@@ -8,10 +8,15 @@ import 'firebase/auth'
 import 'firebase/firestore'
 
 import { FirebaseContext } from './contexts/firebase'
+import { StoreContext } from './contexts/store'
+
 import { Profile } from './routes/profile'
 import { GetStarted } from './routes/getstarted'
-import { StoreContext } from './contexts/store'
+import { ProfileBuildup } from './routes/profile_buildup'
+
 import { Navigation } from './components/navigation'
+import { Center } from './components/layouts'
+import { Observer } from 'mobx-react'
 
 
 const app = firebase.initializeApp({
@@ -53,24 +58,34 @@ const App = () => {
     // })
 
 
-    store.login('O9MfbO7egDQIn6KmDHyA')
+    // store.login('O9MfbO7egDQIn6KmDHyA')
 
-    auth.onAuthStateChanged(u => setUser(u))
+    auth.onAuthStateChanged(async u => {
+      if (u) { await store.login(u.uid) }
+      // console.log(store.player)
+      setUser(u)
+    })
   }, [])
   
   return <PaperProvider theme={theme}>
     <FirebaseContext.Provider value={{ db, auth, user }}>
       {/* <Appbar.Header>
         <Appbar.Content
-          title='GolfRoster TEST'
+          title='GolfRoster'
         />
       </Appbar.Header> */}
-      
-      {user
-        ? <Navigation />
-        : <View>
-          <GetStarted />
-        </View>}
+      {user === undefined
+        ? <Center><Headline>One moment...</Headline></Center>
+        : user !== null
+          ? <Observer>{() => store.player.accepted_terms
+            ? <Navigation />
+            : <View>
+              <ProfileBuildup />
+            </View>
+          }</Observer>
+          : <View>
+            <GetStarted />
+          </View>}
     </FirebaseContext.Provider>
   </PaperProvider>
 }

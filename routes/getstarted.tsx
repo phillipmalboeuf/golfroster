@@ -49,31 +49,41 @@ export const GetStarted: FunctionComponent<{}> = props => {
 
       <Form onSubmit={async values => {
         setExists(await store.exists(values.email))
-        setEmail(email)
+        setEmail(values.email)
       }} cta='Continue with Email'>
         <Input name='email' type='email' label='Email address' placeholder='player@golfroster.com' autoFocus={false} />
       </Form>
 
-      {exists && <Redirect to='/getstarted/2' />}
+      {exists !== undefined && <Redirect to='/getstarted/2' />}
     </Center>,
-    <Center>
-      <Headline>
-        GolfRoster
-      </Headline>
-    </Center>,
-  ]} />
+    exists
+      ? <Center>
+        <Headline>
+          Welcome Back!
+        </Headline>
+        <Subheading>
+          Get back into your tee-off calendar by entering your password.
+        </Subheading>
 
-  // <Form onSubmit={async ({ email, password }) => {
-  //       auth.signInWithEmailAndPassword(email, password)
-  //     }} cta='Login'>
-  //       <Input name='email' type='email' label='Email address' placeholder='player@golfroster.com' />
-  //       <Input name='password' type='password' label='Password' placeholder='********' />
-  //     </Form>
-      
-  //     <Form onSubmit={async ({ email, password }) => {
-  //       auth.createUserWithEmailAndPassword(email, password)
-  //     }} cta='Sign up'>
-  //       <Input name='email' type='email' label='Email address' placeholder='player@golfroster.com' />
-  //       <Input name='password' type='newpassword' label='New Password' placeholder='********' />
-  //     </Form>
+        <Form onSubmit={async values => {
+          auth.signInWithEmailAndPassword(email, values.password)
+        }} cta='Log me in'>
+          <Input name='password' type='password' label='Your password' placeholder='********' />
+        </Form>
+      </Center>
+      : <Center>
+        <Headline>
+          You're new here!
+        </Headline>
+        <Subheading>
+          The first step to creating your account is to enter a new password here.
+        </Subheading>
+
+        <Form onSubmit={async values => {
+          auth.createUserWithEmailAndPassword(email, values.password)
+        }} cta='Sign me up'>
+          <Input name='password' type='newpassword' label='New password' placeholder='********' />
+        </Form>
+      </Center>,
+  ]} />
 }
