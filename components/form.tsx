@@ -68,8 +68,8 @@ export class Form extends React.Component<Props, State> {
       </FormContext.Provider>
       {this.state.error && <HelperText type='error'>{this.state.error}</HelperText>}
       {!this.props.hideButton && (this.state.waiting
-      ? <Button mode='contained' uppercase={false} onPress={e => null} disabled>{'One moment...'}</Button>
-      : <Button mode='contained' uppercase={false} onPress={e => this.submit()}>{this.props.cta || 'Save'}</Button>)}
+      ? <Button mode='contained' uppercase={false} disabled>{'One moment...'}</Button>
+      : <Button mode='contained' uppercase={false} onPress={() => this.submit()}>{this.props.cta || 'Save'}</Button>)}
     </View>
   }
 }

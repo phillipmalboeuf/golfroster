@@ -16,6 +16,6 @@ export const Profile: FunctionComponent<{}> = props => {
 
   return <Center>
     <Observer>{() => <Text>Hi {user.email} {store.player.id} {store.player.first_name}</Text>}</Observer>
-    <Button onPress={e => auth.signOut()}>Logout</Button>
+    <Button onPress={() => auth.signOut()}>Logout</Button>
   </Center>
 }

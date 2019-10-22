@@ -47,7 +47,7 @@ export const Dots: FunctionComponent<{
           </View>
 
           {!props.hideButtons ? (active === props.items.length - 1
-            ? <Button uppercase={false} compact onPress={e => props.onFinish()}>Finish</Button>
+            ? <Button uppercase={false} compact onPress={() => props.onFinish()}>Finish</Button>
             :  <Link to={`/${props.path}/${active + 1}`}>
               <Button uppercase={false} compact>Next</Button>
           </Link>) : <View />}

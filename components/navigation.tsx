@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View } from 'react-native'
 import { BottomNavigation, DefaultTheme } from 'react-native-paper'
+import CommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { Profile } from '../routes/profile'
 import { Events } from '../routes/events'
@@ -12,16 +13,11 @@ export class Navigation extends React.Component {
   public state = {
     index: 0,
     routes: [
-      // { key: 'events', title: 'Events', icon: 'event' },
-      { key: 'events', title: 'Events' },
-      // { key: 'messages', title: 'Messages', icon: 'forum' },
-      { key: 'messages', title: 'Messages' },
-      // { key: 'players', title: 'Players', icon: 'account-circle' },
-      { key: 'players', title: 'Players' },
-      // { key: 'notifications', title: 'Notifications', icon: 'notifications' },
-      { key: 'notifications', title: 'Notifications' },
-      // { key: 'profile', title: 'Profile', icon: 'account-circle' },
-      { key: 'profile', title: 'Profile' },
+      { key: 'events', title: 'Events', icon: 'calendar' },
+      { key: 'messages', title: 'Messages', icon: 'forum' },
+      { key: 'players', title: 'Players', icon: 'account-group' },
+      { key: 'notifications', title: 'Notifications', icon: 'bell' },
+      { key: 'profile', title: 'Profile', icon: 'account-circle' },
     ],
   }
 
