@@ -36,6 +36,9 @@ export class Navigation extends React.Component {
         navigationState={this.state}
         onIndexChange={index => this.setState({ index })}
         renderScene={this.scene}
+        barStyle={{
+          zIndex: -1,
+        }}
       />
     )
   }

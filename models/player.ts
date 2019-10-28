@@ -4,6 +4,7 @@ import 'firebase/firestore'
 import { types, flow } from 'mobx-state-tree'
 
 import { Club } from './club'
+import { Event } from './event'
 
 export const Player = types
   .model({
@@ -12,6 +13,7 @@ export const Player = types
     first_name: types.maybe(types.string),
     accepted_terms: types.maybe(types.boolean),
     clubs: types.optional(types.array(Club), []),
+    events: types.optional(types.array(Event), []),
   })
   .actions(self => ({
     fetch: flow(function* fetch() {

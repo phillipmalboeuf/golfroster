@@ -31,6 +31,21 @@ export const Bottom: FunctionComponent<{}> = props => {
   </View>
 }
 
+export const Full: FunctionComponent<{}> = props => {
+
+  return <View style={{
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 20,
+    backgroundColor: 'white',
+  }}>
+    {props.children}
+  </View>
+}
+
 export const Spaced: FunctionComponent<{}> = props => {
   return <View style={{
     flex: 1,

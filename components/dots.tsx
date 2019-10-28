@@ -10,6 +10,7 @@ export const Dots: FunctionComponent<{
   path: string
   items: JSX.Element[]
   hideButtons?: boolean
+  onCancel?: () => void
   onFinish?: () => void
 }> = props => {
 
@@ -33,7 +34,9 @@ export const Dots: FunctionComponent<{
       <Bottom>
         <Spaced>
           {!props.hideButtons ? <Link disabled={active === 0} to={`/${props.path}/${active - 1}`}>
-            <Button disabled={active === 0} uppercase={false} compact>Previous</Button>
+            {active !== 0 
+              ? <Button disabled={active === 0} uppercase={false} compact>Previous</Button>
+              : <Button onPress={() => props.onCancel && props.onCancel()} uppercase={false} compact>Cancel</Button> }
           </Link> : <View />}
           
           <View style={{ flexDirection: 'row' }}>
@@ -47,7 +50,7 @@ export const Dots: FunctionComponent<{
           </View>
 
           {!props.hideButtons ? (active === props.items.length - 1
-            ? <Button uppercase={false} compact onPress={() => props.onFinish()}>Finish</Button>
+            ? <Button uppercase={false} compact onPress={() => props.onFinish && props.onFinish()}>Finish</Button>
             :  <Link to={`/${props.path}/${active + 1}`}>
               <Button uppercase={false} compact>Next</Button>
           </Link>) : <View />}

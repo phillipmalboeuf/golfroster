@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { FormContext } from './form'
-import { KeyboardTypeOptions, TextInputProps, Text } from 'react-native'
+import { KeyboardTypeOptions, TextInputProps, Text, DatePickerIOS } from 'react-native'
 import { TextInput } from 'react-native-paper'
 
 
@@ -9,7 +9,7 @@ interface Props {
   name: string,
   placeholder?: string,
   value?: any,
-  type?: 'email' | 'password' | 'newpassword' | 'phone' | 'number' | 'url',
+  type?: 'email' | 'password' | 'newpassword' | 'phone' | 'number' | 'url' | 'multiline' | 'datetime',
   label?: string,
   optional?: boolean,
   disabled?: boolean,
@@ -20,8 +20,9 @@ interface Props {
 
 export const Input: React.FunctionComponent<Props> = props => {
   return <FormContext.Consumer>
-    {context => <>
-      <TextInput
+    {context => 
+      props.type !== 'datetime'
+      ? <TextInput
         mode='outlined'
         theme={{ colors: { background: 'white' } }}
         style={{ marginBottom: 16 }}
@@ -30,10 +31,11 @@ export const Input: React.FunctionComponent<Props> = props => {
         label={props.label}
         placeholder={props.placeholder}
         autoFocus={props.autoFocus}
-        autoCapitalize={'none'}
+        autoCapitalize={props.type === 'multiline' ? 'sentences' : 'none'}
         autoCorrect={false}
         editable={!props.disabled}
         blurOnSubmit={props.submitter}
+        multiline={props.type === 'multiline'}
         secureTextEntry={props.type === 'password' || props.type === 'newpassword'}
         keyboardType={({
           email: 'email-address',
@@ -48,6 +50,7 @@ export const Input: React.FunctionComponent<Props> = props => {
           phone: 'telephoneNumber',
           url: 'URL',
         } as {[key: string]: TextInputProps['textContentType']})[props.type]} />
-    </>}
+      : <DatePickerIOS date={context.values[props.name] || props.value || new Date()}
+        onDateChange={date => context.onChange(props.name, date)} />}
   </FormContext.Consumer>
 }
