@@ -16,7 +16,7 @@ import { Input } from '../components/input'
 
 
 export const Events: FunctionComponent<{}> = props => {
-  const { user, auth } = useContext(FirebaseContext)
+  // const { user, auth } = useContext(FirebaseContext)
   const { store } = useContext(StoreContext)
 
   const form = useRef<Form>()
@@ -30,6 +30,7 @@ export const Events: FunctionComponent<{}> = props => {
     </Appbar.Header>
     <Observer>{() => <View>
       <Calendar />
+      <Text>{JSON.stringify(store.events)}</Text>
       {/* <Agenda<{ text: string }> items={{'2012-05-22': [{text: 'item 1 - any js object'}],
     '2012-05-23': [{text: 'item 2 - any js object'}],
     '2012-05-24': [],
@@ -41,7 +42,7 @@ export const Events: FunctionComponent<{}> = props => {
     </View>}</Observer>
     {building && <Full>
       <Form ref={form} onSubmit={async values => {
-        console.log(values)
+        store.createEvent(values)
       }} hideButton>
         <Dots path='new_event' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
           <Center>

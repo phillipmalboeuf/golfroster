@@ -61,7 +61,10 @@ const App = () => {
     // store.login('O9MfbO7egDQIn6KmDHyA')
 
     auth.onAuthStateChanged(async u => {
-      if (u) { await store.login(u.uid) }
+      if (u) {
+        await store.login(u.uid)
+        store.listEvents()
+      }
       // console.log(store.player)
       setUser(u)
     })

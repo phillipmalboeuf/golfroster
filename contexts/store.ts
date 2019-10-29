@@ -5,10 +5,12 @@ import { createContext } from 'react'
 import { types, flow } from 'mobx-state-tree'
 
 import { Player } from '../models/player'
+import { Event } from '../models/event'
 
 const Store = types
   .model({
     player: types.maybe(Player),
+    events: types.optional(types.map(Event), {}),
   })
   .actions(self => ({
 
@@ -16,10 +18,28 @@ const Store = types
       self.player = Player.create({ id })
       yield self.player.fetch()
     }),
+
     exists: flow(function* exists(email: string) {
-      return !(yield firebase.app().firestore().collection('players').where('email', '==', email).get()).empty
+      const snapshot: firestore.QuerySnapshot = yield firebase.app().firestore().collection('players').where('email', '==', email).get()
+      return !snapshot.empty
     }),
 
+    listEvents: flow(function* listEvents() {
+      const snapshot: firestore.QuerySnapshot = yield firebase.app().firestore().collection('events').where('attendees', 'array-contains', self.player.id).get()
+      snapshot.forEach(doc => self.events.set(doc.id, doc.data()))
+      console.log(self.events)
+    }),
+
+    createEvent: flow(function* exists(data: typeof Event.CreationType) {
+      const event = Event.create({
+        ...data,
+        organizer_id: self.player.id,
+        attendees: [self.player.id],
+      })
+      yield event.save(event)
+      self.events.set(event.id, event)
+    }),
+    
   }))
 
 export const StoreContext = createContext({
