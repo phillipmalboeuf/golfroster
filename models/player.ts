@@ -11,8 +11,9 @@ export const Player = types.model({
   email: types.maybe(types.string),
   first_name: types.maybe(types.string),
   accepted_terms: types.maybe(types.boolean),
+  friends: types.optional(types.array(types.string), []),
   clubs: types.optional(types.array(Club), []),
-  events: types.optional(types.array(Event), []),
+  // events: types.optional(types.array(Event), []),
 })
   .actions(self => ({
     fetch: flow(function* fetch() {

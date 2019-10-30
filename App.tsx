@@ -10,7 +10,6 @@ import 'firebase/firestore'
 import { FirebaseContext } from './contexts/firebase'
 import { StoreContext } from './contexts/store'
 
-import { Profile } from './routes/profile'
 import { GetStarted } from './routes/getstarted'
 import { ProfileBuildup } from './routes/profile_buildup'
 
@@ -64,6 +63,7 @@ const App = () => {
       if (u) {
         await store.login(u.uid)
         store.listEvents()
+        store.listFriends()
       }
       // console.log(store.player)
       setUser(u)

@@ -3,14 +3,21 @@ import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
 
+export const Padded: FunctionComponent<{}> = props => {
+  return <View style={{
+    padding: 33,
+  }}>
+    {props.children}
+  </View>
+}
+
 export const Center: FunctionComponent<{}> = props => {
 
   return <View style={{
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('window').height - 88,
     display: 'flex',
     alignContent: 'center',
     justifyContent: 'center',
-    padding: 33,
   }}>
     {props.children}
   </View>
