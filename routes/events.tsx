@@ -42,7 +42,8 @@ export const Events: FunctionComponent<{}> = props => {
     </View>}</Observer>
     {building && <Full>
       <Form ref={form} onSubmit={async values => {
-        store.createEvent(values)
+        await store.createEvent(values)
+        setBuilding(false)
       }} hideButton>
         <Dots path='new_event' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
           <Center>
@@ -61,6 +62,8 @@ export const Events: FunctionComponent<{}> = props => {
             </Subheading>
 
             <Input name='end_date' type='datetime' />
+
+            <Input name='is_repeatable' type='checkbox' label='Is this event repeatable?' />
           </Center>,
           <Center>
             <Headline>

@@ -1,15 +1,15 @@
 
 import React from 'react'
 import { FormContext } from './form'
-import { KeyboardTypeOptions, TextInputProps, Text, DatePickerIOS } from 'react-native'
-import { TextInput } from 'react-native-paper'
+import { KeyboardTypeOptions, TextInputProps, Text, DatePickerIOS, View } from 'react-native'
+import { TextInput, Checkbox, Caption } from 'react-native-paper'
 
 
 interface Props {
   name: string,
   placeholder?: string,
   value?: any,
-  type?: 'email' | 'password' | 'newpassword' | 'phone' | 'number' | 'url' | 'multiline' | 'datetime',
+  type?: 'email' | 'password' | 'newpassword' | 'phone' | 'number' | 'url' | 'checkbox' | 'multiline' | 'datetime',
   label?: string,
   optional?: boolean,
   disabled?: boolean,
@@ -20,9 +20,19 @@ interface Props {
 
 export const Input: React.FunctionComponent<Props> = props => {
   return <FormContext.Consumer>
-    {context => 
-      props.type !== 'datetime'
-      ? <TextInput
+    {context => ({
+      datetime: <DatePickerIOS date={context.values[props.name] || props.value || new Date()}
+        onDateChange={date => context.onChange(props.name, date)} />,
+      checkbox: <View style={{ 
+        flexDirection: 'row',
+        alignItems: 'center',
+      }}>
+        <Checkbox.Android color='#007251' status={context.values[props.name] ? 'checked' : 'unchecked'} />
+        <Caption onPress={() => context.onChange(props.name, context.values[props.name] !== undefined
+          ? !context.values[props.name] : true)}>{props.label}</Caption>
+      </View>,
+    }[props.type]
+      || <TextInput
         mode='outlined'
         theme={{ colors: { background: 'white' } }}
         style={{ marginBottom: 16 }}
@@ -49,8 +59,6 @@ export const Input: React.FunctionComponent<Props> = props => {
           newpassword: 'newPassword',
           phone: 'telephoneNumber',
           url: 'URL',
-        } as {[key: string]: TextInputProps['textContentType']})[props.type]} />
-      : <DatePickerIOS date={context.values[props.name] || props.value || new Date()}
-        onDateChange={date => context.onChange(props.name, date)} />}
+        } as {[key: string]: TextInputProps['textContentType']})[props.type]} />)}
   </FormContext.Consumer>
 }

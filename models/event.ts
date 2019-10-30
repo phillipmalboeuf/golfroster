@@ -16,6 +16,7 @@ export const Event = types.model({
   description: types.maybeNull(types.string),
   start_date: dateType,
   end_date: dateType,
+  repeatable: types.optional(types.boolean, false),
   attendees: types.array(types.string),
 })
   .actions(self => ({
