@@ -10,6 +10,8 @@ export const Player = types.model({
   id: types.maybe(types.identifier),
   email: types.maybe(types.string),
   first_name: types.maybe(types.string),
+  last_name: types.maybe(types.string),
+  photo: types.maybe(types.string),
   accepted_terms: types.maybe(types.boolean),
   friends: types.optional(types.array(types.string), []),
   clubs: types.optional(types.array(Club), []),

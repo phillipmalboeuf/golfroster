@@ -27,7 +27,7 @@ const scene = BottomNavigation.SceneMap({
 })
 
 export const Navigation: FunctionComponent<{}> = props => {
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(4)
 
   return <BottomNavigation
     shifting={false}

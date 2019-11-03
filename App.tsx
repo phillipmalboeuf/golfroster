@@ -6,6 +6,7 @@ import { Appbar } from 'react-native-paper'
 import firebase, { User } from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/storage'
 
 import { FirebaseContext } from './contexts/firebase'
 import { StoreContext } from './contexts/store'
@@ -28,6 +29,7 @@ const app = firebase.initializeApp({
 
 const db = app.firestore()
 const auth = app.auth()
+const storage = app.storage()
 
 const theme: Theme = {
   ...DefaultTheme,
@@ -71,7 +73,7 @@ const App = () => {
   }, [])
   
   return <PaperProvider theme={theme}>
-    <FirebaseContext.Provider value={{ db, auth, user }}>
+    <FirebaseContext.Provider value={{ db, auth, user, storage }}>
       {/* <Appbar.Header>
         <Appbar.Content
           title='GolfRoster'
