@@ -12,18 +12,23 @@ export const Avatar: FunctionComponent<{
   photo?: string
   first_name?: string
   last_name?: string
-}> = ({ photo, first_name, last_name }) => {
+  small?: boolean
+}> = ({ photo, first_name, last_name, small }) => {
   const { storage } = useContext(FirebaseContext)
   const [uri, setURI] = useState(undefined)
 
-  useEffect(() => {
-    storage.refFromURL(photo).getDownloadURL().then(url => setURI(url))
-  }, [photo])
+  if (photo) {
+    useEffect(() => {
+      storage.refFromURL(photo).getDownloadURL().then(url => setURI(url))
+    }, [photo])
+  }
+
+  const size = small ? 40 : 66
 
   return <>
     {(photo && uri)
-      ? <RNAvatar.Image size={66} source={{ uri }} style={{width: 66, height: 66}} />
-      : <RNAvatar.Text size={66} label={`${first_name[0]}${last_name[0]}`} />}
+      ? <RNAvatar.Image size={size} source={{ uri }} style={{width: size, height: size}} />
+      : <RNAvatar.Text size={size} label={`${first_name[0]}${last_name[0]}`} />}
   </>
 }
 
