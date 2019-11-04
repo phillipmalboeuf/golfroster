@@ -7,13 +7,7 @@ import { Button, Appbar, Avatar as RNAvatar } from 'react-native-paper'
 import { FirebaseContext } from '../contexts/firebase'
 import { Center, Padded } from './layouts'
 
-
-export const Avatar: FunctionComponent<{
-  photo?: string
-  first_name?: string
-  last_name?: string
-  small?: boolean
-}> = ({ photo, first_name, last_name, small }) => {
+function usePhotoURI(photo: string) {
   const { storage } = useContext(FirebaseContext)
   const [uri, setURI] = useState(undefined)
 
@@ -23,6 +17,16 @@ export const Avatar: FunctionComponent<{
     }, [photo])
   }
 
+  return uri
+}
+
+export const Avatar: FunctionComponent<{
+  photo?: string
+  first_name?: string
+  last_name?: string
+  small?: boolean
+}> = ({ photo, first_name, last_name, small }) => {
+  const uri = usePhotoURI(photo)
   const size = small ? 40 : 66
 
   return <>
@@ -35,12 +39,7 @@ export const Avatar: FunctionComponent<{
 export const Background: FunctionComponent<{
   photo?: string
 }> = ({ photo, children }) => {
-  const { storage } = useContext(FirebaseContext)
-  const [uri, setURI] = useState(undefined)
-
-  useEffect(() => {
-    storage.refFromURL(photo).getDownloadURL().then(url => setURI(url))
-  }, [photo])
+  const uri = usePhotoURI(photo)
 
   return <View style={{
     backgroundColor: '#0f0f0f',
