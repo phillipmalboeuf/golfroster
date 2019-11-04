@@ -7,8 +7,10 @@ import { Button, Appbar, List, Headline, Caption } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
+
 import { Center, Padded, Spaced } from '../components/layouts'
 import { Avatar, Background } from '../components/photos'
+import { Player } from '../components/player'
 
 
 export const Profile: FunctionComponent<{}> = props => {
@@ -24,27 +26,8 @@ export const Profile: FunctionComponent<{}> = props => {
       <Appbar.Action icon='dots-vertical' />
     </Appbar.Header>
     <Observer>{() => <>
-      <Background photo={player.photo}>
-        <View style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-          <Padded>
-            <Avatar {...player} />
-          </Padded>
-          <View>
-            <Headline style={{ color: 'white', marginBottom: 0 }}>
-              {player.first_name} {player.last_name}
-            </Headline>
-            <Caption style={{ color: 'white' }}>Newton, MA</Caption>
-          </View>
-        </View>
-      </Background>
-        
-      <Padded>
-        <Text>Hi {user.email} {player.id} {player.first_name}</Text>
-        <Button onPress={() => auth.signOut()}>Logout</Button>
-      </Padded>
+      <Player player={player} />
+      <Button onPress={() => auth.signOut()}>Logout</Button>
     </>}</Observer>
   </>
 }
