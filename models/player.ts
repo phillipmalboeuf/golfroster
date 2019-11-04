@@ -25,9 +25,29 @@ export const Player = types.model({
 
       Object.keys(data).forEach(key => self[key] = data[key])
     }),
+    
     save: flow(function* save(data: firestore.DocumentData) {
       yield firebase.app().firestore().collection('players').doc(self.id).set(data, { merge: true })
-      
-      Object.keys(data).forEach(key => self[key] = data[key])
+    }),
+
+    unfriend: flow(function* unfriend(friendId: string) {
+      yield Promise.all([
+        firebase.app().firestore().collection('players').doc(self.id).update({
+          friends: firestore.FieldValue.arrayRemove(friendId),
+        }),
+        firebase.app().firestore().collection('players').doc(friendId).update({
+          friends: firestore.FieldValue.arrayRemove(self.id),
+        }),
+      ])
+
+      self.friends.splice(self.friends.indexOf(friendId))
+    }),
+
+    requestFriend: flow(function* requestFriend(friendId: string) {
+      yield firebase.app().firestore().collection('players').doc(self.id).update({
+        friends: firestore.FieldValue.arrayUnion(friendId),
+      })
+
+      self.friends.push(friendId)
     }),
   }))

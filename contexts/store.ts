@@ -2,7 +2,7 @@ import firebase, { firestore } from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { createContext } from 'react'
-import { types, flow } from 'mobx-state-tree'
+import { types, flow, unprotect } from 'mobx-state-tree'
 
 import { Player } from '../models/player'
 import { Event } from '../models/event'
@@ -26,20 +26,28 @@ const Store = types
     }),
 
     listEvents: flow(function* listEvents() {
-      const snapshot: firestore.QuerySnapshot = yield firebase.app().firestore().collection('events').where('attendees', 'array-contains', self.player.id).get()
-      snapshot.forEach(doc => self.events.set(doc.id, doc.data()))
+      firebase.app().firestore().collection('events')
+        .where('attendees', 'array-contains', self.player.id).onSnapshot(snapshot => {
+          snapshot.forEach(doc => self.events.set(doc.id, doc.data()))
+        })
     }),
 
     listFriends: flow(function* listFriends() {
-      const snapshot: firestore.DocumentSnapshot[] = yield Promise.all(self.player.friends.map(friend => 
-        firebase.app().firestore().collection('players').doc(friend).get()
-      ))
+      // const snapshot: firestore.DocumentSnapshot[] = yield Promise.all(self.player.friends.map(friend => 
+      //   firebase.app().firestore().collection('players').doc(friend).get()
+      // ))
+
+      firebase.app().firestore().collection('players').onSnapshot(snapshot => {
+        snapshot.docs.forEach(doc => self.friends.set(doc.id, {
+          id: doc.id,
+          ...doc.data(),
+        }))
+      })
       
-      snapshot.forEach(doc => self.friends.set(doc.id, {
-        id: doc.id,
-        ...doc.data(),
-      }))
-      console.log(self.friends)
+      // snapshot.forEach(doc => self.friends.set(doc.id, {
+      //   id: doc.id,
+      //   ...doc.data(),
+      // }))
     }),
 
     createEvent: flow(function* exists(data: typeof Event.CreationType) {
@@ -49,11 +57,11 @@ const Store = types
         attendees: [self.player.id],
       })
       yield event.save(event)
-      self.events.set(event.id, event)
+      // self.events.set(event.id, event)
     }),
     
   }))
 
-export const StoreContext = createContext({
-  store: Store.create(),
-})
+const store = Store.create()
+unprotect(store)
+export const StoreContext = createContext({ store })

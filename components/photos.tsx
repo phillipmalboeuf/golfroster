@@ -42,7 +42,7 @@ export const Background: FunctionComponent<{
   const uri = usePhotoURI(photo)
 
   return <View style={{
-    backgroundColor: '#0f0f0f',
+    backgroundColor: '#666666',
     overflow: 'hidden',
   }}>
     {(photo && uri)

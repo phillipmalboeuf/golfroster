@@ -14,10 +14,10 @@ import { Player } from '../components/player'
 
 
 export const Players: FunctionComponent<{}> = props => {
-  const { user, auth } = useContext(FirebaseContext)
   const { store } = useContext(StoreContext)
 
-  return <NativeRouter>
+  return <Observer>
+  {() => <NativeRouter>
     <Switch>
       <Route exact path='/players/:id' render={({ match }) => {
         const player = store.friends.get(match.params.id)
@@ -46,5 +46,6 @@ export const Players: FunctionComponent<{}> = props => {
         </List.Section>}</Observer>
       </>} />
     </Switch>
-  </NativeRouter>
+  </NativeRouter>}
+  </Observer>
 }

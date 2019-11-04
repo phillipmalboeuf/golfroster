@@ -1,19 +1,25 @@
 import React, { useContext } from 'react'
 import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
+import { SnapshotIn } from 'mobx-state-tree'
 
 import { Text, View } from 'react-native'
 import { Button, Appbar, List, Headline, Caption } from 'react-native-paper'
+
+import { StoreContext } from '../contexts/store'
+import { Player as PlayerModel } from '../models/player'
 
 import { Center, Padded, Spaced } from '../components/layouts'
 import { Avatar, Background } from '../components/photos'
 
 
-export const Player: FunctionComponent<{
-  player
-}> = ({ player }) => {
 
-  return <>
+export const Player: FunctionComponent<{
+  player: SnapshotIn<typeof PlayerModel>
+}> = ({ player }) => {
+  const { store } = useContext(StoreContext)
+  return <Observer>
+  {() => <>
     <Background photo={player.photo}>
       <View style={{
         flexDirection: 'row',
@@ -27,6 +33,16 @@ export const Player: FunctionComponent<{
             {player.first_name} {player.last_name}
           </Headline>
           <Caption style={{ color: 'white' }}>Newton, MA</Caption>
+          {player.id !== store.player.id && (store.player.friends.includes(player.id)
+            ? player.friends.includes(store.player.id)
+              ? <Button mode='outlined' uppercase={false}
+                onPress={() => store.player.unfriend(player.id)}>Unfriend</Button>
+              : <Button mode='outlined' uppercase={false} disabled>Friend Request Sent</Button>
+            : player.friends.includes(store.player.id)
+              ? <Button mode='outlined' uppercase={false}
+                onPress={() => store.player.requestFriend(player.id)}>Respond to Friend Request</Button>
+              : <Button mode='outlined' uppercase={false}
+                onPress={() => store.player.requestFriend(player.id)}>Send a Friend Request</Button>)}
         </View>
       </View>
     </Background>
@@ -34,5 +50,5 @@ export const Player: FunctionComponent<{
     <Padded>
       <Text>Hi {player.first_name}</Text>
     </Padded>
-  </>
+  </>}</Observer>
 }
