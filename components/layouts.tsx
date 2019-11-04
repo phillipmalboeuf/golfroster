@@ -3,9 +3,11 @@ import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
 
-export const Padded: FunctionComponent<{}> = props => {
+export const Padded: FunctionComponent<{
+  tight?: boolean
+}> = props => {
   return <View style={{
-    padding: 33,
+    padding: props.tight ? 12 : 33,
   }}>
     {props.children}
   </View>
