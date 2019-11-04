@@ -5,7 +5,7 @@ import { types, flow } from 'mobx-state-tree'
 import { Player } from './player'
 
 
-const dateType = types.snapshotProcessor(types.Date, {
+export const dateType = types.snapshotProcessor(types.Date, {
   preProcessor(d: firestore.Timestamp) { return d.toDate ? d.toDate() : d as any as Date },
 })
 

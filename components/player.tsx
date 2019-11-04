@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
-import { SnapshotIn } from 'mobx-state-tree'
+import { Instance } from 'mobx-state-tree'
 
 import { Text, View } from 'react-native'
 import { Button, Appbar, List, Headline, Caption } from 'react-native-paper'
@@ -15,7 +15,7 @@ import { Avatar, Background } from '../components/photos'
 
 
 export const Player: FunctionComponent<{
-  player: SnapshotIn<typeof PlayerModel>
+  player: Instance<typeof PlayerModel>
 }> = ({ player }) => {
   const { store } = useContext(StoreContext)
   return <Observer>

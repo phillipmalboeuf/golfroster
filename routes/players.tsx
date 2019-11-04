@@ -34,7 +34,7 @@ export const Players: FunctionComponent<{}> = props => {
       }} />
       <Route exact render={() => <>
         <Appbar.Header>
-          <Appbar.Content title='Players' />
+          <Appbar.Content title='Friends & Groups' />
           <Appbar.Action icon='magnify' />
           <Appbar.Action icon='dots-vertical' />
         </Appbar.Header>

@@ -27,6 +27,7 @@ const app = firebase.initializeApp({
   storageBucket: 'golfroster.appspot.com',
 })
 
+
 const db = app.firestore()
 const auth = app.auth()
 const storage = app.storage()
@@ -46,39 +47,25 @@ const theme: Theme = {
 
 
 const App = () => {
-  // const [players, setPlayers] = useState([])
   const [user, setUser] = useState<User>(undefined)
   const { store } = useContext(StoreContext)
 
   useEffect(() => {
-    // db.collection('players').where('club', '==', 'Fairway').onSnapshot(snapshot => {
-    //   setPlayers(snapshot.docs.map(doc => ({
-    //     ...doc.data(),
-    //     id: doc.id,
-    //   })))
-    // })
-
-
-    // store.login('O9MfbO7egDQIn6KmDHyA')
 
     auth.onAuthStateChanged(async u => {
       if (u) {
         await store.login(u.uid)
         store.listEvents()
         store.listFriends()
+        store.listChatrooms()
       }
-      // console.log(store.player)
+
       setUser(u)
     })
   }, [])
   
   return <PaperProvider theme={theme}>
     <FirebaseContext.Provider value={{ db, auth, user, storage }}>
-      {/* <Appbar.Header>
-        <Appbar.Content
-          title='GolfRoster'
-        />
-      </Appbar.Header> */}
       {user === undefined
         ? <Center><Headline>One moment...</Headline></Center>
         : user !== null
