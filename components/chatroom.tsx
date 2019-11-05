@@ -55,7 +55,9 @@ export const Chatroom: FunctionComponent<{
               }}>{message.body}</Chip>
             </View>
 
-            {(!messages[index + 1] || messages[index + 1].player_id !== message.player_id)
+            {(!messages[index + 1]
+            || messages[index + 1].player_id !== message.player_id
+            || messages[index + 1].date.getTime() > message.date.getTime() + 600000)
               && <Caption style={{
                 textAlign: message.player_id === store.player.id ? 'right' : 'left',
               }}>{moment(message.date).fromNow()}</Caption>}
