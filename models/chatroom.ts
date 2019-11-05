@@ -4,6 +4,7 @@ import 'firebase/firestore'
 import { types, flow } from 'mobx-state-tree'
 
 import { Message } from './message'
+import { dateType } from './event'
 
 export const Chatroom = types.model({
   id: types.optional(types.identifier, () => firebase.app().firestore().collection('events').doc().id),
@@ -11,6 +12,11 @@ export const Chatroom = types.model({
   event_id: types.maybe(types.string),
   group_id: types.maybe(types.string),
   messages: types.optional(types.map(Message), {}),
+  latest: types.maybe(types.model({
+    player_id: types.string,
+    body: types.string,
+    date: dateType,
+  })),
 })
   .actions(self => ({
 

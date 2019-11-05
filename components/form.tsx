@@ -42,6 +42,7 @@ export class Form extends React.Component<Props, State> {
     this.props.onSubmit(this.state.values).then(response => this.setState({
         response,
         waiting: false,
+        values: {},
       })).catch(error => this.setState({
         error: error.message,
         waiting: false,

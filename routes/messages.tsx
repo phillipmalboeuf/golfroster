@@ -4,13 +4,14 @@ import { Observer } from 'mobx-react'
 
 import { Text } from 'react-native'
 import { NativeRouter, Switch, Route, Link } from 'react-router-native'
-import { Button, Appbar, List } from 'react-native-paper'
+import { Button, Appbar, List, Caption } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 
 import { Avatar } from '../components/photos'
 import { Chatroom } from '../components/chatroom'
+import moment from 'moment'
 
 
 export const Messages: FunctionComponent<{}> = props => {
@@ -39,7 +40,14 @@ export const Messages: FunctionComponent<{}> = props => {
         <Observer>{() => <List.Section>
           {Array.from(store.chatrooms.values()).map(chatroom =>
             <Link key={chatroom.id} to={`/chatrooms/${chatroom.id}`}>
-              <List.Item title={`${chatroom.players}`} />
+              <List.Item title={chatroom.players.filter(playerId => playerId !== store.player.id)
+                .map(player => `${store.friends.get(player).first_name} ${store.friends.get(player).last_name}`)
+                .join(', ')}
+                description={chatroom.latest.player_id === store.player.id
+                  ? `You: ${chatroom.latest.body}`
+                  : `${store.friends.get(chatroom.latest.player_id).first_name}: ${chatroom.latest.body}`}
+                right={() => <Caption>{moment(chatroom.latest.date).fromNow()}</Caption>}
+              />
             </Link>)}
         </List.Section>}</Observer>
       </>} />
