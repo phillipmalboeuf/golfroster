@@ -15,6 +15,7 @@ interface Props {
   disabled?: boolean,
   autoFocus?: boolean,
   autoComplete?: string,
+  flat?: boolean
   submitter?: boolean
 }
 
@@ -33,9 +34,9 @@ export const Input: React.FunctionComponent<Props> = props => {
       </View>,
     }[props.type]
       || <TextInput
-        mode='outlined'
+        mode={props.flat ? 'flat' : 'outlined'}
         theme={{ colors: { background: 'white' } }}
-        style={{ marginBottom: 16 }}
+        style={{ marginBottom: 16, flex: 1 }}
         onChangeText={text => context.onChange(props.name, text)}
         defaultValue={props.value}
         label={props.label}

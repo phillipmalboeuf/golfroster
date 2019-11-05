@@ -6,7 +6,9 @@ import { Player } from './player'
 
 
 export const dateType = types.snapshotProcessor(types.Date, {
-  preProcessor(d: firestore.Timestamp) { return d.toDate ? d.toDate() : d as any as Date },
+  preProcessor(d: firestore.Timestamp | Date) {
+    return (d as firestore.Timestamp).toDate ? (d as firestore.Timestamp).toDate() : d as any as Date
+  },
 })
 
 export const Event = types.model({

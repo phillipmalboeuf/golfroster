@@ -4,14 +4,17 @@ import { Observer } from 'mobx-react'
 import { SnapshotIn, SnapshotOrInstance, Instance } from 'mobx-state-tree'
 
 import { Text, View, ScrollView } from 'react-native'
-import { Button, Appbar, List, Headline, Caption, Chip } from 'react-native-paper'
+import { Button, Appbar, List, Headline, Caption, Chip, Surface } from 'react-native-paper'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import moment from 'moment'
 
 import { StoreContext } from '../contexts/store'
 import { Chatroom as ChatroomModel } from '../models/chatroom'
 
-import { Center, Padded, Spaced } from '../components/layouts'
+import { Center, Padded, Spaced, Bottom } from '../components/layouts'
 import { Avatar, Background } from '../components/photos'
+import { Form } from './form'
+import { Input } from './input'
 
 
 export const Chatroom: FunctionComponent<{
@@ -20,7 +23,8 @@ export const Chatroom: FunctionComponent<{
   const { store } = useContext(StoreContext)
   const scrollView = useRef<ScrollView>()
 
-  return <ScrollView ref={scrollView} onLayout={e => scrollView.current.scrollToEnd({ animated: false })}>
+  return <>
+  <ScrollView ref={scrollView} onLayout={e => scrollView.current.scrollToEnd({ animated: false })}>
     <Padded tight>
       <Observer>
       {() => {
@@ -35,17 +39,17 @@ export const Chatroom: FunctionComponent<{
               <Chip {...message.player_id === store.player.id ? {
                 style: {
                   backgroundColor: '#007251',
-                  borderBottomRightRadius: 0,
+                  borderBottomRightRadius: 3,
                   ...(messages[index - 1] && messages[index - 1].player_id === message.player_id) && {
-                    borderTopRightRadius: 0,
+                    borderTopRightRadius: 3,
                   },
                 },
                 textStyle: { color: 'white' },
               } : {
                 style: {
-                  borderBottomLeftRadius: 0,
+                  borderBottomLeftRadius: 3,
                   ...(messages[index - 1] && messages[index - 1].player_id === message.player_id) && {
-                    borderTopLeftRadius: 0,
+                    borderTopLeftRadius: 3,
                   },
                 },
               }}>{message.body}</Chip>
@@ -61,4 +65,13 @@ export const Chatroom: FunctionComponent<{
       </Observer>
     </Padded>
   </ScrollView>
+  <Bottom>
+    <Form onSubmit={async values => {
+      await chatroom.sendMessage(values.body, store.player.id)
+    }}
+      inline cta={<Icon name='send' size={33} />}>
+      <Input name='body' placeholder='Message here...' flat />
+    </Form>
+  </Bottom>
+  </>
 }

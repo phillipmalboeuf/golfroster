@@ -28,4 +28,15 @@ export const Chatroom = types.model({
 
     }),
     
+    sendMessage: flow(function* sendMessage(body: string, player: string) {
+
+      const message = Message.create({
+        chatroom_id: self.id,
+        player_id: player,
+        body,
+        date: new Date(),
+      })
+
+      return yield message.send()
+    }),
   }))

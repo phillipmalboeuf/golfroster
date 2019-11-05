@@ -13,8 +13,8 @@ export const Message = types.model({
   seen_by: types.array(types.string),
 })
   .actions(self => ({
-    send: flow(function* send(data: firestore.DocumentData) {
+    send: flow(function* send() {
       yield firebase.app().firestore().collection('chatrooms').doc(self.chatroom_id)
-        .collection('messages').add(data)
+        .collection('messages').add(self)
     }),
   }))
