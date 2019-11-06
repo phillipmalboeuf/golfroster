@@ -14,6 +14,7 @@ const Store = types
     player: types.maybe(Player),
     events: types.optional(types.map(Event), {}),
     friends: types.optional(types.map(Player), {}),
+    players: types.optional(types.map(Player), {}),
     groups: types.optional(types.map(Group), {}),
     chatrooms: types.optional(types.map(Chatroom), {}),
   })
@@ -46,22 +47,24 @@ const Store = types
       // self.events.set(event.id, event)
     }),
 
-    listFriends: flow(function* listFriends() {
-      // const snapshot: firestore.DocumentSnapshot[] = yield Promise.all(self.player.friends.map(friend => 
-      //   firebase.app().firestore().collection('players').doc(friend).get()
-      // ))
+    fetchPlayer: flow(function* fetchPlayer(id: string) {
+      const player = Player.create({ id })
+      self.players.set(id, player)
+      yield player.fetch()
+    }),
 
-      firebase.app().firestore().collection('players').onSnapshot(snapshot => {
+    listFriends: flow(function* listFriends() {
+
+      firebase.app().firestore().collection('players')
+        .where('friends', 'array-contains', self.player.id)
+        .where(firestore.FieldPath.documentId(), 'in', self.player.friends)
+        .onSnapshot(snapshot => {
         snapshot.docs.forEach(doc => self.friends.set(doc.id, {
           id: doc.id,
           ...doc.data(),
         }))
       })
-      
-      // snapshot.forEach(doc => self.friends.set(doc.id, {
-      //   id: doc.id,
-      //   ...doc.data(),
-      // }))
+
     }),
 
     listChatrooms: flow(function* listChatrooms() {
