@@ -1,20 +1,28 @@
-import React, { useContext, Fragment } from 'react'
+import React, { useContext, Fragment, useRef, useState } from 'react'
 import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 
 import { Text } from 'react-native'
 import { NativeRouter, Switch, Route, Link } from 'react-router-native'
-import { Button, Appbar, List } from 'react-native-paper'
+import { Button, Appbar, List, Headline, Subheading, FAB } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 
 import { Avatar } from '../components/photos'
 import { Player } from '../components/player'
+import { Full, Center } from '../components/layouts'
+import { Dots } from '../components/dots'
+import { Form } from '../components/form'
+import { Input } from '../components/input'
+import { Group } from '../components/group'
 
 
 export const Players: FunctionComponent<{}> = props => {
   const { store } = useContext(StoreContext)
+
+  const form = useRef<Form>()
+  const [building, setBuilding] = useState(false)
 
   return <Observer>
   {() => <NativeRouter>
@@ -32,6 +40,18 @@ export const Players: FunctionComponent<{}> = props => {
           <Player player={player} />
         </Fragment>
       }} />
+      <Route exact path='/groups/:id' render={({ match }) => {
+        const group = store.groups.get(match.params.id)
+        return <Fragment key={match.params.id}>
+          <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
+            <Link to='/'><Appbar.BackAction /></Link>
+            <Appbar.Content title={group.name} />
+            <Appbar.Action icon='message-outline' />
+            <Appbar.Action icon='dots-vertical' />
+          </Appbar.Header>
+          <Group group={group} />
+        </Fragment>
+      }} />
       <Route exact render={() => <>
         <Appbar.Header>
           <Appbar.Content title='Friends & Groups' />
@@ -43,7 +63,52 @@ export const Players: FunctionComponent<{}> = props => {
             <List.Item title={`${friend.first_name} ${friend.last_name}`}
               left={() => <Avatar {...friend} small />} />
           </Link>)}
+          {Array.from(store.groups.values()).map(group => <Link key={group.id} to={`/groups/${group.id}`}>
+            <List.Item title={group.name} />
+          </Link>)}
         </List.Section>}</Observer>
+
+        {building && <Full>
+          <Form ref={form} onSubmit={async values => {
+            await store.createGroup(values)
+            setBuilding(false)
+          }} hideButton>
+            <Dots path='new_group' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
+              <Center>
+                <Headline>
+                  Group Members
+                </Headline>
+
+                <Subheading>
+                  Who would you like to invite to the group?
+                </Subheading>
+
+                <Input name='is_public' type='checkbox' label='Is this group public?' />
+              </Center>,
+              <Center>
+                <Headline>
+                  Give it a name
+                </Headline>
+
+                <Subheading>
+                  Finally, give your group a name and a description.
+                </Subheading>
+
+                <Input name='name' label='Group Name' />
+                <Input name='description' type='multiline' label='Description' />
+              </Center>,
+            ]} />
+          </Form>
+        </Full>}
+        <FAB
+          style={{
+            position: 'absolute',
+            right: 16,
+            bottom: 25,
+          }}
+          icon='plus'
+          onPress={() => setBuilding(true)}
+        />
       </>} />
     </Switch>
   </NativeRouter>}

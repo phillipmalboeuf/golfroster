@@ -57,6 +57,7 @@ const App = () => {
         await store.login(u.uid)
         store.listEvents()
         store.listFriends()
+        store.listGroups()
         store.listChatrooms()
       }
 

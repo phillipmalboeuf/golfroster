@@ -6,6 +6,7 @@ import { types, flow, unprotect } from 'mobx-state-tree'
 
 import { Player } from '../models/player'
 import { Event } from '../models/event'
+import { Group } from '../models/group'
 import { Chatroom } from '../models/chatroom'
 
 const Store = types
@@ -13,6 +14,7 @@ const Store = types
     player: types.maybe(Player),
     events: types.optional(types.map(Event), {}),
     friends: types.optional(types.map(Player), {}),
+    groups: types.optional(types.map(Group), {}),
     chatrooms: types.optional(types.map(Chatroom), {}),
   })
   .actions(self => ({
@@ -76,6 +78,29 @@ const Store = types
           })
         })
 
+    }),
+
+    listGroups: flow(function* listGroups() {
+
+      firebase.app().firestore().collection('groups').where('members', 'array-contains', self.player.id)
+        .onSnapshot(snapshot => {
+          snapshot.docs.forEach(doc => {
+            self.groups.set(doc.id, {
+              id: doc.id,
+              ...doc.data(),
+            })
+          })
+        })
+
+    }),
+
+    createGroup: flow(function* exists(data: typeof Group.CreationType) {
+      const group = Group.create({
+        ...data,
+        organizer_id: self.player.id,
+        members: [self.player.id],
+      })
+      yield group.save(group)
     }),
     
   }))
