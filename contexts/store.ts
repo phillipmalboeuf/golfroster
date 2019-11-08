@@ -12,13 +12,20 @@ import { Chatroom } from '../models/chatroom'
 const Store = types
   .model({
     player: types.maybe(Player),
-    events: types.optional(types.map(Event), {}),
-    friends: types.optional(types.map(Player), {}),
-    players: types.optional(types.map(Player), {}),
-    groups: types.optional(types.map(Group), {}),
-    chatrooms: types.optional(types.map(Chatroom), {}),
+    events: types.map(Event),
+    friends: types.map(Player),
+    players: types.map(Player),
+    groups: types.map(Group),
+    chatrooms: types.map(Chatroom),
+    // navigation_tab: types.maybe(types.string),
+    // navigation_path: types.maybe(types.string),
   })
   .actions(self => ({
+
+    // navigate: (tab: string, path?: string) => {
+    //   self.navigation_tab = tab
+    //   self.navigation_path = path
+    // },
 
     login: flow(function* login(id: string) {
       self.player = Player.create({ id })
@@ -37,14 +44,13 @@ const Store = types
         })
     }),
 
-    createEvent: flow(function* exists(data: typeof Event.CreationType) {
+    createEvent: flow(function* createEvent(data: typeof Event.CreationType) {
       const event = Event.create({
         ...data,
         organizer_id: self.player.id,
         attendees: [self.player.id],
       })
       yield event.save(event)
-      // self.events.set(event.id, event)
     }),
 
     fetchPlayer: flow(function* fetchPlayer(id: string) {
@@ -65,6 +71,14 @@ const Store = types
         }))
       })
 
+    }),
+
+    createChatroom: flow(function* createChatroom(data: typeof Chatroom.CreationType) {
+      const chatroom = Chatroom.create({
+        ...data,
+        players: [...data.players, self.player.id],
+      })
+      return yield chatroom.create()
     }),
 
     listChatrooms: flow(function* listChatrooms() {

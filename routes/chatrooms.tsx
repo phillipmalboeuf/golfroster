@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react'
+import React, { useContext, Fragment, useRef } from 'react'
 import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 
@@ -14,17 +14,17 @@ import { Chatroom } from '../components/chatroom'
 import moment from 'moment'
 
 
-export const Messages: FunctionComponent<{}> = props => {
+export const Chatrooms: FunctionComponent<{}> = props => {
   const { store } = useContext(StoreContext)
 
   return <Observer>
-  {() => <NativeRouter>
+  {() => <>
     <Switch>
       <Route exact path='/chatrooms/:id' render={({ match }) => {
         const chatroom = store.chatrooms.get(match.params.id)
         return <Fragment key={match.params.id}>
           <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
-            <Link to='/'><Appbar.BackAction /></Link>
+            <Link to='/chatrooms'><Appbar.BackAction /></Link>
             <Appbar.Content title={`Chatroom`} />
             <Appbar.Action icon='dots-vertical' />
           </Appbar.Header>
@@ -43,15 +43,17 @@ export const Messages: FunctionComponent<{}> = props => {
               <List.Item title={chatroom.players.filter(playerId => playerId !== store.player.id)
                 .map(player => `${store.friends.get(player).first_name} ${store.friends.get(player).last_name}`)
                 .join(', ')}
-                description={chatroom.latest.player_id === store.player.id
-                  ? `You: ${chatroom.latest.body}`
-                  : `${store.friends.get(chatroom.latest.player_id).first_name}: ${chatroom.latest.body}`}
-                right={() => <Caption>{moment(chatroom.latest.date).fromNow()}</Caption>}
+                description={chatroom.latest
+                  ? (chatroom.latest.player_id === store.player.id
+                    ? `You: ${chatroom.latest.body}`
+                    : `${store.friends.get(chatroom.latest.player_id).first_name}: ${chatroom.latest.body}`)
+                  : 'New conversation'}
+                right={() => <Caption>{chatroom.latest ? moment(chatroom.latest.date).fromNow() : 'New'}</Caption>}
               />
             </Link>)}
         </List.Section>}</Observer>
       </>} />
     </Switch>
-  </NativeRouter>}
+  </>}
   </Observer>
 }

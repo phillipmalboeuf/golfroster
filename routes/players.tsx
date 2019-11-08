@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 
 import { Text } from 'react-native'
-import { NativeRouter, Switch, Route, Link } from 'react-router-native'
+import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-native'
 import { Button, Appbar, List, Headline, Subheading, FAB } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
@@ -16,25 +16,45 @@ import { Dots } from '../components/dots'
 import { Form } from '../components/form'
 import { Input } from '../components/input'
 import { Group } from '../components/group'
+import { Chatroom } from '../models/chatroom'
+import { Instance } from 'mobx-state-tree'
 
 
 export const Players: FunctionComponent<{}> = props => {
   const { store } = useContext(StoreContext)
+  const history = useHistory()
 
   const form = useRef<Form>()
   const [building, setBuilding] = useState(false)
 
   return <Observer>
-  {() => <NativeRouter>
+  {() => <>
     <Switch>
       <Route exact path='/players/:id' render={({ match }) => {
         const player = store.friends.get(match.params.id)
         return <Fragment key={match.params.id}>
           <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
-            <Link to='/'><Appbar.BackAction /></Link>
+            <Link to='/players'><Appbar.BackAction /></Link>
             <Appbar.Content title={`${player.first_name}'s Profile`} />
             <Appbar.Action icon='account-plus' />
-            <Appbar.Action icon='message-outline' />
+            <Appbar.Action icon='message-outline' onPress={async () => {
+              const chatroom = Array.from(store.chatrooms.values()).find(room =>
+                !room.event_id && !room.group_id
+                && room.players.includes(match.params.id))
+
+              if (chatroom) {
+                // console.log(chatroom)
+                history.push(`/chatrooms/${chatroom.id}`)
+              } else {
+                await store.createChatroom({
+                  players: [match.params.id],
+                }).then(room => {
+                  history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
+                  // store.navigate('messages', )
+                })
+              }
+              // const chatroom = 
+            }} />
             <Appbar.Action icon='dots-vertical' />
           </Appbar.Header>
           <Player player={player} />
@@ -44,7 +64,7 @@ export const Players: FunctionComponent<{}> = props => {
         const group = store.groups.get(match.params.id)
         return <Fragment key={match.params.id}>
           <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
-            <Link to='/'><Appbar.BackAction /></Link>
+            <Link to='/groups'><Appbar.BackAction /></Link>
             <Appbar.Content title={group.name} />
             <Appbar.Action icon='message-outline' />
             <Appbar.Action icon='dots-vertical' />
@@ -111,6 +131,6 @@ export const Players: FunctionComponent<{}> = props => {
         />
       </>} />
     </Switch>
-  </NativeRouter>}
+  </>}
   </Observer>
 }

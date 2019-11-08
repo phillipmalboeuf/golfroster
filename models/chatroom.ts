@@ -9,9 +9,9 @@ import { dateType } from './event'
 export const Chatroom = types.model({
   id: types.optional(types.identifier, () => firebase.app().firestore().collection('events').doc().id),
   players: types.array(types.string),
-  event_id: types.maybe(types.string),
-  group_id: types.maybe(types.string),
-  messages: types.optional(types.map(Message), {}),
+  event_id: types.maybeNull(types.string),
+  group_id: types.maybeNull(types.string),
+  messages: types.map(Message),
   latest: types.maybe(types.model({
     player_id: types.string,
     body: types.string,
@@ -19,6 +19,13 @@ export const Chatroom = types.model({
   })),
 })
   .actions(self => ({
+    create: flow(function* create() {
+      delete self.messages
+      delete self.latest
+      yield firebase.app().firestore().collection('chatrooms').doc(self.id).set(self, { merge: true })
+
+      return self
+    }),
 
     listMessages: flow(function* listChatrooms() {
 

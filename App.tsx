@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View, Text } from 'react-native'
 import { DefaultTheme, Provider as PaperProvider, Colors, Theme, Headline } from 'react-native-paper'
-import { Appbar } from 'react-native-paper'
+import { Observer } from 'mobx-react'
+import { NativeRouter } from 'react-router-native'
 
 import firebase, { User } from 'firebase'
 import 'firebase/auth'
@@ -16,7 +17,6 @@ import { ProfileBuildup } from './routes/profile_buildup'
 
 import { Navigation } from './components/navigation'
 import { Center } from './components/layouts'
-import { Observer } from 'mobx-react'
 
 
 const app = firebase.initializeApp({
@@ -71,7 +71,7 @@ const App = () => {
         ? <Center><Headline>One moment...</Headline></Center>
         : user !== null
           ? <Observer>{() => store.player.accepted_terms
-            ? <Navigation />
+            ? <NativeRouter><Navigation /></NativeRouter>
             : <View>
               <ProfileBuildup />
             </View>
