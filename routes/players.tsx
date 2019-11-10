@@ -18,6 +18,7 @@ import { Input } from '../components/input'
 import { Group } from '../components/group'
 import { Chatroom } from '../models/chatroom'
 import { Instance } from 'mobx-state-tree'
+import { Search } from '../components/search'
 
 
 export const Players: FunctionComponent<{}> = props => {
@@ -78,6 +79,9 @@ export const Players: FunctionComponent<{}> = props => {
           <Appbar.Action icon='magnify' />
           <Appbar.Action icon='dots-vertical' />
         </Appbar.Header>
+        
+        <Search index='players' />
+
         <Observer>{() => <List.Section>
           {Array.from(store.friends.values()).map(friend => <Link key={friend.id} to={`/players/${friend.id}`}>
             <List.Item title={`${friend.first_name} ${friend.last_name}`}

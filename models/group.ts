@@ -11,6 +11,7 @@ export const Group = types.model({
   description: types.maybeNull(types.string),
   photo: types.maybe(types.string),
   members: types.array(types.string),
+  invited: types.array(types.string),
   is_public: types.boolean,
 })
   .actions(self => ({

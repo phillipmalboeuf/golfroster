@@ -1,7 +1,10 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const algoliasearch = require('algoliasearch');
 
 admin.initializeApp();
+
+const CONFIG = functions.config();
 
 exports.newMessage = functions.firestore
   .document('chatrooms/{chatroomId}/messages/{messageId}')
@@ -18,4 +21,17 @@ exports.newMessage = functions.firestore
           date: message.date,
         },
       });
+  });
+
+const search = algoliasearch(CONFIG.algolia.id, CONFIG.algolia.key);
+
+exports.writePlayer = functions.firestore
+  .document('players/{playerId}')
+  .onWrite(async (change, context) => {
+    const player = change.after.data();
+    const index = search.initIndex('players');
+    return index.saveObject({
+      ...player,
+      objectID: context.params.playerId,
+    });
   });
