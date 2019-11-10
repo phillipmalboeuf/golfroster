@@ -2,7 +2,8 @@ import firebase, { firestore } from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { createContext } from 'react'
-import { types, flow, unprotect } from 'mobx-state-tree'
+import { AsyncStorage } from 'react-native'
+import { types, flow, unprotect, onSnapshot, applySnapshot } from 'mobx-state-tree'
 
 import { Player } from '../models/player'
 import { Event } from '../models/event'
@@ -17,15 +18,8 @@ const Store = types
     players: types.map(Player),
     groups: types.map(Group),
     chatrooms: types.map(Chatroom),
-    // navigation_tab: types.maybe(types.string),
-    // navigation_path: types.maybe(types.string),
   })
   .actions(self => ({
-
-    // navigate: (tab: string, path?: string) => {
-    //   self.navigation_tab = tab
-    //   self.navigation_path = path
-    // },
 
     login: flow(function* login(id: string) {
       self.player = Player.create({ id })
@@ -124,4 +118,15 @@ const Store = types
 
 const store = Store.create()
 unprotect(store)
+
+onSnapshot(store, snapshot => {
+  AsyncStorage.setItem('store', JSON.stringify(snapshot))
+})
+
+AsyncStorage.getItem('store').then(stored => {
+  if (stored) {
+    applySnapshot(store, JSON.parse(stored))
+  }
+})
+
 export const StoreContext = createContext({ store })

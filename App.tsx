@@ -9,6 +9,8 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
 
+import app from './clients/firebase'
+
 import { FirebaseContext } from './contexts/firebase'
 import { StoreContext } from './contexts/store'
 
@@ -17,15 +19,6 @@ import { ProfileBuildup } from './routes/profile_buildup'
 
 import { Navigation } from './components/navigation'
 import { Center } from './components/layouts'
-
-
-const app = firebase.initializeApp({
-  apiKey: 'AIzaSyBE9N72hl6q78zTBVUZVCwYplZ9iDOG8e8',
-  authDomain: 'golfroster.firebaseapp.com',
-  projectId: 'golfroster',
-  databaseURL: 'https://golfroster.firebaseio.com',
-  storageBucket: 'golfroster.appspot.com',
-})
 
 
 const db = app.firestore()
