@@ -2,7 +2,7 @@ import React, { useContext, useState, Component, ComponentElement } from 'react'
 import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
-import { Center, Bottom, Spaced } from './layouts'
+import { Center, Bottom, Spaced, Padded } from './layouts'
 import { Button } from 'react-native-paper'
 import { NativeRouter, Switch, Route, Redirect, useHistory, Link } from 'react-router-native'
 
@@ -19,17 +19,19 @@ export const Dots: FunctionComponent<{
   
   return <View>
     <NativeRouter>
-      <Switch>
-        {props.items.map((item, index) => (
-          <Route key={index} exact path={`/${props.path}/${index}`} render={() => {
-            setActive(index)
-            return item
+      <Center>
+        <Switch>
+          {props.items.map((item, index) => (
+            <Route key={index} exact path={`/${props.path}/${index}`} render={() => {
+              setActive(index)
+              return <Padded>{item}</Padded>
+            }} />
+          ))}
+          <Route render={() => {
+            return <Redirect to={`/${props.path}/0`} />
           }} />
-        ))}
-        <Route render={() => {
-          return <Redirect to={`/${props.path}/0`} />
-        }} />
-      </Switch>
+        </Switch>
+      </Center>
 
       <Bottom>
         <Spaced>

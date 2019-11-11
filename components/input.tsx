@@ -3,6 +3,7 @@ import React from 'react'
 import { FormContext } from './form'
 import { KeyboardTypeOptions, TextInputProps, Text, DatePickerIOS, View } from 'react-native'
 import { TextInput, Checkbox, Caption } from 'react-native-paper'
+import { pick } from 'dot-object'
 
 
 interface Props {
@@ -21,24 +22,29 @@ interface Props {
 
 export const Input: React.FunctionComponent<Props> = props => {
   return <FormContext.Consumer>
-    {context => ({
-      datetime: <DatePickerIOS date={context.values[props.name] || props.value || new Date()}
+  {context => {
+    const value = pick(props.name, context.values)
+    return {
+      datetime: <DatePickerIOS date={value || props.value || new Date()}
         onDateChange={date => context.onChange(props.name, date)} />,
       checkbox: <View style={{ 
         flexDirection: 'row',
         alignItems: 'center',
       }}>
-        <Checkbox.Android color='#007251' status={context.values[props.name] ? 'checked' : 'unchecked'} />
-        <Caption onPress={() => context.onChange(props.name, context.values[props.name] !== undefined
-          ? !context.values[props.name] : true)}>{props.label}</Caption>
+        <Checkbox.Android color='#007251' status={value ? 'checked' : 'unchecked'}
+          onPress={() => context.onChange(props.name, value !== undefined
+            ? !value : true)} />
+        <Caption onPress={() => context.onChange(props.name, value !== undefined
+            ? !value : true)}>{props.label}</Caption>
       </View>,
     }[props.type]
       || <TextInput
         mode={props.flat ? 'flat' : 'outlined'}
         theme={{ colors: { background: 'white' } }}
-        style={{ marginBottom: 16, flex: 1 }}
+        style={{ marginBottom: 16, ...context.inline && { flex: 1 },
+          ...props.disabled && { opacity: 0.5 } }}
         onChangeText={text => context.onChange(props.name, text)}
-        defaultValue={props.value}
+        defaultValue={value || props.value}
         label={props.label}
         placeholder={props.placeholder}
         autoFocus={props.autoFocus}
@@ -60,6 +66,7 @@ export const Input: React.FunctionComponent<Props> = props => {
           newpassword: 'newPassword',
           phone: 'telephoneNumber',
           url: 'URL',
-        } as {[key: string]: TextInputProps['textContentType']})[props.type]} />)}
+        } as {[key: string]: TextInputProps['textContentType']})[props.type]} />
+  }}
   </FormContext.Consumer>
 }

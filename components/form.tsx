@@ -4,10 +4,12 @@ import React from 'react'
 import { View } from 'react-native'
 
 import { Button, HelperText } from 'react-native-paper'
+import { str } from 'dot-object'
 
 
 export const FormContext = React.createContext({
   values: {} as { [key: string]: any },
+  inline: false as boolean,
   onChange(name: string, value: any): void { return },
 })
 
@@ -50,20 +52,19 @@ export class Form extends React.Component<Props, State> {
   }
 
   private onChange(name: string, value: any) {
-    this.setState({
-      values : {
-        ...this.state.values,
-        [name]: value,
-      },
-    })
+    const values = this.state.values
+    str(name, value, values)
+    this.setState({ values })
   }
 
   public render() {
+    console.log(this.state.values)
     return this.state.response
     ? this.state.response
     : <View style={{ ...this.props.inline && { flexDirection: 'row' }}}>
       <FormContext.Provider value={{
         onChange: this.onChange.bind(this),
+        inline: this.props.inline,
         values: this.state.values,
       }}>
         {this.props.children}

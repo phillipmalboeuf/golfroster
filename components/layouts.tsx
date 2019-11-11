@@ -16,7 +16,7 @@ export const Padded: FunctionComponent<{
 export const Center: FunctionComponent<{}> = props => {
 
   return <View style={{
-    height: Dimensions.get('window').height - 88,
+    height: Dimensions.get('window').height,
     display: 'flex',
     alignContent: 'center',
     justifyContent: 'center',

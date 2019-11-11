@@ -1,6 +1,7 @@
 import React, { useContext, Fragment, useRef, useState } from 'react'
 import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
+import { Instance } from 'mobx-state-tree'
 
 import { Text } from 'react-native'
 import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-native'
@@ -9,24 +10,18 @@ import { Button, Appbar, List, Headline, Subheading, FAB } from 'react-native-pa
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 
+import { Chatroom } from '../models/chatroom'
+
 import { Avatar } from '../components/photos'
 import { Player } from '../components/player'
-import { Full, Center } from '../components/layouts'
-import { Dots } from '../components/dots'
-import { Form } from '../components/form'
-import { Input } from '../components/input'
 import { Group } from '../components/group'
-import { Chatroom } from '../models/chatroom'
-import { Instance } from 'mobx-state-tree'
 import { Search } from '../components/search'
+import { NewGroup } from '../components/new_group'
 
 
 export const Players: FunctionComponent<{}> = props => {
   const { store } = useContext(StoreContext)
   const history = useHistory()
-
-  const form = useRef<Form>()
-  const [building, setBuilding] = useState(false)
 
   return <Observer>
   {() => <>
@@ -51,10 +46,8 @@ export const Players: FunctionComponent<{}> = props => {
                   players: [match.params.id],
                 }).then(room => {
                   history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
-                  // store.navigate('messages', )
                 })
               }
-              // const chatroom = 
             }} />
             <Appbar.Action icon='dots-vertical' />
           </Appbar.Header>
@@ -92,47 +85,7 @@ export const Players: FunctionComponent<{}> = props => {
           </Link>)}
         </List.Section>}</Observer>
 
-        {building && <Full>
-          <Form ref={form} onSubmit={async values => {
-            await store.createGroup(values)
-            setBuilding(false)
-          }} hideButton>
-            <Dots path='new_group' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
-              <Center>
-                <Headline>
-                  Group Members
-                </Headline>
-
-                <Subheading>
-                  Who would you like to invite to the group?
-                </Subheading>
-
-                <Input name='is_public' type='checkbox' label='Is this group public?' />
-              </Center>,
-              <Center>
-                <Headline>
-                  Give it a name
-                </Headline>
-
-                <Subheading>
-                  Finally, give your group a name and a description.
-                </Subheading>
-
-                <Input name='name' label='Group Name' />
-                <Input name='description' type='multiline' label='Description' />
-              </Center>,
-            ]} />
-          </Form>
-        </Full>}
-        <FAB
-          style={{
-            position: 'absolute',
-            right: 16,
-            bottom: 25,
-          }}
-          icon='plus'
-          onPress={() => setBuilding(true)}
-        />
+        <NewGroup />
       </>} />
     </Switch>
   </>}
