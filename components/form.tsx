@@ -58,7 +58,6 @@ export class Form extends React.Component<Props, State> {
   }
 
   public render() {
-    console.log(this.state.values)
     return this.state.response
     ? this.state.response
     : <View style={{ ...this.props.inline && { flexDirection: 'row' }}}>

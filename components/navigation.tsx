@@ -3,6 +3,9 @@ import { View } from 'react-native'
 import { useHistory } from 'react-router'
 import { BottomNavigation, DefaultTheme } from 'react-native-paper'
 import CommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Observer } from 'mobx-react'
+
+import { StoreContext } from '../contexts/store'
 
 import { Profile } from '../routes/profile'
 import { Events } from '../routes/events'
@@ -29,6 +32,8 @@ const scene = BottomNavigation.SceneMap({
 
 export const Navigation: FunctionComponent<{}> = props => {
   const [index, setIndex] = useState(2)
+
+  const { store } = useContext(StoreContext)
   const history = useHistory()
 
   useEffect(() => {
@@ -36,21 +41,24 @@ export const Navigation: FunctionComponent<{}> = props => {
     setIndex(routes.findIndex(route => route.key.includes(root === 'groups' ? 'players' : root)))
   }, [history.location])
 
-  return <BottomNavigation
-    shifting={false}
-    navigationState={{
-      index,
-      routes,
-    }}
-    onIndexChange={i => {
-      setIndex(i)
-    }}
-    renderScene={scene}
-    barStyle={{
-      zIndex: -1,
-      backgroundColor: '#fff',
-      borderTopColor: '#F5F5F5',
-      borderTopWidth: 1,
-    }}
-  />
+  return <Observer>
+    {() => {
+      return <BottomNavigation
+        shifting={false}
+        navigationState={{
+          index,
+          routes: routes.map(route => ({ ...route, ...store.badges[route.key] && { badge: store.badges[route.key] }})),
+        }}
+        onIndexChange={i => {
+          setIndex(i)
+        }}
+        renderScene={scene}
+        barStyle={{
+          zIndex: -1,
+          backgroundColor: '#fff',
+          borderTopColor: '#F5F5F5',
+          borderTopWidth: 1,
+        }}
+      />}}
+  </Observer>
 }

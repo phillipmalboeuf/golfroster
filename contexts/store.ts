@@ -9,6 +9,7 @@ import { Player } from '../models/player'
 import { Event } from '../models/event'
 import { Group } from '../models/group'
 import { Chatroom } from '../models/chatroom'
+import { Notification } from '../models/notification'
 
 const Store = types
   .model({
@@ -18,6 +19,11 @@ const Store = types
     players: types.map(Player),
     groups: types.map(Group),
     chatrooms: types.map(Chatroom),
+    notifications: types.map(Notification),
+    badges: types.model({
+      chatrooms: types.maybe(types.number),
+      notifications: types.maybe(types.number),
+    }),
   })
   .actions(self => ({
 
@@ -113,10 +119,27 @@ const Store = types
       })
       yield group.save(group)
     }),
+
+    listNotifications: flow(function* listNotifications() {
+
+      firebase.app().firestore().collection('players').doc(self.player.id)
+        .collection('notifications')
+        .onSnapshot(snapshot => {
+          snapshot.docs.forEach(doc => {
+            self.notifications.set(doc.id, {
+              id: doc.id,
+              ...doc.data(),
+            })
+          })
+
+          self.badges.notifications = snapshot.docs.filter(doc => !doc.data().seen).length
+        })
+
+    }),
     
   }))
 
-const store = Store.create()
+const store = Store.create({ badges: {} })
 unprotect(store)
 
 onSnapshot(store, snapshot => {

@@ -52,6 +52,7 @@ const App = () => {
         store.listFriends()
         store.listGroups()
         store.listChatrooms()
+        store.listNotifications()
       }
 
       setUser(u)
