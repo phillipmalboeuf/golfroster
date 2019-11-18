@@ -54,7 +54,6 @@ export const Navigation: FunctionComponent<{}> = props => {
         }}
         renderScene={scene}
         barStyle={{
-          zIndex: -1,
           backgroundColor: '#fff',
           borderTopColor: '#F5F5F5',
           borderTopWidth: 1,

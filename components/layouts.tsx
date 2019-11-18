@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
+import { Portal } from 'react-native-paper'
 
 export const Padded: FunctionComponent<{
   tight?: boolean
@@ -42,17 +43,19 @@ export const Bottom: FunctionComponent<{}> = props => {
 
 export const Full: FunctionComponent<{}> = props => {
 
-  return <View style={{
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 20,
-    backgroundColor: 'white',
-  }}>
-    {props.children}
-  </View>
+  return <Portal>
+    <View style={{
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      zIndex: 20,
+      backgroundColor: 'white',
+    }}>
+      {props.children}
+    </View>
+  </Portal>
 }
 
 export const Spaced: FunctionComponent<{}> = props => {
