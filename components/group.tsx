@@ -38,6 +38,7 @@ export const Group: FunctionComponent<{
       
     <Padded>
       <Text>{group.description}</Text>
+      <Text>{JSON.stringify(group.members)}</Text>
     </Padded>
   </>}</Observer>
 }

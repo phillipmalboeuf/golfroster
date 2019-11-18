@@ -120,6 +120,12 @@ const Store = types
       yield group.save(group)
     }),
 
+    joinGroup: flow(function* exists(groupId: string) {
+      yield firebase.app().firestore().collection('groups').doc(groupId).update({
+        members: firestore.FieldValue.arrayUnion(self.player.id),
+      })
+    }),
+
     listNotifications: flow(function* listNotifications() {
 
       firebase.app().firestore().collection('players').doc(self.player.id)
@@ -128,6 +134,7 @@ const Store = types
           snapshot.docs.forEach(doc => {
             self.notifications.set(doc.id, {
               id: doc.id,
+              player_id: self.player.id,
               ...doc.data(),
             })
           })

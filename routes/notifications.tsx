@@ -28,10 +28,17 @@ export const Notifications: FunctionComponent<{}> = props => {
           content={<Text>Reply to this</Text>}
           actions={[{
             label: 'Decline',
-            onPress: () => console.log('Decline'),
-          },{
+            onPress: async () => {
+              await store.notifications.get(match.params.id).hide()
+              history.push('/notifications')
+            },
+          }, {
             label: 'Accept',
-            onPress: () => console.log('Accept'),
+            onPress: async () => {
+              await store.joinGroup(store.notifications.get(match.params.id).invited_to_id)
+              await store.notifications.get(match.params.id).accept()
+              history.push('/notifications')
+            },
           }]}
         />
       }} />
@@ -45,22 +52,27 @@ export const Notifications: FunctionComponent<{}> = props => {
       </Appbar.Header>
       
 
-      <Observer>{() => <List.Section>
+      <List.Section>
         {Array.from(store.notifications.values()).map(notification => <Link key={notification.id} to={`/groups/${notification.invited_to_id}`}>
           {{
             group: () => <List.Item title={`${notification.invited_to_name}`}
               description={notification.invited_by_name
                 ? `${notification.invited_by_name} invited you to join`
                 : 'You were invited to join'}
-              right={() => <Link to={`/notifications/${notification.id}`} style={{ flexDirection: 'column' }}>
-                <>
+              right={() => <Observer>{() => notification.accepted
+                ? <View style={{ flexDirection: 'column' }}>
                   <Caption>{moment(notification.date).fromNow()}</Caption>
-                  <Button uppercase={false} mode='outlined'>Reply</Button>
-                </>
-              </Link>} />,
+                  <Text style={{ textAlign: 'right' }}>Accepted</Text>
+                </View>
+                : <Link to={`/notifications/${notification.id}`} style={{ flexDirection: 'column' }}>
+                  <>
+                    <Caption>{moment(notification.date).fromNow()}</Caption>
+                    <Button uppercase={false} mode='outlined'>Reply</Button>
+                  </>
+                </Link>}</Observer>} />,
           }[notification.invitation_type]()}
         </Link>)}
-      </List.Section>}</Observer>
+      </List.Section>
     </>} />
   </>}
   </Observer>
