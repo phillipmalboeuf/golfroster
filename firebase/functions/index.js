@@ -23,9 +23,48 @@ exports.newMessage = functions.firestore
       });
   });
 
+exports.inviteToGroup = functions.firestore
+  .document('groups/{groupId}')
+  .onWrite(async (change, {params, auth, authType}) => {
+    const group = change.after.data();
+    const previous = change.before.data();
+    const players = group.invited.filter(
+      player => !previous.invited.includes(player),
+    );
+
+    const invited_by =
+      authType === 'USER' &&
+      (await admin
+        .firestore()
+        .collection('players')
+        .doc(auth.uid)
+        .get());
+
+    return (
+      players.length &&
+      players.map(player =>
+        admin
+          .firestore()
+          .collection('players')
+          .doc(player)
+          .collection('notifications')
+          .add({
+            invitation_type: 'group',
+            invited_to_id: params.groupId,
+            invited_to_name: group.name,
+            ...(invited_by && {
+              invited_by_id: auth.uid,
+              invited_by_name: invited_by.data().name,
+            }),
+            date: new Date(),
+          }),
+      )
+    );
+  });
+
 const search = algoliasearch(CONFIG.algolia.id, CONFIG.algolia.key);
 
-exports.writePlayer = functions.firestore
+exports.indexPlayer = functions.firestore
   .document('players/{playerId}')
   .onWrite(async (change, context) => {
     const player = change.after.data();

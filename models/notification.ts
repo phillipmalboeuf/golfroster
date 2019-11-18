@@ -10,8 +10,8 @@ export const Notification = types.model({
   invitation_type: types.string,
   invited_to_id: types.string,
   invited_to_name: types.string,
-  invited_by_id: types.string,
-  invited_by_name: types.string,
+  invited_by_id: types.maybe(types.string),
+  invited_by_name: types.maybe(types.string),
   date: dateType,
   seen: types.optional(types.boolean, false),
 })
