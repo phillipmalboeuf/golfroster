@@ -4,7 +4,7 @@ import { Observer } from 'mobx-react'
 import { SnapshotIn, SnapshotOrInstance, Instance } from 'mobx-state-tree'
 
 import { Text, View, ScrollView } from 'react-native'
-import { Button, Appbar, List, Headline, Caption, Chip, Surface } from 'react-native-paper'
+import { Button, Appbar, List, Headline, Caption, Chip, Surface, Portal } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import moment from 'moment'
 
@@ -67,6 +67,7 @@ export const Chatroom: FunctionComponent<{
       </Observer>
     </Padded>
   </ScrollView>
+  <Portal>
   <Bottom>
     <Form onSubmit={async values => {
       await chatroom.sendMessage(values.body, store.player.id)
@@ -75,5 +76,6 @@ export const Chatroom: FunctionComponent<{
       <Input name='body' placeholder='Message here...' flat />
     </Form>
   </Bottom>
+  </Portal>
   </>
 }
