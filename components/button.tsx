@@ -2,7 +2,9 @@ import React, { useContext } from 'react'
 import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
-import { Button as PaperButton } from 'react-native-paper'
+import { Button as PaperButton, FAB } from 'react-native-paper'
+import { IconSource } from 'react-native-paper/lib/typescript/src/components/Icon'
+
 import { StylesContext } from '../contexts/styles'
 
 export const Button: FunctionComponent<{
@@ -21,8 +23,23 @@ export const Button: FunctionComponent<{
     onPress={props.onPress}
     labelStyle={{
       fontSize: styles.sizes.base,
-      lineHeight: styles.sizes.base,
+      // lineHeight: styles.sizes.base,
     }}>
     {props.children}
   </PaperButton>
+}
+
+export const FloatingButton: FunctionComponent<{
+  icon: IconSource
+  onPress?: () => void
+}> = props => {
+  return <FAB
+    style={{
+      position: 'absolute',
+      right: 16,
+      bottom: 25,
+    }}
+    icon={props.icon}
+    onPress={props.onPress}
+  />
 }

@@ -6,7 +6,7 @@ import moment from 'moment'
 
 import { Text, View } from 'react-native'
 import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-native'
-import { Button, Appbar, List, Headline, Subheading, FAB, Portal, Modal, Caption } from 'react-native-paper'
+import { Button, Appbar, List, Caption } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'

@@ -3,17 +3,19 @@ import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 
 import { Text, View } from 'react-native'
-import { Button, Appbar, FAB } from 'react-native-paper'
+import { Button, Appbar } from 'react-native-paper'
+import { Calendar, Agenda } from 'react-native-calendars'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
-import { Calendar, Agenda } from 'react-native-calendars'
+
 import { Full, Center } from '../components/layouts'
 import { Dots } from '../components/dots'
 import { Form } from '../components/form'
 import { Input } from '../components/input'
 import { Title, Subtitle } from '../components/text'
+import { FloatingButton } from '../components/button'
 
 
 export const Events: FunctionComponent<{}> = props => {
@@ -81,12 +83,7 @@ export const Events: FunctionComponent<{}> = props => {
         ]} />
       </Form>
     </Full>}
-    <FAB
-      style={{
-        position: 'absolute',
-        right: 16,
-        bottom: 25,
-      }}
+    <FloatingButton
       icon='plus'
       onPress={() => setBuilding(true)}
     />

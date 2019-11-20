@@ -4,7 +4,7 @@ import { Observer } from 'mobx-react'
 
 import { Text } from 'react-native'
 import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-native'
-import { Button, Appbar, List, Headline, Subheading, FAB } from 'react-native-paper'
+import { Button, Appbar, List } from 'react-native-paper'
 import { pick } from 'dot-object'
 
 import { FirebaseContext } from '../contexts/firebase'
@@ -16,6 +16,7 @@ import { Form, FormContext } from './form'
 import { Input } from './input'
 import { Avatar } from './photos'
 import { Title, Subtitle } from './text'
+import { FloatingButton } from './button'
 
 
 export const NewGroup: FunctionComponent<{}> = props => {
@@ -102,12 +103,7 @@ export const NewGroup: FunctionComponent<{}> = props => {
         ]} />
       </Form>
     </Full>}
-    <FAB
-      style={{
-        position: 'absolute',
-        right: 16,
-        bottom: 25,
-      }}
+    <FloatingButton
       icon='plus'
       onPress={() => setBuilding(true)}
     />

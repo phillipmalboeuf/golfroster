@@ -5,7 +5,7 @@ import { Instance } from 'mobx-state-tree'
 
 import { Text } from 'react-native'
 import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-native'
-import { Button, Appbar, List, Headline, Subheading, FAB } from 'react-native-paper'
+import { Button, Appbar, List } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
