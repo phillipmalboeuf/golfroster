@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from 'react'
 import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
-import { Button, Title, Headline, Subheading } from 'react-native-paper'
+import { Button, Headline, Subheading } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
@@ -12,6 +12,7 @@ import { Input } from '../components/input'
 import { Center } from '../components/layouts'
 import { Dots } from '../components/dots'
 import { Link, Redirect } from 'react-router-native'
+import { Title, Subtitle } from '../components/text'
 
 
 
@@ -29,21 +30,21 @@ export const ProfileBuildup: FunctionComponent<{}> = props => {
       form.current.submit()
     }} items={[
       <Center>
-        <Headline>
+        <Title>
           Let’s Get to Know You
-        </Headline>
+        </Title>
 
-        <Subheading>
+        <Subtitle>
           How would you like to be addressed?
-        </Subheading>
+        </Subtitle>
 
         <Input name='first_name' label='First Name' />
         <Input name='last_name' label='Last Name' />
       </Center>,
       <Center>
-        <Headline>
+        <Title>
           Terms and Privacy
-        </Headline>
+        </Title>
       </Center>,
     ]} />
   </Form>

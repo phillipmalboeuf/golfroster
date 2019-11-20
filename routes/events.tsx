@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 
 import { Text, View } from 'react-native'
-import { Button, Appbar, FAB, Headline, Subheading } from 'react-native-paper'
+import { Button, Appbar, FAB } from 'react-native-paper'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import { FirebaseContext } from '../contexts/firebase'
@@ -13,6 +13,7 @@ import { Full, Center } from '../components/layouts'
 import { Dots } from '../components/dots'
 import { Form } from '../components/form'
 import { Input } from '../components/input'
+import { Title, Subtitle } from '../components/text'
 
 
 export const Events: FunctionComponent<{}> = props => {
@@ -47,32 +48,32 @@ export const Events: FunctionComponent<{}> = props => {
       }} hideButton>
         <Dots path='new_event' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
           <Center>
-            <Headline>
+            <Title>
               Tee-off Time
-            </Headline>
+            </Title>
 
-            <Subheading>
+            <Subtitle>
               When is this event starting?
-            </Subheading>
+            </Subtitle>
 
             <Input name='start_date' type='datetime' />
 
-            <Subheading>
+            <Subtitle>
               And when is it ending?
-            </Subheading>
+            </Subtitle>
 
             <Input name='end_date' type='datetime' />
 
             <Input name='is_repeatable' type='checkbox' label='Is this event repeatable?' />
           </Center>,
           <Center>
-            <Headline>
+            <Title>
               Give it a name
-            </Headline>
+            </Title>
 
-            <Subheading>
+            <Subtitle>
               Finally, give your event a name and a description.
-            </Subheading>
+            </Subtitle>
 
             <Input name='name' label='Event Name' />
             <Input name='description' type='multiline' label='Description' />

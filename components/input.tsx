@@ -1,9 +1,10 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { FormContext } from './form'
 import { KeyboardTypeOptions, TextInputProps, Text, DatePickerIOS, View } from 'react-native'
 import { TextInput, Checkbox, Caption } from 'react-native-paper'
 import { pick } from 'dot-object'
+import { StylesContext } from '../contexts/styles'
 
 
 interface Props {
@@ -21,6 +22,8 @@ interface Props {
 }
 
 export const Input: React.FunctionComponent<Props> = props => {
+  const { colors, sizes } = useContext(StylesContext)
+
   return <FormContext.Consumer>
   {context => {
     const value = pick(props.name, context.values)
@@ -31,7 +34,7 @@ export const Input: React.FunctionComponent<Props> = props => {
         flexDirection: 'row',
         alignItems: 'center',
       }}>
-        <Checkbox.Android color='#007251' status={value ? 'checked' : 'unchecked'}
+        <Checkbox.Android color={colors.green} status={value ? 'checked' : 'unchecked'}
           onPress={() => context.onChange(props.name, value !== undefined
             ? !value : true)} />
         <Caption onPress={() => context.onChange(props.name, value !== undefined
@@ -41,7 +44,9 @@ export const Input: React.FunctionComponent<Props> = props => {
       || <TextInput
         mode={props.flat ? 'flat' : 'outlined'}
         theme={{ colors: { background: 'white' } }}
-        style={{ marginBottom: 16, ...context.inline && { flex: 1 },
+        style={{ marginBottom: sizes.base, ...context.inline && { flex: 1 },
+          fontSize: sizes.base,
+          height: sizes.base * 3.33,
           ...props.disabled && { opacity: 0.5 } }}
         onChangeText={text => context.onChange(props.name, text)}
         defaultValue={value || props.value}

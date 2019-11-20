@@ -5,6 +5,7 @@ import { Text, View, Image, Dimensions } from 'react-native'
 import { Button, Appbar, Avatar as RNAvatar } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
+import { StylesContext } from '../contexts/styles'
 import { Center, Padded } from './layouts'
 
 function usePhotoURI(photo: string) {
@@ -40,9 +41,10 @@ export const Background: FunctionComponent<{
   photo?: string
 }> = ({ photo, children }) => {
   const uri = usePhotoURI(photo)
+  const { colors } = useContext(StylesContext)
 
   return <View style={{
-    backgroundColor: '#666666',
+    backgroundColor: colors.blacks[0],
     overflow: 'hidden',
   }}>
     {(photo && uri)

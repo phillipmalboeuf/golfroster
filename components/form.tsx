@@ -3,8 +3,10 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { Button, HelperText } from 'react-native-paper'
+import { HelperText } from 'react-native-paper'
 import { str } from 'dot-object'
+
+import { Button } from './button'
 
 
 export const FormContext = React.createContext({
@@ -70,9 +72,9 @@ export class Form extends React.Component<Props, State> {
       </FormContext.Provider>
       {this.state.error && <HelperText type='error'>{this.state.error}</HelperText>}
       {!this.props.hideButton && (this.state.waiting
-      ? <Button mode={this.props.inline ? 'text' : 'contained'} uppercase={false} disabled>{this.props.inline ? '...' : 'One moment...'}</Button>
-      : <Button mode={this.props.inline ? 'text' : 'contained'} uppercase={false}
-        onPress={() => this.submit()}>{this.props.cta || 'Save'}</Button>)}
+      ? <Button contained={!this.props.inline} disabled>{this.props.inline ? '...' : 'One moment...'}</Button>
+      : <Button contained={!this.props.inline}
+          onPress={() => this.submit()}>{this.props.cta || 'Save'}</Button>)}
     </View>
   }
 }

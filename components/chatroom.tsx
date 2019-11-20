@@ -4,11 +4,12 @@ import { Observer } from 'mobx-react'
 import { SnapshotIn, SnapshotOrInstance, Instance } from 'mobx-state-tree'
 
 import { Text, View, ScrollView } from 'react-native'
-import { Button, Appbar, List, Headline, Caption, Chip, Surface, Portal } from 'react-native-paper'
+import { Appbar, List, Headline, Caption, Chip, Surface, Portal } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import moment from 'moment'
 
 import { StoreContext } from '../contexts/store'
+import { StylesContext } from '../contexts/styles'
 import { Chatroom as ChatroomModel } from '../models/chatroom'
 
 import { Center, Padded, Spaced, Bottom } from '../components/layouts'
@@ -21,6 +22,7 @@ export const Chatroom: FunctionComponent<{
   chatroom: Instance<typeof ChatroomModel>
 }> = ({ chatroom }) => {
   const { store } = useContext(StoreContext)
+  const { colors } = useContext(StylesContext)
   const scrollView = useRef<ScrollView>()
 
   return <>
@@ -38,7 +40,7 @@ export const Chatroom: FunctionComponent<{
             }}>
               <Chip {...message.player_id === store.player.id ? {
                 style: {
-                  backgroundColor: '#007251',
+                  backgroundColor: colors.green,
                   borderBottomRightRadius: 3,
                   ...(messages[index - 1] && messages[index - 1].player_id === message.player_id) && {
                     borderTopRightRadius: 3,
@@ -68,14 +70,14 @@ export const Chatroom: FunctionComponent<{
     </Padded>
   </ScrollView>
   <Portal>
-  <Bottom>
-    <Form onSubmit={async values => {
-      await chatroom.sendMessage(values.body, store.player.id)
-    }}
-      inline cta={<Icon name='send' size={33} />}>
-      <Input name='body' placeholder='Message here...' flat />
-    </Form>
-  </Bottom>
+    <Bottom>
+      <Form onSubmit={async values => {
+        await chatroom.sendMessage(values.body, store.player.id)
+      }}
+        inline cta={<Icon name='send' size={33} />}>
+        <Input name='body' placeholder='Message here...' flat />
+      </Form>
+    </Bottom>
   </Portal>
   </>
 }

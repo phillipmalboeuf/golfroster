@@ -28,6 +28,8 @@ export const Player = types.model({
     
     save: flow(function* save(data: firestore.DocumentData) {
       yield firebase.app().firestore().collection('players').doc(self.id).set(data, { merge: true })
+
+      Object.keys(data).forEach(key => self[key] = data[key])
     }),
 
     unfriend: flow(function* unfriend(friendId: string) {

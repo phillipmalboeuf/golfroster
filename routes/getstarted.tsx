@@ -2,7 +2,8 @@ import React, { useContext, useRef, useState } from 'react'
 import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
-import { Button, Title, Headline, Subheading } from 'react-native-paper'
+import { Button, Headline, Subheading } from 'react-native-paper'
+import { Link, Redirect } from 'react-router-native'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
@@ -11,8 +12,7 @@ import { Form } from '../components/form'
 import { Input } from '../components/input'
 import { Center } from '../components/layouts'
 import { Dots } from '../components/dots'
-import { Link, Redirect } from 'react-router-native'
-
+import { Title, Subtitle } from '../components/text'
 
 
 export const GetStarted: FunctionComponent<{}> = props => {
@@ -24,13 +24,13 @@ export const GetStarted: FunctionComponent<{}> = props => {
 
   return <Dots path='getstarted' hideButtons items={[
     <Center>
-      <Headline>
+      <Title>
         GolfRoster
-      </Headline>
+      </Title>
 
-      <Subheading>
+      <Subtitle>
         Organize ideal tee-offs with minimal effort
-      </Subheading>
+      </Subtitle>
 
       <Link to='/getstarted/1'>
         <Button mode='contained' uppercase={false}>
@@ -39,13 +39,13 @@ export const GetStarted: FunctionComponent<{}> = props => {
       </Link>
     </Center>,
     <Center>
-      <Headline>
+      <Title>
         First Things First
-      </Headline>
+      </Title>
 
-      <Subheading>
+      <Subtitle>
         Let’s connect by entering your email address or by logging in with your Facebook account.
-      </Subheading>
+      </Subtitle>
 
       <Form onSubmit={async values => {
         setExists(await store.exists(values.email))
@@ -58,12 +58,12 @@ export const GetStarted: FunctionComponent<{}> = props => {
     </Center>,
     exists
       ? <Center>
-        <Headline>
+        <Title>
           Welcome Back!
-        </Headline>
-        <Subheading>
+        </Title>
+        <Subtitle>
           Get back into your tee-off calendar by entering your password.
-        </Subheading>
+        </Subtitle>
 
         <Form onSubmit={async values => {
           auth.signInWithEmailAndPassword(email, values.password)
@@ -72,12 +72,12 @@ export const GetStarted: FunctionComponent<{}> = props => {
         </Form>
       </Center>
       : <Center>
-        <Headline>
+        <Title>
           You're new here!
-        </Headline>
-        <Subheading>
+        </Title>
+        <Subtitle>
           The first step to creating your account is to enter a new password here.
-        </Subheading>
+        </Subtitle>
 
         <Form onSubmit={async values => {
           auth.createUserWithEmailAndPassword(email, values.password)

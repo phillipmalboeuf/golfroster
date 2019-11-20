@@ -6,6 +6,7 @@ import CommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Observer } from 'mobx-react'
 
 import { StoreContext } from '../contexts/store'
+import { StylesContext } from '../contexts/styles'
 
 import { Profile } from '../routes/profile'
 import { Events } from '../routes/events'
@@ -34,6 +35,7 @@ export const Navigation: FunctionComponent<{}> = props => {
   const [index, setIndex] = useState(2)
 
   const { store } = useContext(StoreContext)
+  const { colors } = useContext(StylesContext)
   const history = useHistory()
 
   useEffect(() => {
@@ -53,9 +55,10 @@ export const Navigation: FunctionComponent<{}> = props => {
           setIndex(i)
         }}
         renderScene={scene}
+        activeColor={colors.green}
         barStyle={{
-          backgroundColor: '#fff',
-          borderTopColor: '#F5F5F5',
+          backgroundColor: 'white',
+          borderTopColor: colors.greys[0],
           borderTopWidth: 1,
         }}
       />}}

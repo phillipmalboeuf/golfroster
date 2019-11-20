@@ -15,6 +15,7 @@ import { Dots } from './dots'
 import { Form, FormContext } from './form'
 import { Input } from './input'
 import { Avatar } from './photos'
+import { Title, Subtitle } from './text'
 
 
 export const NewGroup: FunctionComponent<{}> = props => {
@@ -35,29 +36,29 @@ export const NewGroup: FunctionComponent<{}> = props => {
         // setBuilding(false)
       }} hideButton>
         <Dots path='new_group' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
-          // <>
-          //   <Headline>
-          //     Number of Members
-          //   </Headline>
-
-          //   <Subheading>
-          //     How many players are you expecting?
-          //   </Subheading>
-          //   <FormContext.Consumer>
-          //     {({ values }) =>
-          //       <Input name='expected_number_of_members' type='number' label='Number'
-          //         disabled={values.has_unlimited_number_of_players} />}
-          //   </FormContext.Consumer>
-          //   <Input name='has_unlimited_number_of_players' type='checkbox' label='Or is unlimited?' />
-          // </>,
           <>
-            <Headline>
-              Group Members
-            </Headline>
+            <Title>
+              Number of Members
+            </Title>
 
-            <Subheading>
+            <Subtitle>
+              How many players are you expecting?
+            </Subtitle>
+            <FormContext.Consumer>
+              {({ values }) =>
+                <Input name='expected_number_of_members' type='number' label='Number'
+                  disabled={values.has_unlimited_number_of_players} />}
+            </FormContext.Consumer>
+            <Input name='has_unlimited_number_of_players' type='checkbox' label='Or is unlimited?' />
+          </>,
+          <>
+            <Title>
+              Group Members
+            </Title>
+
+            <Subtitle>
               Who would you like to invite to the group?
-            </Subheading>
+            </Subtitle>
 
             <FormContext.Consumer>
               {({ values, onChange }) =>
@@ -80,21 +81,21 @@ export const NewGroup: FunctionComponent<{}> = props => {
             }</FormContext.Consumer>
           </>,
           <>
-            <Headline>
+            <Title>
               Give it a name
-            </Headline>
+            </Title>
 
-            <Subheading>
+            <Subtitle>
               Finally, give your group a name and a description.
-            </Subheading>
+            </Subtitle>
 
             <Input name='name' label='Group Name' />
             <Input name='description' type='multiline' label='Description' />
           </>,
           <>
-            <Headline>
+            <Title>
               Visibility
-            </Headline>
+            </Title>
 
             <Input name='is_public' type='checkbox' label='Is this group public?' />
           </>,

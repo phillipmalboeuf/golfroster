@@ -1,7 +1,8 @@
 import React, { useContext, Fragment, useRef, useState } from 'react'
 import { FunctionComponent } from 'react'
-import { Portal, Modal, Surface, Dialog, Button } from 'react-native-paper'
+import { Portal, Modal, Surface, Dialog } from 'react-native-paper'
 
+import { Button } from './button'
 
 
 export const Popup: FunctionComponent<{
@@ -21,8 +22,9 @@ export const Popup: FunctionComponent<{
         {props.content}
       </Dialog.Content>
       <Dialog.Actions>
-        {props.actions.map(action => <Button key={action.label} uppercase={false}
-          onPress={action.onPress}>{action.label}</Button>)}
+        {props.actions.map(action => <Button key={action.label} onPress={action.onPress}>
+          {action.label}
+        </Button>)}
       </Dialog.Actions>
     </Dialog>
   </Portal>
