@@ -33,11 +33,13 @@ export const FloatingButton: FunctionComponent<{
   icon: IconSource
   onPress?: () => void
 }> = props => {
+  const { colors } = useContext(StylesContext)
   return <FAB
     style={{
       position: 'absolute',
       right: 16,
       bottom: 25,
+      backgroundColor: colors.green,
     }}
     icon={props.icon}
     onPress={props.onPress}
