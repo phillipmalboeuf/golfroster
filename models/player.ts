@@ -11,11 +11,20 @@ export const Player = types.model({
   email: types.maybe(types.string),
   first_name: types.maybe(types.string),
   last_name: types.maybe(types.string),
+  bio: types.maybe(types.string),
   photo: types.maybe(types.string),
+  city: types.maybe(types.string),
+  state: types.maybe(types.string),
+  ghin_index: types.maybe(types.number),
+  weekends: types.array(types.string),
+  weekdays: types.array(types.string),
+  money: types.array(types.string),
+  drinks: types.array(types.string),
+  tee_choices: types.array(types.string),
+  methods: types.array(types.string),
   accepted_terms: types.maybe(types.boolean),
-  friends: types.optional(types.array(types.string), []),
-  clubs: types.optional(types.array(Club), []),
-  // events: types.optional(types.array(Event), []),
+  friends: types.array(types.string),
+  // clubs: types.array(Club),
 })
   .actions(self => ({
     fetch: flow(function* fetch() {

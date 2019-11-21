@@ -8,11 +8,11 @@ import { Link, Redirect } from 'react-router-native'
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 
-import { Form } from '../components/form'
-import { Input } from '../components/input'
-import { Center } from '../components/layouts'
-import { Dots } from '../components/dots'
-import { Title, Subtitle } from '../components/text'
+import { Form } from './form'
+import { Input } from './input'
+import { Center } from './layouts'
+import { Dots } from './dots'
+import { Title, Subtitle } from './text'
 
 
 export const GetStarted: FunctionComponent<{}> = props => {

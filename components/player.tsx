@@ -32,7 +32,7 @@ export const Player: FunctionComponent<{
           <Headline style={{ color: 'white', marginBottom: 0 }}>
             {player.first_name} {player.last_name}
           </Headline>
-          <Caption style={{ color: 'white' }}>Newton, MA</Caption>
+          <Caption style={{ color: 'white' }}>{player.city}, {player.state}</Caption>
           {player.id !== store.player.id && (store.player.friends.includes(player.id)
             ? player.friends.includes(store.player.id)
               ? <Button outlined
@@ -48,7 +48,7 @@ export const Player: FunctionComponent<{
     </Background>
       
     <Padded>
-      <Text>Hi {player.first_name}</Text>
+      <Text>{player.bio}</Text>
     </Padded>
   </>}</Observer>
 }

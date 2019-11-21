@@ -15,8 +15,8 @@ import { FirebaseContext } from './contexts/firebase'
 import { StoreContext } from './contexts/store'
 import { StylesContext } from './contexts/styles'
 
-import { GetStarted } from './routes/getstarted'
-import { ProfileBuildup } from './routes/profile_buildup'
+import { GetStarted } from './components/getstarted'
+import { NewPlayer } from './components/new_player'
 
 import { Navigation } from './components/navigation'
 import { Center } from './components/layouts'
@@ -70,7 +70,7 @@ const App = () => {
           ? <Observer>{() => store.player.accepted_terms
             ? <NativeRouter><Navigation /></NativeRouter>
             : <View>
-              <ProfileBuildup />
+              <NewPlayer />
             </View>
           }</Observer>
           : <View>
