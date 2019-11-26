@@ -34,11 +34,13 @@ export const Input: React.FunctionComponent<Props> = props => {
         flexDirection: 'row',
         alignItems: 'center',
       }}>
-        <Checkbox.Android color={colors.green} status={value ? 'checked' : 'unchecked'}
+        <Checkbox.Android color={colors.green}
+          disabled={props.disabled}
+          status={value ? 'checked' : 'unchecked'}
           onPress={() => context.onChange(props.name, value !== undefined
             ? !value : true)} />
-        <Caption onPress={() => context.onChange(props.name, value !== undefined
-            ? !value : true)}>{props.label}</Caption>
+        {props.label && <Caption onPress={() => context.onChange(props.name, value !== undefined
+            ? !value : true)}>{props.label}</Caption>}
       </View>,
     }[props.type]
       || <TextInput

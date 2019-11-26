@@ -2,7 +2,9 @@ import React, { useContext, useRef, useState } from 'react'
 import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
-import { Button, Headline, Subheading, Caption } from 'react-native-paper'
+import { Headline, Subheading, Caption, DataTable } from 'react-native-paper'
+import { Link, Redirect } from 'react-router-native'
+import { Observer } from 'mobx-react'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
@@ -10,10 +12,11 @@ import { StylesContext } from '../contexts/styles'
 
 import { Form } from './form'
 import { Input } from './input'
-import { Center } from './layouts'
+import { Center, Padded, Bottom } from './layouts'
 import { Dots } from './dots'
-import { Link, Redirect } from 'react-router-native'
 import { Title, Subtitle } from './text'
+import { Button } from './button'
+
 
 export const timesOfDay = {
   early_morning: 'Early morning',
@@ -54,7 +57,7 @@ export const NewPlayer: FunctionComponent<{}> = props => {
   const { sizes } = useContext(StylesContext)
   const form = useRef<Form>(undefined)
 
-  return <Form ref={form} hideButton onSubmit={async values => {
+  return <Observer>{() => store.player.clubs.length ? <Form ref={form} hideButton onSubmit={async values => {
     store.player.save({
       ...values,
       weekends: Object.keys(values.weekends).filter(key => values.weekends[key] === true),
@@ -65,7 +68,7 @@ export const NewPlayer: FunctionComponent<{}> = props => {
       methods: Object.keys(values.methods).filter(key => values.methods[key] === true),
       accepted_terms: true,
     })
-  }} cta='Continue with Email'>
+  }}>
     <Dots path='profile_buildup' onFinish={() => {
       form.current.submit()
     }} items={[
@@ -190,5 +193,38 @@ export const NewPlayer: FunctionComponent<{}> = props => {
         <Input disabled name='privacy' label='Privacy Policy' value={'Privacy Policy goes here.'} />
       </Center>,
     ]} />
-  </Form>
+  </Form> : <Form ref={form} hideButton onSubmit={async values => {
+    store.player.save({
+      clubs: Object.keys(values.clubs).filter(key => values.clubs[key] === true),
+    })
+  }}>
+    <Center>
+      <Padded>
+        <Title>
+          Going to the Club
+        </Title>
+
+        <Subtitle>
+          Now, could you find from this list the clubs to which you are a member or where you play?
+        </Subtitle>
+      </Padded>
+      <DataTable>
+        <DataTable.Header>
+          <Input type='checkbox' name='title' disabled />
+          <DataTable.Title>Club Name</DataTable.Title>
+          <DataTable.Title>City (State)</DataTable.Title>
+        </DataTable.Header>
+
+        <DataTable.Row>
+          <Input type='checkbox' name={`clubs.donnybrook`} />
+          <DataTable.Cell>Donnybrook CC</DataTable.Cell>
+          <DataTable.Cell>Berkshires (MA)</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+    </Center>
+
+    <Bottom>
+      <Button contained onPress={() => form.current.submit()}>Continue with this selection</Button>
+    </Bottom>
+  </Form>}</Observer>
 }
