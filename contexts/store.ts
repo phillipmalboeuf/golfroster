@@ -3,10 +3,10 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import { createContext } from 'react'
 import { AsyncStorage } from 'react-native'
-import { types, flow, unprotect, onSnapshot, applySnapshot } from 'mobx-state-tree'
+import { types, flow, unprotect, onSnapshot, applySnapshot, Instance } from 'mobx-state-tree'
 
 import { Player } from '../models/player'
-import { Event } from '../models/event'
+import { Event as EventModel } from '../models/event'
 import { Group } from '../models/group'
 import { Chatroom } from '../models/chatroom'
 import { Notification } from '../models/notification'
@@ -14,7 +14,7 @@ import { Notification } from '../models/notification'
 const Store = types
   .model({
     player: types.maybe(Player),
-    events: types.map(Event),
+    events: types.map(EventModel),
     friends: types.map(Player),
     players: types.map(Player),
     groups: types.map(Group),
@@ -25,6 +25,25 @@ const Store = types
       notifications: types.maybe(types.number),
     }),
   })
+  .views(self => ({
+    eventDates(): {[key: string]: Array<Instance<typeof EventModel>>} {
+      return Array.from(self.events.values()).reduce((dates, event) => {
+        const start = event.start_date.toISOString().split('T')[0]
+        // const end = event.end_date.toISOString().split('T')[0]
+
+        if (!dates[start]) { dates[start] = [] }
+        dates[start].push(event)
+        
+        // if (!dates[start]) { dates[start] = { starts: [], ends: [] } }
+        // if (!dates[end]) { dates[end] = { starts: [], ends: [] } }
+
+        // dates[start].starts.push(event)
+        // dates[end].ends.push(event)
+
+        return dates
+      }, {})
+    },
+  }))
   .actions(self => ({
 
     login: flow(function* login(id: string) {
@@ -44,8 +63,8 @@ const Store = types
         })
     }),
 
-    createEvent: flow(function* createEvent(data: typeof Event.CreationType) {
-      const event = Event.create({
+    createEvent: flow(function* createEvent(data: typeof EventModel.CreationType) {
+      const event = EventModel.create({
         ...data,
         organizer_id: self.player.id,
         attendees: [self.player.id],
