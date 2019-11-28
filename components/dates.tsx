@@ -17,6 +17,7 @@ import { Title, Subtitle } from '../components/text'
 import { NewEvent } from '../components/new_event'
 import { Event as EventModel } from '../models/event'
 import moment from 'moment'
+import { Link } from 'react-router-native'
 
 
 export const Dates: FunctionComponent<{
@@ -33,11 +34,13 @@ export const Dates: FunctionComponent<{
         ? <>
           {keys.map(date => <List.Section key={date}>
             <List.Subheader>{moment(new Date(date)).format('dddd MMMM Do, YYYY')}</List.Subheader>
-            {dates[date].map(event => <List.Item
-              title={event.name}
-              left={() => <>
-                {/* <Caption>{event.start_date.toTimeString()}</Caption> */}
-              </>} />)}
+            {dates[date].map(event => <Link key={event.id} to={`/events/${event.id}`}>
+              <List.Item
+                title={event.name}
+                left={() => <>
+                  {/* <Caption>{event.start_date.toTimeString()}</Caption> */}
+                </>} />
+            </Link>)}
           </List.Section>)}
         </>
         : <Text>Empty</Text>

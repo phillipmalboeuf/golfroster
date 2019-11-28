@@ -16,6 +16,7 @@ export const Event = types.model({
   organizer_id: types.string,
   name: types.string,
   description: types.maybeNull(types.string),
+  photo: types.maybe(types.string),
   start_date: dateType,
   end_date: dateType,
   repeatable: types.optional(types.boolean, false),
