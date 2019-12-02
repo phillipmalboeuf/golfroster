@@ -2,22 +2,19 @@ import React, { useContext, useState, useRef } from 'react'
 import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
+import moment from 'moment'
 
 import { Text, View } from 'react-native'
-import { Button, Appbar, List, Caption } from 'react-native-paper'
-import { Calendar, Agenda } from 'react-native-calendars'
+import { Link } from 'react-router-native'
+
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 
-import { Full, Center } from '../components/layouts'
-import { Title, Subtitle } from '../components/text'
-import { NewEvent } from '../components/new_event'
 import { Event as EventModel } from '../models/event'
-import moment from 'moment'
-import { Link } from 'react-router-native'
+import { List } from './list'
 
 
 export const Dates: FunctionComponent<{
@@ -31,18 +28,13 @@ export const Dates: FunctionComponent<{
     {() => {
       const keys = Object.keys(dates)
       return keys.length
-        ? <>
-          {keys.map(date => <List.Section key={date}>
-            <List.Subheader>{moment(new Date(date)).format('dddd MMMM Do, YYYY')}</List.Subheader>
-            {dates[date].map(event => <Link key={event.id} to={`/events/${event.id}`}>
-              <List.Item
-                title={event.name}
-                left={() => <>
-                  {/* <Caption>{event.start_date.toTimeString()}</Caption> */}
-                </>} />
-            </Link>)}
-          </List.Section>)}
-        </>
+        ? <List sections={keys.map(date => ({
+          title: moment(new Date(date)).format('dddd MMMM Do, YYYY'),
+          items: dates[date].map(event => ({
+            title: event.name,
+            link: `/events/${event.id}`,
+          })),
+        }))} />
         : <Text>Empty</Text>
     }}
   </Observer>

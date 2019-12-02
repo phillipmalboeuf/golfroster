@@ -1,17 +1,18 @@
 import React, { useContext, Fragment, useRef } from 'react'
 import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
+import moment from 'moment'
 
 import { Text } from 'react-native'
 import { NativeRouter, Switch, Route, Link } from 'react-router-native'
-import { Button, Appbar, List, Caption } from 'react-native-paper'
+import { Button, Appbar, Caption } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 
 import { Avatar } from '../components/photos'
 import { Chatroom } from '../components/chatroom'
-import moment from 'moment'
+import { List } from '../components/list'
 
 
 export const Chatrooms: FunctionComponent<{}> = props => {
@@ -37,21 +38,22 @@ export const Chatrooms: FunctionComponent<{}> = props => {
           <Appbar.Action icon='magnify' />
           <Appbar.Action icon='dots-vertical' />
         </Appbar.Header>
-        <Observer>{() => <List.Section>
-          {Array.from(store.chatrooms.values()).map(chatroom =>
-            <Link key={chatroom.id} to={`/chatrooms/${chatroom.id}`}>
-              <List.Item title={chatroom.players.filter(playerId => playerId !== store.player.id)
+        <Observer>{() => <List sections={[
+          {
+            items: Array.from(store.chatrooms.values()).map(chatroom => ({
+              title: chatroom.players.filter(playerId => playerId !== store.player.id)
                 .map(player => `${store.friends.get(player).first_name} ${store.friends.get(player).last_name}`)
-                .join(', ')}
-                description={chatroom.latest
+                .join(', '),
+              link: `/chatrooms/${chatroom.id}`,
+              description: chatroom.latest
                   ? (chatroom.latest.player_id === store.player.id
                     ? `You: ${chatroom.latest.body}`
                     : `${store.friends.get(chatroom.latest.player_id).first_name}: ${chatroom.latest.body}`)
-                  : 'New conversation'}
-                right={() => <Caption>{chatroom.latest ? moment(chatroom.latest.date).fromNow() : 'New'}</Caption>}
-              />
-            </Link>)}
-        </List.Section>}</Observer>
+                  : 'New conversation',
+              right: <Caption>{chatroom.latest ? moment(chatroom.latest.date).fromNow() : 'New'}</Caption>
+            })),
+          },
+        ]} />}</Observer>
       </>} />
     </Switch>
   </>}

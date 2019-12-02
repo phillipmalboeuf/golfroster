@@ -5,7 +5,7 @@ import { Instance } from 'mobx-state-tree'
 
 import { Text } from 'react-native'
 import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-native'
-import { Button, Appbar, List } from 'react-native-paper'
+import { Button, Appbar } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
@@ -17,6 +17,7 @@ import { Player } from '../components/player'
 import { Group } from '../components/group'
 import { Search } from '../components/search'
 import { NewGroup } from '../components/new_group'
+import { List } from '../components/list'
 
 
 export const Players: FunctionComponent<{}> = props => {
@@ -73,15 +74,19 @@ export const Players: FunctionComponent<{}> = props => {
       
       <Search index='players' />
 
-      <Observer>{() => <List.Section>
-        {Array.from(store.friends.values()).map(friend => <Link key={friend.id} to={`/players/${friend.id}`}>
-          <List.Item title={`${friend.first_name} ${friend.last_name}`}
-            left={() => <Avatar {...friend} small />} />
-        </Link>)}
-        {Array.from(store.groups.values()).map(group => <Link key={group.id} to={`/groups/${group.id}`}>
-          <List.Item title={group.name} />
-        </Link>)}
-      </List.Section>}</Observer>
+      <Observer>{() => <List sections={[{
+        items: [
+          ...Array.from(store.friends.values()).map(friend => ({
+            title: `${friend.first_name} ${friend.last_name}`,
+            link: `/players/${friend.id}`,
+            left: <Avatar {...friend} small />,
+          })),
+          ...Array.from(store.groups.values()).map(group => ({
+            title: group.name,
+            link: `/groups/${group.id}`,
+          })),
+        ],
+      }]} />}</Observer>
 
       <NewGroup />
     </>} />

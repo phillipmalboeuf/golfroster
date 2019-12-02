@@ -38,7 +38,7 @@ export const Events: FunctionComponent<{}> = props => {
         <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
           <Link to='/events'><Appbar.BackAction /></Link>
           <Appbar.Content title={event.name} />
-          <Appbar.Action icon='calendar-edit' />
+          <Appbar.Action icon='pencil' />
           <Appbar.Action icon='message-outline' onPress={async () => {
             // const chatroom = Array.from(store.chatrooms.values()).find(room => room.event_id === match.params.id)
 
