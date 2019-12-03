@@ -36,7 +36,7 @@ target 'golfroster' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
+  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec'
 
   target 'golfrosterTests' do
     inherit! :search_paths

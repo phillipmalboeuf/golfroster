@@ -42,20 +42,64 @@ export const NewEvent: FunctionComponent<{}> = props => {
               Tee-off Time
             </Title>
 
-            <Subtitle>
+            <Subtitle topMargin>
               When is this event starting?
             </Subtitle>
 
-            <Input name='start_date' type='datetime' />
+            <Input name='start_date' type='datetime' label='Start' />
 
-            <Subtitle>
+            <Subtitle topMargin>
               And when is it ending?
             </Subtitle>
 
-            <Input name='end_date' type='datetime' />
+            <Input name='end_date' type='datetime' label='End' />
 
             <Input name='is_repeatable' type='checkbox' label='Is this event repeatable?' />
           </Center>,
+          <>
+            <Title>
+              Number of Members
+            </Title>
+
+            <Subtitle>
+              How many players are you expecting?
+            </Subtitle>
+            <FormContext.Consumer>
+              {({ values }) =>
+                <Input name='expected_number_of_members' type='number' label='Number'
+                  disabled={values.has_unlimited_number_of_players} />}
+            </FormContext.Consumer>
+            <Input name='has_unlimited_number_of_players' type='checkbox' label='Or is unlimited?' />
+          </>,
+          <>
+            <Title>
+              Group Members
+            </Title>
+
+            <Subtitle>
+              Who would you like to invite to this event?
+            </Subtitle>
+
+            <FormContext.Consumer>
+              {({ values, onChange }) =>
+                <List.Section>
+                  <List.Subheader style={{ textAlign: 'right' }}>{values.invited
+                    ? Object.keys(values.invited).filter(id => values.invited[id] === true).length
+                    : 0} invited</List.Subheader>
+                  {Array.from(store.friends.values()).map(friend => {
+                    const name = `invited.${friend.id}`
+                    return <List.Item key={friend.id} title={`${friend.first_name} ${friend.last_name}`}
+                      onPress={() => onChange(name, pick(name, values) !== undefined ? !pick(name, values) : true)}
+                      left={() => <Avatar {...friend} small />}
+                      right={() => <Input name={`invited.${friend.id}`} type='checkbox' />} />
+                  })}
+                  {/* {Array.from(store.groups.values()).map(group =>
+                    <List.Item key={group.id} title={group.name}
+                      right />
+                  )} */}
+                </List.Section>
+            }</FormContext.Consumer>
+          </>,
           <Center>
             <Title>
               Give it a name

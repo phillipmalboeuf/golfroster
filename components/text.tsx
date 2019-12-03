@@ -19,14 +19,18 @@ export const Title: FunctionComponent<{}> = props => {
   </Headline>
 }
 
-export const Subtitle: FunctionComponent<{}> = props => {
+export const Subtitle: FunctionComponent<{
+  topMargin?: boolean
+}> = props => {
   const styles = useContext(StylesContext)
 
   return <Subheading style={{
     fontSize: styles.sizes.base,
     lineHeight: styles.sizes.base * 1.333,
     textAlign: 'center',
-    marginBottom: styles.sizes.base * 2,
+    ...props.topMargin
+      ? { marginTop: styles.sizes.base }
+      : { marginBottom: styles.sizes.base * 2 },
   }}>
     {props.children}
   </Subheading>

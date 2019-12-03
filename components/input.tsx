@@ -1,10 +1,14 @@
 
-import React, { useContext } from 'react'
-import { FormContext } from './form'
+import React, { useContext, useState, useRef } from 'react'
+import { pick } from 'dot-object'
+
 import { KeyboardTypeOptions, TextInputProps, Text, DatePickerIOS, View } from 'react-native'
 import { TextInput, Checkbox, Caption } from 'react-native-paper'
-import { pick } from 'dot-object'
+import DateTimePickerModal from 'react-native-modal-datetime-picker'
+
+
 import { StylesContext } from '../contexts/styles'
+import { FormContext } from './form'
 
 
 interface Props {
@@ -28,8 +32,11 @@ export const Input: React.FunctionComponent<Props> = props => {
   {context => {
     const value = pick(props.name, context.values)
     return {
-      datetime: <DatePickerIOS date={value || props.value || new Date()}
-        onDateChange={date => context.onChange(props.name, date)} />,
+      datetime: <DatetimePicker name={props.name}
+        onConfirm={date => context.onChange(props.name, date)}
+        value={value}
+        style={{ marginBottom: sizes.base, fontSize: sizes.base }}
+        label={props.label} />,
       checkbox: <View style={{ 
         flexDirection: 'row',
         alignItems: 'center',
@@ -77,4 +84,39 @@ export const Input: React.FunctionComponent<Props> = props => {
         } as {[key: string]: TextInputProps['textContentType']})[props.type]} />
   }}
   </FormContext.Consumer>
+}
+
+
+export const DatetimePicker: React.FunctionComponent<{
+  name: string
+  onConfirm: (date: Date) => void
+  value?: Date
+  label?: string
+  style?: any
+}> = props => {
+  const [visible, setVisibility] = useState(false)
+  const input = useRef()
+  
+  return <>
+    <TextInput ref={input}
+      mode='outlined'
+      style={props.style}
+      onFocus={() => setVisibility(true)}
+      value={props.value && props.value.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })}
+      label={`${props.label} Date`} />
+    <DateTimePickerModal
+      isVisible={visible}
+      mode='datetime'
+      onConfirm={date => {
+        props.onConfirm(date)
+        setVisibility(false)
+      }}
+      onCancel={() => setVisibility(false)} />
+  </>
 }
