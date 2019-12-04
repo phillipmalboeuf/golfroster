@@ -16,11 +16,12 @@ import { Notifications } from '../routes/notifications'
 
 
 const routes = [
+  { key: 'profile', title: 'Profile', icon: 'account-circle' },
   { key: 'events', title: 'Events', icon: 'calendar' },
   { key: 'chatrooms', title: 'Messages', icon: 'forum' },
   { key: 'players', title: 'Players', icon: 'account-group' },
   { key: 'notifications', title: 'Notifications', icon: 'bell' },
-  { key: 'profile', title: 'Profile', icon: 'account-circle' },
+  
 ]
 
 const scene = BottomNavigation.SceneMap({

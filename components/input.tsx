@@ -2,7 +2,7 @@
 import React, { useContext, useState, useRef } from 'react'
 import { pick } from 'dot-object'
 
-import { KeyboardTypeOptions, TextInputProps, Text, DatePickerIOS, View } from 'react-native'
+import { KeyboardTypeOptions, TextInputProps, Text, View } from 'react-native'
 import { TextInput, Checkbox, Caption } from 'react-native-paper'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 
@@ -12,15 +12,17 @@ import { FormContext } from './form'
 
 
 interface Props {
-  name: string,
-  placeholder?: string,
-  value?: any,
-  type?: 'email' | 'password' | 'newpassword' | 'phone' | 'number' | 'url' | 'checkbox' | 'multiline' | 'datetime',
-  label?: string,
-  optional?: boolean,
-  disabled?: boolean,
-  autoFocus?: boolean,
-  autoComplete?: string,
+  name: string
+  placeholder?: string
+  value?: any
+  type?: 'email' | 'password' | 'newpassword' | 'phone' | 'number' | 'url' | 'checkbox' | 'multiline' | 'datetime' | 'slider'
+  label?: string
+  optional?: boolean
+  disabled?: boolean
+  min?: number
+  max?: number
+  autoFocus?: boolean
+  autoComplete?: string
   flat?: boolean
   submitter?: boolean
 }
@@ -37,6 +39,11 @@ export const Input: React.FunctionComponent<Props> = props => {
         value={value}
         style={{ marginBottom: sizes.base, fontSize: sizes.base }}
         label={props.label} />,
+      // slider: <Slider value={value}
+      //   step={0.1}
+      //   minimumValue={props.min}
+      //   maximumValue={props.max}
+      //   onValueChange={v => context.onChange(props.name, v)} />,
       checkbox: <View style={{ 
         flexDirection: 'row',
         alignItems: 'center',

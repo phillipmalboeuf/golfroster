@@ -6,6 +6,8 @@ import { Text } from 'react-native'
 import { NativeRouter, Switch, Route, Link } from 'react-router-native'
 import { List as PaperList, TouchableRipple } from 'react-native-paper'
 
+import { StylesContext } from '../contexts/styles'
+
 
 export const List: FunctionComponent<{
   sections: Array<{
@@ -19,12 +21,15 @@ export const List: FunctionComponent<{
     }>
   }>
 }> = ({ sections }) => {
+  const { colors, sizes } = useContext(StylesContext)
 
   return <>
-    {sections.map((section, index) => <PaperList.Section key={index}>
+    {sections.map((section, index) => <PaperList.Section key={index} style={{ marginBottom: 0 }}>
       {section.title && <PaperList.Subheader>{section.title}</PaperList.Subheader>}
       {section.items.map(item => <Link to={item.link} key={item.link}>
-        <PaperList.Item title={item.title}
+        <PaperList.Item style={{
+          backgroundColor: 'white',
+        }} title={item.title}
           description={item.description}
           left={() => item.left}
           right={() => item.right} />
