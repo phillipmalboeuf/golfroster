@@ -16,6 +16,7 @@ import { Center, Padded, Bottom } from './layouts'
 import { Dots } from './dots'
 import { Title, Subtitle } from './text'
 import { Button } from './button'
+import { Avatar } from './photos'
 
 
 export const timesOfDay = {
@@ -138,7 +139,7 @@ export const NewPlayer: FunctionComponent<{}> = props => {
       </Center>,
       <Center>
         <Title>
-          Tee Choice
+          Socializing
         </Title>
 
         <Subtitle>
@@ -179,6 +180,17 @@ export const NewPlayer: FunctionComponent<{}> = props => {
         </Subtitle>
 
         <Input name='bio' type='multiline' label='Bio' />
+      </Center>,
+      <Center>
+        <Title>
+          Pick a Profile Photo
+        </Title>
+
+        <Subtitle>
+          Ideally, pick one of you on the green.
+        </Subtitle>
+
+        <Avatar upload />
       </Center>,
       <Center>
         <Title>
