@@ -197,7 +197,7 @@ export const NewPlayer: FunctionComponent<{}> = props => {
         </Subtitle>
 
         <FormContext.Consumer>
-          {context => <Upload onUpload={url => {
+          {context => <Upload avatar onUpload={url => {
             context.onChange('photo', url)
           }} />}
         </FormContext.Consumer>

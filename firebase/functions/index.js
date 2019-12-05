@@ -23,6 +23,42 @@ exports.newMessage = functions.firestore
       });
   });
 
+async function sendNotification(
+  players,
+  invitation_type,
+  invited_to_id,
+  invited_to_name,
+) {
+  // const invited_by =
+  //   authType === 'USER' &&
+  //   (await admin
+  //     .firestore()
+  //     .collection('players')
+  //     .doc(auth.uid)
+  //     .get());
+
+  return (
+    players.length &&
+    players.map(player =>
+      admin
+        .firestore()
+        .collection('players')
+        .doc(player)
+        .collection('notifications')
+        .add({
+          invitation_type,
+          invited_to_id,
+          invited_to_name,
+          // ...(invited_by && {
+          //   invited_by_id: auth.uid,
+          //   invited_by_name: invited_by.data().name,
+          // }),
+          date: new Date(),
+        }),
+    )
+  );
+}
+
 exports.inviteToGroup = functions.firestore
   .document('groups/{groupId}')
   .onWrite(async (change, {params, auth, authType}) => {
@@ -32,34 +68,19 @@ exports.inviteToGroup = functions.firestore
       player => !previous.invited.includes(player),
     );
 
-    const invited_by =
-      authType === 'USER' &&
-      (await admin
-        .firestore()
-        .collection('players')
-        .doc(auth.uid)
-        .get());
+    return sendNotification(players, 'group', params.groupId, group.name);
+  });
 
-    return (
-      players.length &&
-      players.map(player =>
-        admin
-          .firestore()
-          .collection('players')
-          .doc(player)
-          .collection('notifications')
-          .add({
-            invitation_type: 'group',
-            invited_to_id: params.groupId,
-            invited_to_name: group.name,
-            ...(invited_by && {
-              invited_by_id: auth.uid,
-              invited_by_name: invited_by.data().name,
-            }),
-            date: new Date(),
-          }),
-      )
+exports.inviteToEvent = functions.firestore
+  .document('events/{eventId}')
+  .onWrite(async (change, {params, auth, authType}) => {
+    const event = change.after.data();
+    const previous = change.before.data();
+    const players = event.invited.filter(
+      player => !previous.invited.includes(player),
     );
+
+    return sendNotification(players, 'event', params.eventId, event.name);
   });
 
 const search = algoliasearch(CONFIG.algolia.id, CONFIG.algolia.key);

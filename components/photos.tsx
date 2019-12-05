@@ -23,7 +23,7 @@ function usePhotoURI(photo: string) {
 }
 
 async function uploadPhoto(uri: string, filename: string, contentType: string, storage: firebase.storage.Storage) {
-
+  console.log(storage)
   const image = await fetch(uri)
   const ref = storage.ref(filename)
   await storage.ref(filename).put(await image.blob(), { contentType })
@@ -77,16 +77,26 @@ export const Background: FunctionComponent<{
 
 export const Upload: FunctionComponent<{
   onUpload: (url: string) => void
-}> = ({ onUpload }) => {
+  avatar?: boolean
+}> = ({ onUpload, avatar }) => {
   const { storage } = useContext(FirebaseContext)
+  const { colors } = useContext(StylesContext)
+
+  console.log(storage)
 
   const [uploaded, setUploaded] = useState<string>(undefined)
   const [loading, setLoading] = useState(false)
 
   return <View style={{ alignItems: 'center' }}>
-    {loading
-      ? <RNAvatar.Icon icon={({ size, color }) => <ActivityIndicator color={color} />} size={88} />
-      : <RNAvatar.Image size={88} source={{ uri: uploaded }} style={{width: 88, height: 88}} />}
+    {avatar
+      ? loading
+        ? <RNAvatar.Icon icon={({ size, color }) => <ActivityIndicator color={color} />} size={88} />
+        : <RNAvatar.Image size={88} source={{ uri: uploaded }} style={{width: 88, height: 88}} />
+      : loading
+        ? <Image source={{ uri: uploaded }} style={{width: 242, height: 166, backgroundColor: colors.green }} />
+        : <View style={{width: 242, height: 166, backgroundColor: colors.green }}>
+          <ActivityIndicator />
+        </View>}
     <Button style={{ marginTop: 6 }} onPress={() => {
       ImagePicker.showImagePicker({
         title: 'Upload Photo',
