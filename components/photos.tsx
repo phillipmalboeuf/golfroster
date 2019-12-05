@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { FunctionComponent } from 'react'
 
 import { Text, View, Image, Dimensions } from 'react-native'
-import { Button, Appbar, Avatar as RNAvatar } from 'react-native-paper'
+import { Button, Appbar, Avatar as RNAvatar, ActivityIndicator } from 'react-native-paper'
 import ImagePicker from 'react-native-image-picker'
 
 import { FirebaseContext } from '../contexts/firebase'
@@ -39,38 +39,15 @@ export const Avatar: FunctionComponent<{
   first_name?: string
   last_name?: string
   small?: boolean
-  upload?: boolean
-}> = ({ photo, first_name, last_name, small, upload }) => {
-  const { storage } = useContext(FirebaseContext)
-
-  const [uploaded, setUploaded] = useState<string>(undefined)
+}> = ({ photo, first_name, last_name, small }) => {
   const uri = usePhotoURI(photo)
   const size = small ? 40 : 66
 
-  return <View style={{ alignItems: 'center' }}>
-    {uploaded 
-      ? <RNAvatar.Image size={size} source={{ uri: uploaded }} style={{width: size, height: size}} />
-      : (photo && uri)
-        ? <RNAvatar.Image size={size} source={{ uri }} style={{width: size, height: size}} />
-        : <RNAvatar.Text size={size} label={first_name && last_name && `${first_name[0]}${last_name[0]}`} />}
-
-    {upload && <Button style={{ marginTop: 6 }} onPress={() => {
-      
-      ImagePicker.showImagePicker({
-        title: 'Upload Photo',
-        storageOptions: {
-          skipBackup: true,
-          path: 'images',
-        },
-      }, async response => {
-        if (!response.didCancel) {
-          const { storageURL, downloadURL } = await uploadPhoto(response.uri,
-            `${new Date().getTime()}/${response.fileName}`, response.type, storage)
-          setUploaded(downloadURL)
-        }
-      })
-    }}>Upload Photo</Button>}
-  </View>
+  return <>
+    {(photo && uri)
+      ? <RNAvatar.Image size={size} source={{ uri }} style={{width: size, height: size}} />
+      : <RNAvatar.Text size={size} label={first_name && last_name && `${first_name[0]}${last_name[0]}`} />}
+  </>
 }
 
 export const Background: FunctionComponent<{
@@ -95,5 +72,40 @@ export const Background: FunctionComponent<{
       }} />
       : null}
     {children}
+  </View>
+}
+
+export const Upload: FunctionComponent<{
+  onUpload: (url: string) => void
+}> = ({ onUpload }) => {
+  const { storage } = useContext(FirebaseContext)
+
+  const [uploaded, setUploaded] = useState<string>(undefined)
+  const [loading, setLoading] = useState(false)
+
+  return <View style={{ alignItems: 'center' }}>
+    {loading
+      ? <RNAvatar.Icon icon={({ size, color }) => <ActivityIndicator color={color} />} size={88} />
+      : <RNAvatar.Image size={88} source={{ uri: uploaded }} style={{width: 88, height: 88}} />}
+    <Button style={{ marginTop: 6 }} onPress={() => {
+      ImagePicker.showImagePicker({
+        title: 'Upload Photo',
+        storageOptions: {
+          skipBackup: true,
+          path: 'images',
+        },
+      }, async response => {
+        if (!response.didCancel) {
+          setLoading(true)
+
+          const { storageURL, downloadURL } = await uploadPhoto(response.uri,
+            `${new Date().getTime()}/${response.fileName}`, response.type, storage)
+
+          setLoading(false)
+          setUploaded(downloadURL)
+          onUpload(storageURL)
+        }
+      })
+    }}>Upload Photo</Button>
   </View>
 }

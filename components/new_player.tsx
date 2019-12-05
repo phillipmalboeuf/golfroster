@@ -10,13 +10,13 @@ import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 
-import { Form } from './form'
+import { Form, FormContext } from './form'
 import { Input } from './input'
 import { Center, Padded, Bottom } from './layouts'
 import { Dots } from './dots'
 import { Title, Subtitle } from './text'
 import { Button } from './button'
-import { Avatar } from './photos'
+import { Avatar, Upload } from './photos'
 
 
 export const timesOfDay = {
@@ -59,14 +59,21 @@ export const NewPlayer: FunctionComponent<{}> = props => {
   const form = useRef<Form>(undefined)
 
   return <Observer>{() => store.player.clubs.length ? <Form ref={form} hideButton onSubmit={async values => {
+    console.log(values)
     store.player.save({
       ...values,
-      weekends: Object.keys(values.weekends).filter(key => values.weekends[key] === true),
-      weekdays: Object.keys(values.weekends).filter(key => values.weekends[key] === true),
-      tee_choices: Object.keys(values.tee_choices).filter(key => values.tee_choices[key] === true),
-      money: Object.keys(values.money).filter(key => values.money[key] === true),
-      drinks: Object.keys(values.drinks).filter(key => values.drinks[key] === true),
-      methods: Object.keys(values.methods).filter(key => values.methods[key] === true),
+      weekends: values.weekends
+        && Object.keys(values.weekends).filter(key => values.weekends[key] === true),
+      weekdays: values.weekends
+        && Object.keys(values.weekends).filter(key => values.weekends[key] === true),
+      tee_choices: values.tee_choices
+        && Object.keys(values.tee_choices).filter(key => values.tee_choices[key] === true),
+      money: values.money
+        && Object.keys(values.money).filter(key => values.money[key] === true),
+      drinks: values.drinks
+        && Object.keys(values.drinks).filter(key => values.drinks[key] === true),
+      methods: values.methods
+        && Object.keys(values.methods).filter(key => values.methods[key] === true),
       accepted_terms: true,
     })
   }}>
@@ -190,7 +197,11 @@ export const NewPlayer: FunctionComponent<{}> = props => {
           Ideally, pick one of you on the green.
         </Subtitle>
 
-        <Avatar upload />
+        <FormContext.Consumer>
+          {context => <Upload onUpload={url => {
+            context.onChange('photo', url)
+          }} />}
+        </FormContext.Consumer>
       </Center>,
       <Center>
         <Title>
