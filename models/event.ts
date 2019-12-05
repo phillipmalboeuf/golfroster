@@ -15,12 +15,17 @@ export const Event = types.model({
   id: types.optional(types.identifier, () => firebase.app().firestore().collection('events').doc().id),
   organizer_id: types.string,
   name: types.string,
+  club: types.string,
   description: types.maybeNull(types.string),
   photo: types.maybe(types.string),
   start_date: dateType,
   end_date: dateType,
   repeatable: types.optional(types.boolean, false),
   attendees: types.array(types.string),
+  money: types.array(types.string),
+  drinks: types.array(types.string),
+  tee_choices: types.array(types.string),
+  methods: types.array(types.string),
 })
   .actions(self => ({
     save: flow(function* save(data: firestore.DocumentData) {

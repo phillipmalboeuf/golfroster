@@ -26,7 +26,7 @@ export const Dates: FunctionComponent<{
 
   return <Observer>
     {() => {
-      const keys = Object.keys(dates)
+      const keys = Object.keys(dates).sort()
       return keys.length
         ? <List sections={keys.map(date => ({
           title: moment(new Date(date)).format('dddd MMMM Do, YYYY'),

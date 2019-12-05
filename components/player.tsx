@@ -112,7 +112,7 @@ export const Player: FunctionComponent<{
   </ScrollView>
 }
 
-const Row: FunctionComponent<{
+export const Row: FunctionComponent<{
   italicTitle?: boolean
   boldItems?: boolean
   title: string

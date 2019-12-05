@@ -59,7 +59,6 @@ export const NewPlayer: FunctionComponent<{}> = props => {
   const form = useRef<Form>(undefined)
 
   return <Observer>{() => store.player.clubs.length ? <Form ref={form} hideButton onSubmit={async values => {
-    console.log(values)
     store.player.save({
       ...values,
       weekends: values.weekends
