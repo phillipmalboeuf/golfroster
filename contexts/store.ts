@@ -72,6 +72,12 @@ const Store = types
       yield event.save(event)
     }),
 
+    attendEvent: flow(function* exists(eventId: string) {
+      yield firebase.app().firestore().collection('events').doc(eventId).update({
+        attendees: firestore.FieldValue.arrayUnion(self.player.id),
+      })
+    }),
+
     fetchPlayer: flow(function* fetchPlayer(id: string) {
       const player = Player.create({ id })
       self.players.set(id, player)

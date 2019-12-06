@@ -16,7 +16,7 @@ export const Popup: FunctionComponent<{
 }> = props => {
 
   return <Portal>
-    <Dialog visible={true} onDismiss={props.onDismiss}>
+    <Dialog visible={true} style={{ backgroundColor: 'white' }} onDismiss={props.onDismiss}>
       {props.title && <Dialog.Title>{props.title}</Dialog.Title>}
       <Dialog.Content>
         {props.content}
