@@ -11,7 +11,6 @@ export const Group = types.model({
   description: types.maybeNull(types.string),
   photo: types.maybe(types.string),
   members: types.array(types.string),
-  invited: types.array(types.string),
   is_public: types.boolean,
 })
   .actions(self => ({
@@ -19,5 +18,13 @@ export const Group = types.model({
       yield firebase.app().firestore().collection('groups').doc(self.id).set(data, { merge: true })
       
       Object.keys(data).forEach(key => self[key] = data[key])
+    }),
+    // tslint:disable-next-line: variable-name
+    invite: flow(function* save(player_id: string, invited_by: string) {
+      yield firebase.app().firestore().collection('groups').doc(self.id)
+        .collection('invitations').add({
+          player_id,
+          invited_by,
+        })
     }),
   }))

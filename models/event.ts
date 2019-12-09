@@ -22,7 +22,6 @@ export const Event = types.model({
   end_date: dateType,
   repeatable: types.optional(types.boolean, false),
   attendees: types.array(types.string),
-  invited: types.array(types.string),
   money: types.array(types.string),
   drinks: types.array(types.string),
   tee_choices: types.array(types.string),
@@ -33,5 +32,13 @@ export const Event = types.model({
       yield firebase.app().firestore().collection('events').doc(self.id).set(data, { merge: true })
       
       Object.keys(data).forEach(key => self[key] = data[key])
+    }),
+    // tslint:disable-next-line: variable-name
+    invite: flow(function* save(player_id: string, invited_by: string) {
+      yield firebase.app().firestore().collection('events').doc(self.id)
+        .collection('invitations').add({
+          player_id,
+          invited_by,
+        })
     }),
   }))

@@ -24,64 +24,88 @@ exports.newMessage = functions.firestore
   });
 
 async function sendNotification(
-  players,
+  invitation,
   invitation_type,
   invited_to_id,
   invited_to_name,
 ) {
-  // const invited_by =
-  //   authType === 'USER' &&
-  //   (await admin
-  //     .firestore()
-  //     .collection('players')
-  //     .doc(auth.uid)
-  //     .get());
+  const invited_by =
+    invitation.invited_by &&
+    (await admin
+      .firestore()
+      .collection('players')
+      .doc(invitation.invited_by)
+      .get()).data();
 
-  return (
-    players.length &&
-    players.map(player =>
-      admin
-        .firestore()
-        .collection('players')
-        .doc(player)
-        .collection('notifications')
-        .add({
-          invitation_type,
-          invited_to_id,
-          invited_to_name,
-          // ...(invited_by && {
-          //   invited_by_id: auth.uid,
-          //   invited_by_name: invited_by.data().name,
-          // }),
-          date: new Date(),
-        }),
-    )
-  );
+  return admin
+    .firestore()
+    .collection('players')
+    .doc(invitation.player_id)
+    .collection('notifications')
+    .add({
+      invitation_type,
+      invited_to_id,
+      invited_to_name,
+      ...(invited_by && {
+        invited_by_id: invitation.invited_by,
+        invited_by_name: `${invited_by.first_name} ${invited_by.last_name}`,
+      }),
+      date: new Date(),
+    });
 }
 
 exports.inviteToGroup = functions.firestore
-  .document('groups/{groupId}')
-  .onWrite(async (change, {params, auth, authType}) => {
-    const group = change.after.data();
-    const previous = change.before.data();
-    const players = group.invited.filter(
-      player => !previous.invited.includes(player),
-    );
+  .document('groups/{groupId}/invitations/{id}')
+  .onCreate(async (snapshot, {params}) => {
+    const invitation = snapshot.data();
+    const group = (await admin
+      .firestore()
+      .collection('groups')
+      .doc(params.groupId)
+      .get()).data();
 
-    return sendNotification(players, 'group', params.groupId, group.name);
+    return await sendNotification(
+      invitation,
+      'group',
+      params.groupId,
+      group.name,
+    );
   });
 
 exports.inviteToEvent = functions.firestore
-  .document('events/{eventId}')
-  .onWrite(async (change, {params, auth, authType}) => {
-    const event = change.after.data();
-    const previous = change.before.data();
-    const players = event.invited.filter(
-      player => !previous.invited.includes(player),
-    );
+  .document('events/{eventId}/invitations/{id}')
+  .onCreate(async (snapshot, {params}) => {
+    const invitation = snapshot.data();
+    const event = (await admin
+      .firestore()
+      .collection('events')
+      .doc(params.eventId)
+      .get()).data();
 
-    return sendNotification(players, 'event', params.eventId, event.name);
+    return await sendNotification(
+      invitation,
+      'event',
+      params.eventId,
+      event.name,
+    );
   });
+
+// exports.friendRequest = functions.firestore
+//   .document('players/{playerId}')
+//   .onWrite(async (change, {params}) => {
+//     const player = change.after.data();
+//     const previous = change.before.data();
+//     const players = player.friends.filter(
+//       player => !previous.friends.includes(player),
+//     );
+
+//     return sendNotification(
+//       players,
+//       'friend',
+//       params.playerId,
+//       `${player.first_name} ${player.last_name}`,
+//     );
+//   });
 
 const search = algoliasearch(CONFIG.algolia.id, CONFIG.algolia.key);
 
