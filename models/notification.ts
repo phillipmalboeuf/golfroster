@@ -31,4 +31,8 @@ export const Notification = types.model({
         
       destroy(self)
     }),
+    see: flow(function* hide() {
+      yield firebase.app().firestore().collection('players').doc(self.player_id)
+        .collection('notifications').doc(self.id).update({ seen: true })
+    }),
   }))

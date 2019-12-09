@@ -50,7 +50,7 @@ export const Chatrooms: FunctionComponent<{}> = props => {
                       ? `You: ${chatroom.latest.body}`
                       : `${store.friends.get(chatroom.latest.player_id).first_name}: ${chatroom.latest.body}`)
                     : 'New conversation',
-                right: <Caption>{chatroom.latest ? moment(chatroom.latest.date).fromNow() : 'New'}</Caption>
+                right: <Caption>{chatroom.latest ? moment(chatroom.latest.date).fromNow() : 'New'}</Caption>,
               })),
             },
           ]} />}</Observer>

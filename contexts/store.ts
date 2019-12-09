@@ -175,10 +175,10 @@ const store = Store.create({ badges: {} })
 unprotect(store)
 
 onSnapshot(store, snapshot => {
-  AsyncStorage.setItem('store', JSON.stringify(snapshot))
+  AsyncStorage.setItem('store3', JSON.stringify(snapshot))
 })
 
-AsyncStorage.getItem('store').then(stored => {
+AsyncStorage.getItem('store3').then(stored => {
   if (stored) {
     applySnapshot(store, JSON.parse(stored))
   }

@@ -43,24 +43,22 @@ export const Navigation: FunctionComponent<{}> = props => {
     setIndex(routes.findIndex(route => route.key.includes(root === 'groups' ? 'players' : root)))
   }, [history.location])
 
-  return <Observer>
-    {() => {
-      return <BottomNavigation
-        shifting={false}
-        navigationState={{
-          index,
-          routes: routes.map(route => ({ ...route, ...store.badges[route.key] && { badge: store.badges[route.key] }})),
-        }}
-        onIndexChange={i => {
-          setIndex(i)
-        }}
-        renderScene={scene}
-        activeColor={colors.green}
-        barStyle={{
-          backgroundColor: 'white',
-          borderTopColor: colors.greys[0],
-          borderTopWidth: 1,
-        }}
-      />}}
-  </Observer>
+  return <BottomNavigation
+    shifting={false}
+    navigationState={{
+      index,
+      routes: routes.map(route => ({ ...route, ...store.badges[route.key] && { badge: store.badges[route.key] }})),
+    }}
+    onIndexChange={i => {
+      history.push(`/${routes[i].key}`)
+      // setIndex(i)
+    }}
+    renderScene={scene}
+    activeColor={colors.green}
+    barStyle={{
+      backgroundColor: 'white',
+      borderTopColor: colors.greys[0],
+      borderTopWidth: 1,
+    }}
+  />
 }
