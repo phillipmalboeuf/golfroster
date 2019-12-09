@@ -37,9 +37,9 @@ export const Notifications: FunctionComponent<{}> = props => {
             label: 'Accept',
             onPress: async () => {
               await ({
-                group: () => store.joinGroup(notification.invited_to_id),
-                event: () => store.attendEvent(notification.invited_to_id),
-              }[notification.invitation_type]())
+                group: () => store.joinGroup(notification.subject_id),
+                event: () => store.attendEvent(notification.subject_id),
+              }[notification.type]())
 
               await notification.accept()
               history.push('/notifications')
@@ -57,19 +57,23 @@ export const Notifications: FunctionComponent<{}> = props => {
       
       <ScrollView>
         <Observer>{() => <List.Section>
-          {Array.from(store.notifications.values()).map(notification => <Link key={notification.id} to={`/${notification.invitation_type}s/${notification.invited_to_id}`}>
+          {Array.from(store.notifications.values()).map(notification => <Link key={notification.id} to={`/${notification.type.replace('_accepted', '')}s/${notification.subject_id}`}>
             {{
-              group: () => <List.Item title={`${notification.invited_to_name}`}
-                description={notification.invited_by_name
-                  ? `${notification.invited_by_name} invited you to join`
+              group: () => <List.Item title={`${notification.subject_name}`}
+                description={notification.sent_by_name
+                  ? `${notification.sent_by_name} invited you to join`
                   : 'You were invited to join'}
                 right={() => <AcceptButton notification={notification} />} />,
-              event: () => <List.Item title={`${notification.invited_to_name}`}
-                description={notification.invited_by_name
-                  ? `${notification.invited_by_name} invited you to attend`
+              event: () => <List.Item title={`${notification.subject_name}`}
+                description={notification.sent_by_name
+                  ? `${notification.sent_by_name} invited you to attend`
                   : 'You were invited to attend'}
                 right={() => <AcceptButton notification={notification} />} />,
-            }[notification.invitation_type]()}
+              group_accepted: () => <List.Item title={`${notification.sent_by_name} has accepted your invitation to join ${notification.subject_name}!`} />,
+              event_accepted: () => <List.Item title={`${notification.sent_by_name} has accepted your invitation to attend ${notification.subject_name}!`}
+                titleNumberOfLines={2}
+                right={() => <Caption>{moment(notification.date).fromNow()}</Caption>} />,
+            }[notification.type]()}
           </Link>)}
         </List.Section>}</Observer>
       </ScrollView>

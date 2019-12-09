@@ -24,31 +24,32 @@ exports.newMessage = functions.firestore
   });
 
 async function sendNotification(
-  invitation,
-  invitation_type,
-  invited_to_id,
-  invited_to_name,
+  player_id,
+  sent_by_id,
+  type,
+  subject_id,
+  subject_name,
 ) {
-  const invited_by =
-    invitation.invited_by &&
+  const sent_by =
+    sent_by_id &&
     (await admin
       .firestore()
       .collection('players')
-      .doc(invitation.invited_by)
+      .doc(sent_by_id)
       .get()).data();
 
   return admin
     .firestore()
     .collection('players')
-    .doc(invitation.player_id)
+    .doc(player_id)
     .collection('notifications')
     .add({
-      invitation_type,
-      invited_to_id,
-      invited_to_name,
-      ...(invited_by && {
-        invited_by_id: invitation.invited_by,
-        invited_by_name: `${invited_by.first_name} ${invited_by.last_name}`,
+      type,
+      subject_id,
+      subject_name,
+      ...(sent_by && {
+        sent_by_id,
+        sent_by_name: `${sent_by.first_name} ${sent_by.last_name}`,
       }),
       date: new Date(),
     });
@@ -65,7 +66,8 @@ exports.inviteToGroup = functions.firestore
       .get()).data();
 
     return await sendNotification(
-      invitation,
+      invitation.player_id,
+      invitation.invited_by,
       'group',
       params.groupId,
       group.name,
@@ -83,7 +85,8 @@ exports.inviteToEvent = functions.firestore
       .get()).data();
 
     return await sendNotification(
-      invitation,
+      invitation.player_id,
+      invitation.invited_by,
       'event',
       params.eventId,
       event.name,
@@ -106,6 +109,24 @@ exports.inviteToEvent = functions.firestore
 //       `${player.first_name} ${player.last_name}`,
 //     );
 //   });
+
+exports.acceptedNotification = functions.firestore
+  .document('players/{playerId}/notifications/{id}')
+  .onWrite(async (change, {params}) => {
+    const notification = change.after.data();
+
+    return (
+      notification.accepted &&
+      notification.sent_by_id &&
+      sendNotification(
+        notification.sent_by_id,
+        params.playerId,
+        `${notification.type}_accepted`,
+        notification.subject_id,
+        notification.subject_name,
+      )
+    );
+  });
 
 const search = algoliasearch(CONFIG.algolia.id, CONFIG.algolia.key);
 
