@@ -39,6 +39,7 @@ export const Notifications: FunctionComponent<{}> = props => {
               await ({
                 group: () => store.joinGroup(notification.subject_id),
                 event: () => store.attendEvent(notification.subject_id),
+                player: () => store.player.requestFriend(notification.subject_id)
               }[notification.type]())
 
               await notification.accept()
@@ -49,11 +50,12 @@ export const Notifications: FunctionComponent<{}> = props => {
       }} />
     </Switch>
 
-    <Route exact render={() => {
+    <Route exact path='/notifications' render={() => {
       const notifications = Array.from(store.notifications.values())
       notifications.filter(notification => !notification.seen).forEach(notification => {
         notification.see()
       })
+      const highlight = { backgroundColor: 'white' }
       return <>
         <Appbar.Header>
           <Appbar.Content title='Notifications & Invitations' />
@@ -64,15 +66,18 @@ export const Notifications: FunctionComponent<{}> = props => {
           <Observer>{() => <List.Section>
             {notifications.map(notification => <Link key={notification.id} to={`/${notification.type.replace('_accepted', '')}s/${notification.subject_id}`}>
               {{
-                group: () => <List.Item title={`${notification.subject_name}`}
+                group: () => <List.Item style={!notification.accepted && highlight} title={`${notification.subject_name}`}
                   description={notification.sent_by_name
                     ? `${notification.sent_by_name} invited you to join`
                     : 'You were invited to join'}
                   right={() => <AcceptButton notification={notification} />} />,
-                event: () => <List.Item title={`${notification.subject_name}`}
+                event: () => <List.Item style={!notification.accepted && highlight} title={`${notification.subject_name}`}
                   description={notification.sent_by_name
                     ? `${notification.sent_by_name} invited you to attend`
                     : 'You were invited to attend'}
+                  right={() => <AcceptButton notification={notification} />} />,
+                player: () => <List.Item style={!notification.accepted && highlight} title={`${notification.subject_name}`}
+                  description={'has sent you a friend request'}
                   right={() => <AcceptButton notification={notification} />} />,
                 group_accepted: () => <List.Item title={`${notification.sent_by_name} has accepted your invitation to join ${notification.subject_name}!`} />,
                 event_accepted: () => <List.Item title={`${notification.sent_by_name} has accepted your invitation to attend ${notification.subject_name}!`}

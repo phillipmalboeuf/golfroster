@@ -93,22 +93,25 @@ exports.inviteToEvent = functions.firestore
     );
   });
 
-// exports.friendRequest = functions.firestore
-//   .document('players/{playerId}')
-//   .onWrite(async (change, {params}) => {
-//     const player = change.after.data();
-//     const previous = change.before.data();
-//     const players = player.friends.filter(
-//       player => !previous.friends.includes(player),
-//     );
+exports.friendRequest = functions.firestore
+  .document('players/{playerId}')
+  .onWrite(async (change, {params}) => {
+    const player = change.after.data();
+    const previous = change.before.data();
+    const friends = player.friends.filter(
+      friend => !previous.friends.includes(friend),
+    );
 
-//     return sendNotification(
-//       players,
-//       'friend',
-//       params.playerId,
-//       `${player.first_name} ${player.last_name}`,
-//     );
-//   });
+    return friends.map(friend => {
+      return sendNotification(
+        friend,
+        player.id,
+        'friend',
+        params.playerId,
+        `${player.first_name} ${player.last_name}`,
+      );
+    });
+  });
 
 exports.acceptedNotification = functions.firestore
   .document('players/{playerId}/notifications/{id}')
