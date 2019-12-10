@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View, Text } from 'react-native'
-import { DefaultTheme, Provider as PaperProvider, Colors, Theme, Headline } from 'react-native-paper'
+import { DefaultTheme, Provider as PaperProvider, Colors, Theme, Headline, Portal } from 'react-native-paper'
 import { Observer } from 'mobx-react'
 import { NativeRouter } from 'react-router-native'
 
@@ -68,7 +68,7 @@ const App = () => {
         ? <Center><Title>One moment...</Title></Center>
         : user !== null
           ? <Observer>{() => store.player.accepted_terms
-            ? <NativeRouter><Navigation /></NativeRouter>
+            ? <NativeRouter><Portal.Host><Navigation /></Portal.Host></NativeRouter>
             : <View>
               <NewPlayer />
             </View>
