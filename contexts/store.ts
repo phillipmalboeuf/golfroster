@@ -90,11 +90,11 @@ const Store = types
         .where('friends', 'array-contains', self.player.id)
         .where(firestore.FieldPath.documentId(), 'in', self.player.friends)
         .onSnapshot(snapshot => {
-        snapshot.docs.forEach(doc => self.friends.set(doc.id, {
-          id: doc.id,
-          ...doc.data(),
-        }))
-      })
+          snapshot.docs.forEach(doc => self.friends.set(doc.id, {
+            id: doc.id,
+            ...doc.data(),
+          }))
+        })
 
     }),
 
@@ -174,14 +174,14 @@ const Store = types
 const store = Store.create({ badges: {} })
 unprotect(store)
 
-onSnapshot(store, snapshot => {
-  AsyncStorage.setItem('store3', JSON.stringify(snapshot))
-})
+// onSnapshot(store, snapshot => {
+//   AsyncStorage.setItem('store3', JSON.stringify(snapshot))
+// })
 
-AsyncStorage.getItem('store3').then(stored => {
-  if (stored) {
-    applySnapshot(store, JSON.parse(stored))
-  }
-})
+// AsyncStorage.getItem('store3').then(stored => {
+//   if (stored) {
+//     applySnapshot(store, JSON.parse(stored))
+//   }
+// })
 
 export const StoreContext = createContext({ store })

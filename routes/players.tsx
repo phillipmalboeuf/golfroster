@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useRef, useState } from 'react'
+import React, { useContext, Fragment, useRef, useState, useEffect } from 'react'
 import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
@@ -20,40 +20,57 @@ import { NewGroup } from '../components/new_group'
 import { List } from '../components/list'
 
 
-export const Players: FunctionComponent<{}> = props => {
+const PlayerRoute: FunctionComponent<{
+  id: string
+}> = ({ id }) => {
   const { store } = useContext(StoreContext)
   const history = useHistory()
+
+  const [player, setPlayer] = useState(store.friends.get(id))
+
+  useEffect(() => {
+    if (!player) {
+      store.fetchPlayer(id)
+        .then(() => setPlayer(store.players.get(id)))
+    }
+  }, [])
+
+  return player ? <>
+    <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
+      <Link to='/players'><Appbar.BackAction /></Link>
+      <Appbar.Content title={`${player.first_name}'s Profile`} />
+      <Appbar.Action icon='account-plus' />
+      <Appbar.Action icon='message-outline' onPress={async () => {
+        const chatroom = Array.from(store.chatrooms.values()).find(room =>
+          !room.event_id && !room.group_id
+          && room.players.includes(id))
+
+        if (chatroom) {
+          // console.log(chatroom)
+          history.push(`/chatrooms/${chatroom.id}`)
+        } else {
+          await store.createChatroom({
+            players: [id],
+          }).then(room => {
+            history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
+          })
+        }
+      }} />
+      <Appbar.Action icon='dots-vertical' />
+    </Appbar.Header>
+    <Player player={player} />
+  </> : null
+}
+
+
+export const Players: FunctionComponent<{}> = props => {
+  const { store } = useContext(StoreContext)
 
   const [searching, setSearching] = useState(false)
 
   return <Switch>
     <Route exact path='/players/:id' render={({ match }) => {
-      const player = store.friends.get(match.params.id)
-      return <Fragment key={match.params.id}>
-        <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
-          <Link to='/players'><Appbar.BackAction /></Link>
-          <Appbar.Content title={`${player.first_name}'s Profile`} />
-          <Appbar.Action icon='account-plus' />
-          <Appbar.Action icon='message-outline' onPress={async () => {
-            const chatroom = Array.from(store.chatrooms.values()).find(room =>
-              !room.event_id && !room.group_id
-              && room.players.includes(match.params.id))
-
-            if (chatroom) {
-              // console.log(chatroom)
-              history.push(`/chatrooms/${chatroom.id}`)
-            } else {
-              await store.createChatroom({
-                players: [match.params.id],
-              }).then(room => {
-                history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
-              })
-            }
-          }} />
-          <Appbar.Action icon='dots-vertical' />
-        </Appbar.Header>
-        <Player player={player} />
-      </Fragment>
+      return <PlayerRoute key={match.params.id} id={match.params.id} />
     }} />
     <Route exact path='/groups/:id' render={({ match }) => {
       const group = store.groups.get(match.params.id)

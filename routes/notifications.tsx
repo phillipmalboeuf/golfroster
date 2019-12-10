@@ -49,7 +49,7 @@ export const Notifications: FunctionComponent<{}> = props => {
       }} />
     </Switch>
 
-    <Route exact path='/notifications' render={() => {
+    <Route exact render={() => {
       const notifications = Array.from(store.notifications.values())
       notifications.filter(notification => !notification.seen).forEach(notification => {
         notification.see()
