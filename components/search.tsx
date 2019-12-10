@@ -9,10 +9,12 @@ import search from '../clients/algolia'
 import { Form } from './form'
 import { Input } from './input'
 
+import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 import { Padded } from './layouts'
 import { Italic } from './text'
 import { List } from './list'
+
 
 
 export const Search: FunctionComponent<{
@@ -21,6 +23,7 @@ export const Search: FunctionComponent<{
   onDismiss: () => void
 }> = ({ index, visible, onDismiss }) => {
   const { colors } = useContext(StylesContext)
+  const { store } = useContext(StoreContext)
   const searchIndex = search.initIndex(index)
   const [query, setQuery] = useState<string>()
   const [hits, setHits] = useState<any[]>()
@@ -35,13 +38,13 @@ export const Search: FunctionComponent<{
               setQuery(text)
               const response = await searchIndex.search({ query: text })
               setHits(response.hits)
-              console.log(response)
+              // console.log(response)
             }} />
         </Padded>
         {hits && <ScrollView>
           {hits.length 
             ? <List sections={[{
-              items: hits.map(hit => ({
+              items: hits.filter(hit => hit.objectID !== store.player.id).map(hit => ({
                 title: `${hit.first_name} ${hit.last_name}`,
                 link: `/players/${hit.objectID}`,
               })),
