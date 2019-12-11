@@ -23,7 +23,6 @@ function usePhotoURI(photo: string) {
 }
 
 async function uploadPhoto(uri: string, filename: string, contentType: string, storage: firebase.storage.Storage) {
-  console.log(storage)
   const image = await fetch(uri)
   const ref = storage.ref(filename)
   await storage.ref(filename).put(await image.blob(), { contentType })
@@ -81,8 +80,6 @@ export const Upload: FunctionComponent<{
 }> = ({ onUpload, avatar }) => {
   const { storage } = useContext(FirebaseContext)
   const { colors } = useContext(StylesContext)
-
-  console.log(storage)
 
   const [uploaded, setUploaded] = useState<string>(undefined)
   const [loading, setLoading] = useState(false)

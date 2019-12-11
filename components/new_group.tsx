@@ -28,13 +28,11 @@ export const NewGroup: FunctionComponent<{}> = props => {
 
   return <>
     {building && <Full>
-      <Form ref={form} onSubmit={async values => {
-        console.log(values)
-        await store.createGroup({
-          ...values,
-          // invited: Object.keys(values.invited).filter(id => values.invited[id] === true),
-        })
-        // setBuilding(false)
+      <Form ref={form} onSubmit={async ({invited, ...values}) => {
+        const group = await store.createGroup(values)
+        Object.keys(invited).filter(id => invited[id] === true).forEach(id => group.invite(id, store.player.id))
+        
+        history.push(`/groups/${group.id}`)
       }} hideButton>
         <Dots path='new_group' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
           <>
@@ -77,6 +75,18 @@ export const NewGroup: FunctionComponent<{}> = props => {
                 </List.Section>
             }</FormContext.Consumer>
           </>,
+          <Center>
+            <Title>
+              This Group's City and State
+            </Title>
+
+            <Subtitle>
+              Which city does this group represent?
+            </Subtitle>
+
+            <Input name='city' label='City' />
+            <Input name='state' label='State' />
+          </Center>,
           <>
             <Title>
               Give it a name

@@ -29,6 +29,7 @@ export const Event = types.model({
 })
   .actions(self => ({
     save: flow(function* save(data: firestore.DocumentData) {
+      Object.keys(data).forEach(key => (data[key] === undefined) && delete data[key])
       yield firebase.app().firestore().collection('events').doc(self.id).set(data, { merge: true })
       
       Object.keys(data).forEach(key => self[key] = data[key])

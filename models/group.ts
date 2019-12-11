@@ -17,10 +17,11 @@ export const Group = types.model({
   drinks: types.array(types.string),
   tee_choices: types.array(types.string),
   methods: types.array(types.string),
-  is_public: types.boolean,
+  is_public: types.optional(types.boolean, false),
 })
   .actions(self => ({
     save: flow(function* save(data: firestore.DocumentData) {
+      Object.keys(data).forEach(key => (data[key] === undefined) && delete data[key])
       yield firebase.app().firestore().collection('groups').doc(self.id).set(data, { merge: true })
       
       Object.keys(data).forEach(key => self[key] = data[key])

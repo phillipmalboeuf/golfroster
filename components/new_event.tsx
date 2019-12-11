@@ -32,9 +32,8 @@ export const NewEvent: FunctionComponent<{}> = props => {
 
   return <>
     {building && <Full>
-      <Form ref={form} onSubmit={async values => {
-        console.log(values)
-        await store.createEvent({
+      <Form ref={form} onSubmit={async ({invited, ...values}) => {
+        const event = await store.createEvent({
           ...values,
           tee_choices: values.tee_choices
             && Object.keys(values.tee_choices).filter(key => values.tee_choices[key] === true),
@@ -44,10 +43,10 @@ export const NewEvent: FunctionComponent<{}> = props => {
             && Object.keys(values.drinks).filter(key => values.drinks[key] === true),
           methods: values.methods
             && Object.keys(values.methods).filter(key => values.methods[key] === true),
-          // invited: Object.keys(values.invited).filter(id => values.invited[id] === true),
         })
+        Object.keys(invited).filter(id => invited[id] === true).forEach(id => event.invite(id, store.player.id))
         
-        // setBuilding(false)
+        history.push(`/events/${event.id}`)
       }} hideButton>
         <Dots path='new_event' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
           <Center>

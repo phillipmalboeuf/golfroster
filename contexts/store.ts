@@ -3,7 +3,7 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import { createContext } from 'react'
 import { AsyncStorage } from 'react-native'
-import { types, flow, unprotect, onSnapshot, applySnapshot, Instance } from 'mobx-state-tree'
+import { types, flow, unprotect, onSnapshot, applySnapshot, Instance, castFlowReturn } from 'mobx-state-tree'
 
 import { Player } from '../models/player'
 import { Event as EventModel } from '../models/event'
@@ -63,13 +63,14 @@ const Store = types
         })
     }),
 
-    createEvent: flow(function* createEvent(data: typeof EventModel.CreationType) {
+    createEvent: flow<Instance<typeof EventModel>>(function* createEvent(data: typeof EventModel.CreationType) {
       const event = EventModel.create({
         ...data,
         organizer_id: self.player.id,
         attendees: [self.player.id],
       })
       yield event.save(event)
+      return event
     }),
 
     attendEvent: flow(function* exists(eventId: string) {
@@ -125,13 +126,14 @@ const Store = types
 
     }),
 
-    createGroup: flow(function* exists(data: typeof Group.CreationType) {
+    createGroup: flow<Instance<typeof Group>>(function* exists(data: typeof Group.CreationType) {
       const group = Group.create({
         ...data,
         organizer_id: self.player.id,
         members: [self.player.id],
       })
       yield group.save(group)
+      return group
     }),
 
     joinGroup: flow(function* exists(groupId: string) {

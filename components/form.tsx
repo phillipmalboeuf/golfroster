@@ -47,10 +47,13 @@ export class Form extends React.Component<Props, State> {
         response,
         waiting: false,
         values: {},
-      })).catch(error => this.setState({
-        error: error.message,
-        waiting: false,
-      }))
+      })).catch(error => {
+        console.error(error)
+        this.setState({
+          error: error.message,
+          waiting: false,
+        })
+      })
   }
 
   private onChange(name: string, value: any) {
