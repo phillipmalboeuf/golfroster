@@ -106,7 +106,7 @@ exports.friendRequest = functions.firestore
       return sendNotification(
         friend,
         player.id,
-        'friend',
+        'player',
         params.playerId,
         `${player.first_name} ${player.last_name}`,
       );
