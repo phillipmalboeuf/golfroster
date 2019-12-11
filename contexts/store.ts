@@ -63,7 +63,7 @@ const Store = types
         })
     }),
 
-    createEvent: flow<Instance<typeof EventModel>>(function* createEvent(data: typeof EventModel.CreationType) {
+    createEvent: flow(function* createEvent(data: typeof EventModel.CreationType) {
       const event = EventModel.create({
         ...data,
         organizer_id: self.player.id,
@@ -126,7 +126,7 @@ const Store = types
 
     }),
 
-    createGroup: flow<Instance<typeof Group>>(function* exists(data: typeof Group.CreationType) {
+    createGroup: flow(function* exists(data: typeof Group.CreationType) {
       const group = Group.create({
         ...data,
         organizer_id: self.player.id,
