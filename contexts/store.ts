@@ -59,7 +59,7 @@ const Store = types
     listEvents: flow(function* listEvents() {
       firebase.app().firestore().collection('events')
         .where('attendees', 'array-contains', self.player.id).onSnapshot(snapshot => {
-          snapshot.forEach(doc => self.events.set(doc.id, doc.data()))
+          setDocs(snapshot, self.events)
         })
     }),
 
@@ -90,10 +90,7 @@ const Store = types
         .where('friends', 'array-contains', self.player.id)
         .where(firestore.FieldPath.documentId(), 'in', self.player.friends)
         .onSnapshot(snapshot => {
-          snapshot.docs.forEach(doc => self.friends.set(doc.id, {
-            id: doc.id,
-            ...doc.data(),
-          }))
+          setDocs(snapshot, self.friends)
         })
 
     }),
@@ -110,12 +107,9 @@ const Store = types
 
       firebase.app().firestore().collection('chatrooms').where('players', 'array-contains', self.player.id)
         .onSnapshot(snapshot => {
-          snapshot.docs.forEach(doc => {
-            self.chatrooms.set(doc.id, {
-              id: doc.id,
-              ...doc.data(),
-            })
+          setDocs(snapshot, self.chatrooms)
 
+          snapshot.docs.forEach(doc => {
             self.chatrooms.get(doc.id).listMessages()
           })
         })
@@ -126,12 +120,7 @@ const Store = types
 
       firebase.app().firestore().collection('groups').where('members', 'array-contains', self.player.id)
         .onSnapshot(snapshot => {
-          snapshot.docs.forEach(doc => {
-            self.groups.set(doc.id, {
-              id: doc.id,
-              ...doc.data(),
-            })
-          })
+          setDocs(snapshot, self.groups)
         })
 
     }),
@@ -156,13 +145,7 @@ const Store = types
       firebase.app().firestore().collection('players').doc(self.player.id)
         .collection('notifications')
         .onSnapshot(snapshot => {
-          snapshot.docs.forEach(doc => {
-            self.notifications.set(doc.id, {
-              id: doc.id,
-              player_id: self.player.id,
-              ...doc.data(),
-            })
-          })
+          setDocs(snapshot, self.notifications, { player_id: self.player.id })
 
           self.badges.notifications = snapshot.docs.filter(doc => !doc.data().seen).length
         })
@@ -174,14 +157,28 @@ const Store = types
 const store = Store.create({ badges: {} })
 unprotect(store)
 
-// onSnapshot(store, snapshot => {
-//   AsyncStorage.setItem('store3', JSON.stringify(snapshot))
-// })
+onSnapshot(store, snapshot => {
+  AsyncStorage.setItem('store3', JSON.stringify(snapshot))
+})
 
-// AsyncStorage.getItem('store3').then(stored => {
-//   if (stored) {
-//     applySnapshot(store, JSON.parse(stored))
-//   }
-// })
+AsyncStorage.getItem('store3').then(stored => {
+  if (stored) {
+    applySnapshot(store, JSON.parse(stored))
+  }
+})
 
 export const StoreContext = createContext({ store })
+
+const setDocs = (snapshot: firestore.QuerySnapshot, storeMap: Map<string, any>, more?: {}) => {
+  return snapshot.docChanges().forEach(change => {
+    if (change.type === 'removed') {
+      storeMap.delete(change.doc.id)
+    } else {
+      storeMap.set(change.doc.id, {
+        id: change.doc.id,
+        ...change.doc.data(),
+        ...more,
+      })
+    }
+  })
+}

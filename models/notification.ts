@@ -18,10 +18,7 @@ export const Notification = types.model({
   accepted: types.optional(types.boolean, false),
 })
   .actions(self => ({
-    // see: flow(function* see() {
-      
-    // }),
-    accept: flow(function* hide() {
+    accept: flow(function* accept() {
       yield firebase.app().firestore().collection('players').doc(self.player_id)
         .collection('notifications').doc(self.id).update({ accepted: true })
     }),
@@ -31,7 +28,7 @@ export const Notification = types.model({
         
       destroy(self)
     }),
-    see: flow(function* hide() {
+    see: flow(function* see() {
       yield firebase.app().firestore().collection('players').doc(self.player_id)
         .collection('notifications').doc(self.id).update({ seen: true })
     }),
