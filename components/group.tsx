@@ -3,14 +3,18 @@ import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
 
-import { Text, View } from 'react-native'
-import { Button, Appbar, List, Headline, Caption } from 'react-native-paper'
+import { Text, View, ScrollView } from 'react-native'
+import { Button, Appbar, Headline, Caption, Surface } from 'react-native-paper'
 
 import { StoreContext } from '../contexts/store'
 import { Group as GroupModel } from '../models/group'
 
-import { Center, Padded, Spaced } from '../components/layouts'
-import { Avatar, Background } from '../components/photos'
+import { Center, Padded, Spaced } from './layouts'
+import { Avatar, Background } from './photos'
+import { Row } from './player'
+import { teeChoices, methods, money, drinks } from './new_player'
+import { Quote } from './text'
+import { Members } from './members_list'
 
 
 
@@ -18,27 +22,51 @@ export const Group: FunctionComponent<{
   group: Instance<typeof GroupModel>
 }> = ({ group }) => {
   const { store } = useContext(StoreContext)
-  return <Observer>
-  {() => <>
-    <Background photo={group.photo}>
-      <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-      }}>
+  return <ScrollView>
+    <Observer>
+    {() => <>
+      <Background photo={group.photo}>
         <Padded>
-          <View>
-            <Headline style={{ color: 'white', marginBottom: 0 }}>
+          <View style={{
+            minHeight: 166,
+            justifyContent: 'center',
+          }}>
+            <Headline style={{ color: 'white', marginBottom: 0, textAlign: 'center' }}>
               {group.name}
             </Headline>
+            <Caption style={{ color: 'white', textAlign: 'center' }}>
+              {group.city}, {group.state}
+            </Caption>
           </View>
         </Padded>
-        
-      </View>
-    </Background>
+      </Background>
+      <Surface style={{ backgroundColor: 'black', padding: 6 }}>
+        <Text style={{ color: 'white', textAlign: 'center' }}>
+          {group.is_public ? 'Public' : 'Private'} Group
+        </Text>
+      </Surface>
+
+      {group.description && <Quote>{group.description}</Quote>}
       
-    <Padded>
-      <Text>{group.description}</Text>
-      <Text>{JSON.stringify(group.members)}</Text>
-    </Padded>
-  </>}</Observer>
+      <Members label='Members' ids={group.members} organizer={group.organizer_id} />
+
+      <Padded tight>
+          {/* <Row boldItems title='GHIN Index'
+            items={event.ghin_index && [event.ghin_index]} /> */}
+        
+        <Row title='Tee Choices'
+          items={group.tee_choices}
+          labels={teeChoices} />
+        <Row title='Methods of Play'
+          items={group.methods}
+          labels={methods} />
+        <Row title='Play for Money'
+          items={group.money}
+          labels={money} />
+        <Row title='Drink on the course'
+          items={group.drinks}
+          labels={drinks} />
+      </Padded>
+    </>}</Observer>
+  </ScrollView>
 }

@@ -5,7 +5,6 @@ import { Instance } from 'mobx-state-tree'
 
 import { Text, View, ScrollView } from 'react-native'
 import { Button, Appbar, List, Headline, Caption, Surface } from 'react-native-paper'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import moment from 'moment'
 
 import { StoreContext } from '../contexts/store'
@@ -14,9 +13,10 @@ import { Event as EventModel } from '../models/event'
 
 import { Center, Padded, Spaced } from './layouts'
 import { Avatar, Background } from './photos'
-import { Subheader } from './text'
+import { Subheader, Quote } from './text'
 import { Row } from './player'
 import { teeChoices, methods, money, drinks } from './new_player'
+import { Members } from './members_list'
 
 
 
@@ -47,17 +47,9 @@ export const Event: FunctionComponent<{
         </Text>
       </Surface>
         
-      <Padded tight>
-        <View style={{ flexDirection: 'row' }}>
-          <Icon style={{ marginRight: sizes.base / 2 }}
-            name='format-quote-open' size={sizes.big} />
-          <Text style={{ flex: 1, fontSize: sizes.base, lineHeight: sizes.base * 1.33 }}>{event.description}</Text>
-        </View>
-      </Padded>
-      <Padded tight>
-        <Subheader>Attendees</Subheader>
-        <Text>{JSON.stringify(event.attendees)}</Text>
-      </Padded>
+      {event.description && <Quote>{event.description}</Quote>}
+
+      <Members label='Members' ids={event.attendees} organizer={event.organizer_id} />
 
       <Padded tight>
         <Subheader>Club Location</Subheader>

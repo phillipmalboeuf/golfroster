@@ -3,7 +3,10 @@ import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
 import { Headline, Subheading } from 'react-native-paper'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
 import { StylesContext } from '../contexts/styles'
+import { Padded } from './layouts'
 
 export const Italic: FunctionComponent<{}> = props => {
   return <Text style={{ fontStyle: 'italic' }}>{props.children}</Text>
@@ -57,4 +60,16 @@ export const Subheader: FunctionComponent<{
   }}>
     {props.children}
   </Subheading>
+}
+
+export const Quote: FunctionComponent<{
+}> = props => {
+  const { sizes, colors } = useContext(StylesContext)
+  return <Padded tight>
+    <View style={{ flexDirection: 'row' }}>
+      <Icon style={{ marginRight: sizes.base / 2 }}
+        name='format-quote-open' size={sizes.big} />
+      <Text style={{ flex: 1, fontSize: sizes.base, lineHeight: sizes.base * 1.33 }}>{props.children}</Text>
+    </View>
+  </Padded>
 }

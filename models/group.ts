@@ -10,7 +10,13 @@ export const Group = types.model({
   name: types.string,
   description: types.maybeNull(types.string),
   photo: types.maybe(types.string),
+  city: types.maybe(types.string),
+  state: types.maybe(types.string),
   members: types.array(types.string),
+  money: types.array(types.string),
+  drinks: types.array(types.string),
+  tee_choices: types.array(types.string),
+  methods: types.array(types.string),
   is_public: types.boolean,
 })
   .actions(self => ({

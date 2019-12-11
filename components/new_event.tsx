@@ -44,8 +44,9 @@ export const NewEvent: FunctionComponent<{}> = props => {
             && Object.keys(values.drinks).filter(key => values.drinks[key] === true),
           methods: values.methods
             && Object.keys(values.methods).filter(key => values.methods[key] === true),
-          invited: Object.keys(values.invited).filter(id => values.invited[id] === true),
+          // invited: Object.keys(values.invited).filter(id => values.invited[id] === true),
         })
+        
         // setBuilding(false)
       }} hideButton>
         <Dots path='new_event' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[

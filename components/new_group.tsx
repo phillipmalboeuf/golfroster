@@ -14,7 +14,7 @@ import { Full, Center } from './layouts'
 import { Dots } from './dots'
 import { Form, FormContext } from './form'
 import { Input } from './input'
-import { Avatar } from './photos'
+import { Avatar, Upload } from './photos'
 import { Title, Subtitle } from './text'
 import { FloatingButton } from './button'
 
@@ -32,7 +32,7 @@ export const NewGroup: FunctionComponent<{}> = props => {
         console.log(values)
         await store.createGroup({
           ...values,
-          invited: Object.keys(values.invited).filter(id => values.invited[id] === true),
+          // invited: Object.keys(values.invited).filter(id => values.invited[id] === true),
         })
         // setBuilding(false)
       }} hideButton>
@@ -74,10 +74,6 @@ export const NewGroup: FunctionComponent<{}> = props => {
                       left={() => <Avatar {...friend} small />}
                       right={() => <Input name={`invited.${friend.id}`} type='checkbox' />} />
                   })}
-                  {/* {Array.from(store.groups.values()).map(group =>
-                    <List.Item key={group.id} title={group.name}
-                      right />
-                  )} */}
                 </List.Section>
             }</FormContext.Consumer>
           </>,
@@ -87,11 +83,17 @@ export const NewGroup: FunctionComponent<{}> = props => {
             </Title>
 
             <Subtitle>
-              Finally, give your group a name and a description.
+              Finally, give your group a name, a description, and a fun photo.
             </Subtitle>
 
             <Input name='name' label='Group Name' />
             <Input name='description' type='multiline' label='Description' />
+
+            <FormContext.Consumer>
+              {context => <Upload onUpload={url => {
+                context.onChange('photo', url)
+              }} />}
+            </FormContext.Consumer>
           </>,
           <>
             <Title>
