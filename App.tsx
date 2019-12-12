@@ -70,7 +70,7 @@ const App = () => {
           ? <Observer>{() => store.player.accepted_terms
             ? <NativeRouter><Portal.Host><Navigation /></Portal.Host></NativeRouter>
             : <View>
-              <NewPlayer />
+              <NewPlayer onCancel={() => auth.signOut()} />
             </View>
           }</Observer>
           : <View>

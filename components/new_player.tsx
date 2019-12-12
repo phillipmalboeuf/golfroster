@@ -53,7 +53,9 @@ export const methods = {
 }
 
 
-export const NewPlayer: FunctionComponent<{}> = props => {
+export const NewPlayer: FunctionComponent<{
+  onCancel?: () => void
+}> = props => {
   const { store } = useContext(StoreContext)
   const { sizes } = useContext(StylesContext)
   const form = useRef<Form>(undefined)
@@ -78,7 +80,7 @@ export const NewPlayer: FunctionComponent<{}> = props => {
   }}>
     <Dots path='profile_buildup' onFinish={() => {
       form.current.submit()
-    }} items={[
+    }} onCancel={props.onCancel} items={[
       <Center>
         <Title>
           Let’s Get to Know You
