@@ -5,7 +5,7 @@ import { Instance } from 'mobx-state-tree'
 
 import { Text, ScrollView } from 'react-native'
 import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-native'
-import { Button, Appbar } from 'react-native-paper'
+import { Appbar, Banner, Headline, Card, Paragraph, Colors } from 'react-native-paper'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
@@ -18,6 +18,8 @@ import { Group } from '../components/group'
 import { Search } from '../components/search'
 import { NewGroup } from '../components/new_group'
 import { List } from '../components/list'
+import { Button } from '../components/button'
+import { StylesContext } from '../contexts/styles'
 
 
 export function usePlayer(id) {
@@ -105,6 +107,7 @@ export const Players: FunctionComponent<{}> = props => {
       <Search visible={searching} onDismiss={() => setSearching(false)} index='players' />
 
       <ScrollView>
+        <LookingForPlayers onPress={() => setSearching(true)} />
         <Observer>{() => <List sections={[{
           items: [
             ...Array.from(store.friends.values()).map(friend => ({
@@ -123,4 +126,40 @@ export const Players: FunctionComponent<{}> = props => {
       <NewGroup />
     </>} />
   </Switch>
+}
+
+const LookingForPlayers: FunctionComponent<{
+  onPress?: () => void
+}> = props => {
+  const [visible, setVisible] = useState(true)
+  const { sizes, colors } = useContext(StylesContext)
+  const { store } = useContext(StoreContext)
+
+  return (store.lookingForPlayers && visible)
+    ? <Card style={{ backgroundColor: colors.faded, paddingTop: sizes.base, shadowOpacity: 0 }}>
+      <Card.Title titleStyle={{
+        fontSize: sizes.big,
+        lineHeight: sizes.big * 1.5,
+        fontWeight: 'normal',
+      }} title='Looking for new Players?' />
+      <Card.Content style={{ paddingHorizontal: sizes.base, marginBottom: sizes.base }}>
+        <Paragraph>
+          With our search functions, you may find players nearby with similar interests or close GHIN index.
+        </Paragraph>
+      </Card.Content>
+      <Card.Actions style={{
+        justifyContent: 'space-between',
+        paddingHorizontal: sizes.base,
+        paddingVertical: sizes.base / 2,
+        borderTopColor: colors.greys[0],
+        borderTopWidth: 1,
+      }}>
+        <Button contained black pill icon='magnify' onPress={props.onPress}>Search Players</Button>
+        <Button onPress={() => {
+          store.stopLookingForPlayers()
+          setVisible(false)
+        }}>Close</Button>
+      </Card.Actions>
+    </Card>
+    : null
 }

@@ -14,7 +14,7 @@ import { Player as PlayerModel } from '../models/player'
 import { Center, Padded } from './layouts'
 import { Avatar, Background } from './photos'
 import { Button } from './button'
-import { Subheader, Italic, Bold } from './text'
+import { Subheader, Italic, Bold, Quote } from './text'
 import { List } from './list'
 import { timesOfDay, teeChoices, methods, money, drinks } from './new_player'
 
@@ -55,13 +55,7 @@ export const Player: FunctionComponent<{
         </View>
       </Background>
         
-      <Padded tight>
-        <View style={{ flexDirection: 'row' }}>
-          <Icon style={{ marginRight: sizes.base / 2 }}
-            name='format-quote-open' size={sizes.big} />
-          <Text style={{ flex: 1, fontSize: sizes.base, lineHeight: sizes.base * 1.33 }}>{player.bio}</Text>
-        </View>
-      </Padded>
+      {player.bio && <Quote>{player.bio}</Quote>}
 
       <Padded tight>
         <Subheader>{player.first_name}'s Clubs</Subheader>

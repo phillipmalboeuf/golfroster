@@ -14,5 +14,6 @@ export const StylesContext = createContext({
     green: '#007251',
     red: '#CF0F42',
     yellow: '#FEF200',
+    faded: 'hsl(57, 100%, 90%)',
   },
 })

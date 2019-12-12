@@ -24,6 +24,7 @@ const Store = types
       chatrooms: types.maybe(types.number),
       notifications: types.maybe(types.number),
     }),
+    lookingForPlayers: types.optional(types.boolean, true),
   })
   .views(self => ({
     eventDates(): {[key: string]: Array<Instance<typeof EventModel>>} {
@@ -153,6 +154,10 @@ const Store = types
         })
 
     }),
+
+    stopLookingForPlayers: () => {
+      self.lookingForPlayers = false
+    },
     
   }))
 
@@ -160,10 +165,10 @@ const store = Store.create({ badges: {} })
 unprotect(store)
 
 onSnapshot(store, snapshot => {
-  AsyncStorage.setItem('store3', JSON.stringify(snapshot))
+  AsyncStorage.setItem('store4', JSON.stringify(snapshot))
 })
 
-AsyncStorage.getItem('store3').then(stored => {
+AsyncStorage.getItem('store4').then(stored => {
   if (stored) {
     applySnapshot(store, JSON.parse(stored))
   }

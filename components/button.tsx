@@ -9,9 +9,12 @@ import { StylesContext } from '../contexts/styles'
 
 export const Button: FunctionComponent<{
   contained?: boolean
+  pill?: boolean
   outlined?: boolean
   disabled?: boolean
   compact?: boolean
+  icon?: string
+  black?: boolean
   onPress?: () => void
 }> = props => {
   const styles = useContext(StylesContext)
@@ -21,9 +24,15 @@ export const Button: FunctionComponent<{
     disabled={props.disabled}
     compact={props.compact}
     onPress={props.onPress}
+    icon={props.icon}
     labelStyle={{
       fontSize: styles.sizes.base,
-      // lineHeight: styles.sizes.base,
+      lineHeight: styles.sizes.base * 1.25,
+    }}
+    style={{
+      ...props.pill && { borderRadius: styles.sizes.base * 1.333 },
+      ...props.icon && { paddingRight: styles.sizes.base / 2 },
+      ...props.black && { backgroundColor: styles.colors.blacks[0] },
     }}>
     {props.children}
   </PaperButton>

@@ -15,7 +15,7 @@ export const Event = types.model({
   id: types.optional(types.identifier, () => firebase.app().firestore().collection('events').doc().id),
   organizer_id: types.string,
   name: types.string,
-  club: types.string,
+  club: types.maybe(types.string),
   description: types.maybeNull(types.string),
   photo: types.maybe(types.string),
   start_date: dateType,
