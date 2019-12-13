@@ -15,7 +15,7 @@ import { Player } from '../components/player'
 
 export const Profile: FunctionComponent<{}> = props => {
   const { user, auth } = useContext(FirebaseContext)
-  const { store: { player } } = useContext(StoreContext)
+  const { store: { player, logout } } = useContext(StoreContext)
   const [visible, setVisible] = useState(false)
 
   return <>
@@ -28,7 +28,7 @@ export const Profile: FunctionComponent<{}> = props => {
         visible={visible}
         onDismiss={() => setVisible(false)}
         anchor={<Appbar.Action icon='dots-vertical' onPress={() => setVisible(true)} />}>
-        <Menu.Item onPress={() => auth.signOut()} title='Logout' />
+        <Menu.Item onPress={() => logout()} title='Logout' />
       </Menu>
     </Appbar.Header>
     <Observer>{() => <>

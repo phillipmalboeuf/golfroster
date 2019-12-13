@@ -35,7 +35,7 @@ export const Dates: FunctionComponent<{
             link: `/events/${event.id}`,
           })),
         }))} />
-        : <Text>Empty</Text>
+        : null
     }}
   </Observer>
 }

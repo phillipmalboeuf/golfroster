@@ -11,6 +11,8 @@ import { Group } from '../models/group'
 import { Chatroom } from '../models/chatroom'
 import { Notification } from '../models/notification'
 
+const key = 'store'
+
 const Store = types
   .model({
     player: types.maybe(Player),
@@ -65,6 +67,11 @@ const Store = types
       })
       const data: firestore.DocumentSnapshot = yield waitForPlayer
       self.player = Player.create({ id, ...data })
+    }),
+
+    logout: flow(function* logout() {
+      yield firebase.app().auth().signOut()
+      applySnapshot(self, { badges: {} })
     }),
 
     exists: flow(function* exists(email: string) {
@@ -180,10 +187,10 @@ const store = Store.create({ badges: {} })
 unprotect(store)
 
 onSnapshot(store, snapshot => {
-  AsyncStorage.setItem('store4', JSON.stringify(snapshot))
+  AsyncStorage.setItem(key, JSON.stringify(snapshot))
 })
 
-AsyncStorage.getItem('store4').then(stored => {
+AsyncStorage.getItem(key).then(stored => {
   if (stored) {
     applySnapshot(store, JSON.parse(stored))
   }

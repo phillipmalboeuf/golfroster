@@ -66,16 +66,15 @@ const App = () => {
     <FirebaseContext.Provider value={{ db, auth, user, storage }}>
       {user === undefined
         ? <Center><Title>One moment...</Title></Center>
-        : user !== null
-          ? <Observer>{() => store.player.accepted_terms
+        : <Observer>{() => (user !== null && store.player)
+          ?  store.player.accepted_terms
             ? <NativeRouter><Portal.Host><Navigation /></Portal.Host></NativeRouter>
             : <View>
               <NewPlayer onCancel={() => auth.signOut()} />
             </View>
-          }</Observer>
           : <View>
             <GetStarted />
-          </View>}
+          </View>}</Observer>}
     </FirebaseContext.Provider>
   </PaperProvider>
 }
