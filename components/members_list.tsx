@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import { FunctionComponent } from 'react'
+import { Link } from 'react-router-native'
 import { List } from 'react-native-paper'
 
 import { Padded } from './layouts'
 import { Subheader } from './text'
-import { usePlayer } from '../routes/players'
 import { Avatar } from './photos'
-import { Link } from 'react-router-native'
+
+import { usePlayer } from '../helpers/hooks'
+
 
 const Member: FunctionComponent<{
   id: string

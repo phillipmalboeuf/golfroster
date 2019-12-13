@@ -114,7 +114,7 @@ export const NewPlayer: FunctionComponent<{
           Could you share with us your GHIN Index / Estimated Handicap?
         </Subtitle>
 
-        <Input name='ghin_index' type='slider' label='GHIN Index' min={-5.0} max={50} />
+        <Input name='ghin_index' type='number' label='GHIN Index' min={-5.0} max={50} />
       </Center>,
       <Center>
         <Title>

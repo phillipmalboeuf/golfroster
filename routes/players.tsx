@@ -9,6 +9,8 @@ import { Appbar, Banner, Headline, Card, Paragraph, Colors } from 'react-native-
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
+import { StylesContext } from '../contexts/styles'
+import { usePlayer } from '../helpers/hooks'
 
 import { Chatroom } from '../models/chatroom'
 
@@ -19,26 +21,7 @@ import { Search } from '../components/search'
 import { NewGroup } from '../components/new_group'
 import { List } from '../components/list'
 import { Button } from '../components/button'
-import { StylesContext } from '../contexts/styles'
 
-
-export function usePlayer(id) {
-  const { store } = useContext(StoreContext)
-  const [player, setPlayer] = useState(store.friends.get(id))
-
-  useEffect(() => {
-    if (!player) {
-      if (id === store.player.id) {
-        setPlayer(store.player)
-      } else {
-        store.fetchPlayer(id)
-          .then(() => setPlayer(store.players.get(id)))
-      }
-    }
-  }, [])
-
-  return player
-}
 
 const PlayerRoute: FunctionComponent<{
   id: string

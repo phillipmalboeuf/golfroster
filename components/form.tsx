@@ -48,7 +48,7 @@ export class Form extends React.Component<Props, State> {
         waiting: false,
         values: {},
       })).catch(error => {
-        console.error(error)
+        // console.error(error)
         this.setState({
           error: error.message,
           waiting: false,

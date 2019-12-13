@@ -6,6 +6,25 @@ admin.initializeApp();
 
 const CONFIG = functions.config();
 
+exports.newUser = functions.auth.user().onCreate(async user => {
+  return await admin
+    .firestore()
+    .collection('players')
+    .doc(user.uid)
+    .set({
+      email: user.email,
+      friends: ['support'],
+    });
+});
+
+exports.deleteUser = functions.auth.user().onDelete(async user => {
+  return await admin
+    .firestore()
+    .collection('players')
+    .doc(user.uid)
+    .delete();
+});
+
 exports.newMessage = functions.firestore
   .document('chatrooms/{chatroomId}/messages/{messageId}')
   .onCreate(async (snapshot, context) => {

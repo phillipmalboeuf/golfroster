@@ -66,7 +66,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
         </Subtitle>
 
         <Form onSubmit={async values => {
-          auth.signInWithEmailAndPassword(email, values.password)
+          await auth.signInWithEmailAndPassword(email, values.password)
         }} cta='Log me in'>
           <Input name='password' type='password' label='Your password' placeholder='********' />
         </Form>

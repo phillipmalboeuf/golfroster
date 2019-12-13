@@ -48,8 +48,23 @@ const Store = types
   .actions(self => ({
 
     login: flow(function* login(id: string) {
-      self.player = Player.create({ id })
-      yield self.player.fetch()
+      const waitForPlayer = new Promise((resolve, reject) => {
+        const unsubscribe = firebase.app().firestore().collection('players').doc(id)
+          .onSnapshot({
+            next: doc => {
+              if (doc.data()) {
+                unsubscribe()
+                resolve(doc.data())
+              }
+            },
+            error: error => {
+              unsubscribe()
+              reject(error)
+            },
+          })
+      })
+      const data: firestore.DocumentSnapshot = yield waitForPlayer
+      self.player = Player.create({ id, ...data })
     }),
 
     exists: flow(function* exists(email: string) {
