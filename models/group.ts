@@ -20,6 +20,13 @@ export const Group = types.model({
   is_public: types.optional(types.boolean, false),
 })
   .actions(self => ({
+    fetch: flow(function* fetch() {
+      const snapshot: firestore.DocumentSnapshot = yield firebase.app().firestore().collection('groups')
+        .doc(self.id).get()
+      const data = snapshot.data()
+
+      Object.keys(data).forEach(key => self[key] = data[key])
+    }),
     save: flow(function* save(data: firestore.DocumentData) {
       Object.keys(data).forEach(key => (data[key] === undefined) && delete data[key])
       yield firebase.app().firestore().collection('groups').doc(self.id).set(data, { merge: true })

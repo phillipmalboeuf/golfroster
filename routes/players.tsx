@@ -10,7 +10,7 @@ import { Appbar, Banner, Headline, Card, Paragraph, Colors } from 'react-native-
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
-import { usePlayer } from '../helpers/hooks'
+import { usePlayer, useGroup } from '../helpers/hooks'
 
 import { Chatroom } from '../models/chatroom'
 
@@ -58,6 +58,38 @@ const PlayerRoute: FunctionComponent<{
   </> : null
 }
 
+const GroupRoute: FunctionComponent<{
+  id: string
+}> = ({ id }) => {
+  const { store } = useContext(StoreContext)
+  const history = useHistory()
+
+  const group = useGroup(id)
+
+  return group ? <>
+    <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
+      <Link to='/players'><Appbar.BackAction /></Link>
+      <Appbar.Content title={`${group.name}'s Profile`} />
+      <Appbar.Action icon='account-plus' />
+      <Appbar.Action icon='message-outline' onPress={async () => {
+            const chatroom = Array.from(store.chatrooms.values()).find(room => room.group_id === id)
+
+            if (chatroom) {
+              history.push(`/chatrooms/${chatroom.id}`)
+            } else {
+              await store.createChatroom({
+                group_id: id,
+                players: group.members.filter(member => member !== store.player.id),
+              }).then(room => {
+                history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
+              })
+            }
+          }} />
+      <Appbar.Action icon='dots-vertical' />
+    </Appbar.Header>
+    <Group group={group} />
+  </> : null
+}
 
 export const Players: FunctionComponent<{}> = props => {
   const { store } = useContext(StoreContext)
@@ -69,16 +101,7 @@ export const Players: FunctionComponent<{}> = props => {
       return <PlayerRoute key={match.params.id} id={match.params.id} />
     }} />
     <Route exact path='/groups/:id' render={({ match }) => {
-      const group = store.groups.get(match.params.id)
-      return <Fragment key={match.params.id}>
-        <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
-          <Link to='/groups'><Appbar.BackAction /></Link>
-          <Appbar.Content title={group.name} />
-          <Appbar.Action icon='message-outline' />
-          <Appbar.Action icon='dots-vertical' />
-        </Appbar.Header>
-        <Group group={group} />
-      </Fragment>
+      return <GroupRoute key={match.params.id} id={match.params.id} />
     }} />
     <Route exact render={() => <>
       <Appbar.Header>

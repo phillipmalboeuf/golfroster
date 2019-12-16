@@ -149,6 +149,12 @@ const Store = types
 
     }),
 
+    fetchGroup: flow(function* fetchGroup(id: string) {
+      const group = Group.create({ id })
+      self.groups.set(id, group)
+      yield group.fetch()
+    }),
+
     createGroup: flow(function* exists(data: typeof Group.CreationType) {
       const group = Group.create({
         ...data,

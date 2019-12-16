@@ -27,7 +27,7 @@ export const Button: FunctionComponent<{
     icon={props.icon}
     labelStyle={{
       fontSize: styles.sizes.base,
-      lineHeight: styles.sizes.base * 1.25,
+      // lineHeight: styles.sizes.base * 1.25,
     }}
     style={{
       ...props.pill && { borderRadius: styles.sizes.base * 1.333 },

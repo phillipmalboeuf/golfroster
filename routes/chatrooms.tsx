@@ -64,6 +64,8 @@ export const Chatrooms: FunctionComponent<{}> = props => {
 const chatroomTitle = (chatroom, store) => {
   return chatroom.event_id
     ? store.events.get(chatroom.event_id).name
+    : chatroom.group_id
+    ? store.groups.get(chatroom.group_id).name
     : chatroom.players.filter(playerId => playerId !== store.player.id)
       .map(player => `${store.friends.get(player).first_name} ${store.friends.get(player).last_name}`)
       .join(', ')

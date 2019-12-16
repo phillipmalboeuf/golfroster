@@ -18,3 +18,17 @@ export function usePlayer(id: string) {
 
   return player
 }
+
+export function useGroup(id: string) {
+  const { store } = useContext(StoreContext)
+  const [group, setGroup] = useState(store.groups.get(id))
+
+  useEffect(() => {
+    if (!group) {
+      store.fetchGroup(id)
+        .then(() => setGroup(store.groups.get(id)))
+    }
+  }, [])
+
+  return group
+}
