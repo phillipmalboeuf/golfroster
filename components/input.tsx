@@ -2,7 +2,7 @@
 import React, { useContext, useState, useRef } from 'react'
 import { pick } from 'dot-object'
 
-import { KeyboardTypeOptions, TextInputProps, Text, View } from 'react-native'
+import { KeyboardTypeOptions, TextInputProps, Text, View, Picker } from 'react-native'
 import { TextInput, Checkbox, Caption } from 'react-native-paper'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 
@@ -15,12 +15,13 @@ interface Props {
   name: string
   placeholder?: string
   value?: any
-  type?: 'email' | 'password' | 'newpassword' | 'phone' | 'number' | 'url' | 'checkbox' | 'multiline' | 'datetime' | 'slider'
+  type?: 'email' | 'password' | 'newpassword' | 'phone' | 'number' | 'url' | 'checkbox' | 'picker' | 'multiline' | 'datetime' | 'slider'
   label?: string
   optional?: boolean
   disabled?: boolean
   min?: number
   max?: number
+  options?: Array<{ label: string, value: string }>
   autoFocus?: boolean
   autoComplete?: string
   flat?: boolean
@@ -88,7 +89,15 @@ export const Input: React.FunctionComponent<Props> = props => {
           newpassword: 'newPassword',
           phone: 'telephoneNumber',
           url: 'URL',
-        } as {[key: string]: TextInputProps['textContentType']})[props.type]} />
+        } as {[key: string]: TextInputProps['textContentType']})[props.type]}
+        {...props.type === 'picker' && { render: () => {
+          return <Picker selectedValue={value || props.value}
+            onValueChange={text => context.onChange(props.name, text)}
+            itemStyle={{ textAlign: 'left', marginHorizontal: sizes.base }}>
+            <Picker.Item label={' '} value={undefined} />
+            {props.options.map(option => <Picker.Item key={option.value} label={option.label} value={option.value} />)}
+          </Picker>
+        } }} />
   }}
   </FormContext.Consumer>
 }
