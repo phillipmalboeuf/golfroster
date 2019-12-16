@@ -37,21 +37,6 @@ export const NewGroup: FunctionComponent<{}> = props => {
         <Dots path='new_group' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
           <>
             <Title>
-              Number of Members
-            </Title>
-
-            <Subtitle>
-              How many players are you expecting?
-            </Subtitle>
-            <FormContext.Consumer>
-              {({ values }) =>
-                <Input name='expected_number_of_members' type='number' label='Number'
-                  disabled={values.has_unlimited_number_of_players} />}
-            </FormContext.Consumer>
-            <Input name='has_unlimited_number_of_players' type='checkbox' label='Or is unlimited?' />
-          </>,
-          <>
-            <Title>
               Group Members
             </Title>
 

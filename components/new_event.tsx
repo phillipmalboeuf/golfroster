@@ -47,6 +47,7 @@ export const NewEvent: FunctionComponent<{}> = props => {
         Object.keys(invited).filter(id => invited[id] === true).forEach(id => event.invite(id, store.player.id))
         
         history.push(`/events/${event.id}`)
+        setBuilding(false)
       }} hideButton>
         <Dots path='new_event' onCancel={() => setBuilding(false)} onFinish={() => form.current.submit()} items={[
           <Center>
@@ -130,7 +131,7 @@ export const NewEvent: FunctionComponent<{}> = props => {
           </>,
           <>
             <Title>
-              Group Members
+              Event Attendees
             </Title>
 
             <Subtitle>
