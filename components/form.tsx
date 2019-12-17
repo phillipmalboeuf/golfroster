@@ -1,6 +1,6 @@
 
 
-import React from 'react'
+import React, { FunctionComponent, useState } from 'react'
 import { View } from 'react-native'
 
 import { HelperText } from 'react-native-paper'
@@ -15,8 +15,58 @@ export const FormContext = React.createContext({
   onChange(name: string, value: any): void { return },
 })
 
+// export const Form: FunctionComponent<{
+//   values?: { [key: string]: any }
+//   cta?: string | JSX.Element
+//   hideButton?: boolean
+//   inline?: boolean
+//   onSubmit: (values: { [key: string]: any }) => Promise<string | JSX.Element | void>
+// }> = props => {
+
+//   const [values, setValues] = useState(props.values || {})
+//   const [waiting, setWaiting] = useState(false)
+//   const [error, setError] = useState<string | JSX.Element>(undefined)
+
+//   this.submit = () => {
+//     setWaiting(true)
+//     setError(undefined)
+
+//     props.onSubmit(values)
+//       .catch(e => {
+//         setError(e.message)
+//       })
+//       .finally(() => {
+//         setWaiting(false)
+//       })
+//   }
+
+//   this.reset = () => {
+//     setValues({})
+//     setWaiting(false)
+//   }
+
+//   return <View style={{ ...props.inline && { flexDirection: 'row' }}}>
+//     <FormContext.Provider value={{
+//         onChange: (name: string, value: any) => {
+//           str(name, value, values)
+//           setValues(values)
+//         },
+//         inline: props.inline,
+//         values,
+//       }}>
+//         {props.children}
+//       </FormContext.Provider>
+//       {error && <HelperText type='error'>{error}</HelperText>}
+//       {!props.hideButton && (waiting
+//       ? <Button contained={!props.inline} disabled>{props.inline ? '...' : 'One moment...'}</Button>
+//       : <Button contained={!props.inline}
+//           onPress={() => this.submit()}>{props.cta || 'Save'}</Button>)}
+//   </View>
+// }
+
 
 interface Props {
+  values?: { [key: string]: any }
   cta?: string | JSX.Element
   hideButton?: boolean
   inline?: boolean
@@ -25,15 +75,17 @@ interface Props {
 interface State {
   values: { [key: string]: any },
   waiting: boolean,
-  response?: string | JSX.Element | void,
   error?: string | JSX.Element
 }
 
 export class Form extends React.Component<Props, State> {
 
-  public state: State = {
-    values: {},
-    waiting: false,
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      values: props.values || {},
+      waiting: false,
+    }
   }
   
 
@@ -43,17 +95,21 @@ export class Form extends React.Component<Props, State> {
       error: undefined,
     })
 
-    this.props.onSubmit(this.state.values).then(response => this.setState({
-        response,
-        waiting: false,
-        values: {},
-      })).catch(error => {
+    this.props.onSubmit(this.state.values)
+      .catch(error => {
         // console.error(error)
         this.setState({
           error: error.message,
           waiting: false,
         })
       })
+  }
+
+  public reset() {
+    this.setState({
+      waiting: false,
+      values: {},
+    })
   }
 
   private onChange(name: string, value: any) {
@@ -63,9 +119,7 @@ export class Form extends React.Component<Props, State> {
   }
 
   public render() {
-    return this.state.response
-    ? this.state.response
-    : <View style={{ ...this.props.inline && { flexDirection: 'row' }}}>
+    return <View style={{ ...this.props.inline && { flexDirection: 'row' }}}>
       <FormContext.Provider value={{
         onChange: this.onChange.bind(this),
         inline: this.props.inline,

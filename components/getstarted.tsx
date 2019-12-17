@@ -80,7 +80,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
         </Subtitle>
 
         <Form onSubmit={async values => {
-          auth.createUserWithEmailAndPassword(email, values.password)
+          await auth.createUserWithEmailAndPassword(email, values.password)
         }} cta='Sign me up'>
           <Input name='password' type='newpassword' label='New password' placeholder='********' />
         </Form>

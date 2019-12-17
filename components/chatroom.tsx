@@ -24,6 +24,7 @@ export const Chatroom: FunctionComponent<{
   const { store } = useContext(StoreContext)
   const { colors } = useContext(StylesContext)
   const scrollView = useRef<ScrollView>()
+  const form = useRef<Form>()
 
   return <>
   <ScrollView ref={scrollView} onLayout={e => scrollView.current.scrollToEnd({ animated: false })}>
@@ -71,8 +72,9 @@ export const Chatroom: FunctionComponent<{
   </ScrollView>
   <Portal>
     <Bottom>
-      <Form onSubmit={async values => {
+      <Form ref={form} onSubmit={async values => {
         await chatroom.sendMessage(values.body, store.player.id)
+        form.current.reset()
       }}
         inline cta={<Icon name='send' size={33} />}>
         <Input name='body' placeholder='Message here...' flat />

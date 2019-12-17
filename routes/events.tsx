@@ -15,13 +15,14 @@ import { StylesContext } from '../contexts/styles'
 
 import { Full, Center } from '../components/layouts'
 import { Title, Subtitle } from '../components/text'
-import { NewEvent } from '../components/new_event'
+import { EventForm } from '../components/event_form'
 import { Event as EventPage } from '../components/event'
 
 import { Dates } from '../components/dates'
 
 import { Event } from '../models/event'
 import { Chatroom } from '../models/chatroom'
+import { FloatingButton } from '../components/button'
 
 
 export const Events: FunctionComponent<{}> = props => {
@@ -31,6 +32,9 @@ export const Events: FunctionComponent<{}> = props => {
 
   const history = useHistory()
 
+  const [building, setBuilding] = useState(false)
+  const [editing, setEditing] = useState(false)
+
   return <Switch>
     <Route exact path='/events/:id' render={({ match }) => {
       const event = store.events.get(match.params.id)
@@ -38,7 +42,7 @@ export const Events: FunctionComponent<{}> = props => {
         <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
           <Link to='/events'><Appbar.BackAction /></Link>
           <Appbar.Content title={event.name} />
-          <Appbar.Action icon='pencil' />
+          <Appbar.Action icon='pencil' onPress={() => setEditing(true)} />
           <Appbar.Action icon='message-outline' onPress={async () => {
             const chatroom = Array.from(store.chatrooms.values()).find(room => room.event_id === match.params.id)
 
@@ -57,6 +61,8 @@ export const Events: FunctionComponent<{}> = props => {
         </Appbar.Header>
 
         <EventPage event={event} />
+        {editing && <Full><EventForm event={event} 
+          onSubmit={() => setEditing(false)} onCancel={() => setEditing(false)} /></Full>}
       </Fragment>
     }} />
     <Route exact render={() => <>
@@ -91,7 +97,11 @@ export const Events: FunctionComponent<{}> = props => {
           </View>
       }}</Observer>
       
-      <NewEvent />
+      {building && <Full><EventForm onSubmit={() => setBuilding(false)} onCancel={() => setBuilding(false)} /></Full>}
+      <FloatingButton
+        icon='plus'
+        onPress={() => setBuilding(true)}
+      />
     </>} />
   </Switch>
 }
