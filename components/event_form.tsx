@@ -21,9 +21,9 @@ import { Input } from './input'
 import { Avatar, Upload } from './photos'
 import { Title, Subtitle } from './text'
 import { FloatingButton } from './button'
-import { money, drinks, methods, teeChoices } from './new_player'
+import { money, drinks, methods, teeChoices } from './player_form'
 
-const list = (values: {[key: string]: boolean}) => {
+export const list = (values: {[key: string]: boolean}) => {
   return values
     && Object.keys(values).filter(key => values[key] === true)
 }
@@ -38,7 +38,7 @@ export const preprocess = (values: { [key: string]: any }) => {
   }
 }
 
-const reduce = (values: string[]) => {
+export const reduce = (values: string[]) => {
   return values && values.reduce((reduced, value) => {
     return {
       ...reduced,
@@ -59,8 +59,8 @@ export const postprocess = (values: { [key: string]: any }) => {
 
 export const EventForm: FunctionComponent<{
   event?: Instance<typeof EventModel>
-  onSubmit?: () => void
-  onCancel?: () => void
+  onSubmit: () => void
+  onCancel: () => void
 }> = props => {
   const { store } = useContext(StoreContext)
   const { sizes } = useContext(StylesContext)
@@ -68,7 +68,6 @@ export const EventForm: FunctionComponent<{
   const history = useHistory()
 
   const form = useRef<Form>()
-  
 
   return <Form ref={form} values={props.event && postprocess(props.event)} onSubmit={async ({invited, ...values}) => {
     if (!props.event) {

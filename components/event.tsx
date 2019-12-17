@@ -15,7 +15,7 @@ import { Center, Padded, Spaced } from './layouts'
 import { Avatar, Background } from './photos'
 import { Subheader, Quote } from './text'
 import { Row } from './player'
-import { teeChoices, methods, money, drinks } from './new_player'
+import { teeChoices, methods, money, drinks } from './player_form'
 import { Members } from './members_list'
 
 

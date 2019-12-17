@@ -18,9 +18,10 @@ import { Avatar } from '../components/photos'
 import { Player } from '../components/player'
 import { Group } from '../components/group'
 import { Search } from '../components/search'
-import { NewGroup } from '../components/new_group'
+import { GroupForm } from '../components/group_form'
 import { List } from '../components/list'
-import { Button } from '../components/button'
+import { Button, FloatingButton } from '../components/button'
+import { Full } from '../components/layouts'
 
 
 const PlayerRoute: FunctionComponent<{
@@ -65,12 +66,13 @@ const GroupRoute: FunctionComponent<{
   const history = useHistory()
 
   const group = useGroup(id)
+  const [editing, setEditing] = useState(false)
 
   return group ? <>
     <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
       <Link to='/players'><Appbar.BackAction /></Link>
       <Appbar.Content title={`${group.name}'s Profile`} />
-      <Appbar.Action icon='account-plus' />
+      {group.organizer_id === store.player.id && <Appbar.Action icon='pencil' onPress={() => setEditing(true)} />}
       <Appbar.Action icon='message-outline' onPress={async () => {
             const chatroom = Array.from(store.chatrooms.values()).find(room => room.group_id === id)
 
@@ -88,6 +90,8 @@ const GroupRoute: FunctionComponent<{
       <Appbar.Action icon='dots-vertical' />
     </Appbar.Header>
     <Group group={group} />
+    {editing && <Full><GroupForm group={group} 
+      onSubmit={() => setEditing(false)} onCancel={() => setEditing(false)} /></Full>}
   </> : null
 }
 
@@ -95,6 +99,7 @@ export const Players: FunctionComponent<{}> = props => {
   const { store } = useContext(StoreContext)
 
   const [searching, setSearching] = useState(false)
+  const [building, setBuilding] = useState(false)
 
   return <Switch>
     <Route exact path='/players/:id' render={({ match }) => {
@@ -129,7 +134,11 @@ export const Players: FunctionComponent<{}> = props => {
         }]} />}</Observer>
       </ScrollView>
 
-      <NewGroup />
+      {building && <Full><GroupForm onSubmit={() => setBuilding(false)} onCancel={() => setBuilding(false)} /></Full>}
+      <FloatingButton
+        icon='plus'
+        onPress={() => setBuilding(true)}
+      />
     </>} />
   </Switch>
 }

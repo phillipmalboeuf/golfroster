@@ -115,31 +115,36 @@ export const states = {
 }
 
 
-export const NewPlayer: FunctionComponent<{
-  onCancel?: () => void
+export const PlayerForm: FunctionComponent<{
+  onSubmit: () => void
+  onCancel: () => void
 }> = props => {
   const { store } = useContext(StoreContext)
   const { sizes } = useContext(StylesContext)
   const form = useRef<Form>(undefined)
 
-  return <Observer>{() => store.player.clubs.length ? <Form ref={form} hideButton onSubmit={async values => {
-    store.player.save({
-      ...values,
-      weekends: values.weekends
-        && Object.keys(values.weekends).filter(key => values.weekends[key] === true),
-      weekdays: values.weekends
-        && Object.keys(values.weekends).filter(key => values.weekends[key] === true),
-      tee_choices: values.tee_choices
-        && Object.keys(values.tee_choices).filter(key => values.tee_choices[key] === true),
-      money: values.money
-        && Object.keys(values.money).filter(key => values.money[key] === true),
-      drinks: values.drinks
-        && Object.keys(values.drinks).filter(key => values.drinks[key] === true),
-      methods: values.methods
-        && Object.keys(values.methods).filter(key => values.methods[key] === true),
-      accepted_terms: true,
-    })
-  }}>
+  return <Observer>{() => store.player.clubs.length ? <Form ref={form} hideButton
+    values={store.player}
+    onSubmit={async values => {
+      store.player.save({
+        ...values,
+        weekends: values.weekends
+          && Object.keys(values.weekends).filter(key => values.weekends[key] === true),
+        weekdays: values.weekends
+          && Object.keys(values.weekends).filter(key => values.weekends[key] === true),
+        tee_choices: values.tee_choices
+          && Object.keys(values.tee_choices).filter(key => values.tee_choices[key] === true),
+        money: values.money
+          && Object.keys(values.money).filter(key => values.money[key] === true),
+        drinks: values.drinks
+          && Object.keys(values.drinks).filter(key => values.drinks[key] === true),
+        methods: values.methods
+          && Object.keys(values.methods).filter(key => values.methods[key] === true),
+        accepted_terms: true,
+      })
+      
+      props.onSubmit()
+    }}>
     <Dots path='profile_buildup' onFinish={() => {
       form.current.submit()
     }} onCancel={props.onCancel} items={[
@@ -269,7 +274,7 @@ export const NewPlayer: FunctionComponent<{
           }} />}
         </FormContext.Consumer>
       </Center>,
-      <Center>
+      !store.player.accepted_terms && <Center>
         <Title>
           Terms and Privacy
         </Title>
@@ -281,7 +286,7 @@ export const NewPlayer: FunctionComponent<{
         <Input disabled name='terms' label='Terms of Use' value={'Terms go here.'} />
         <Input disabled name='privacy' label='Privacy Policy' value={'Privacy Policy goes here.'} />
       </Center>,
-    ]} />
+    ].filter(element => element as any as boolean !== false)} />
   </Form> : <Form ref={form} hideButton onSubmit={async values => {
     store.player.save({
       clubs: Object.keys(values.clubs).filter(key => values.clubs[key] === true),

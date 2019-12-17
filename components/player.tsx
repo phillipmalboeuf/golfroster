@@ -16,7 +16,7 @@ import { Avatar, Background } from './photos'
 import { Button } from './button'
 import { Subheader, Italic, Bold, Quote } from './text'
 import { List } from './list'
-import { timesOfDay, teeChoices, methods, money, drinks } from './new_player'
+import { timesOfDay, teeChoices, methods, money, drinks } from './player_form'
 
 
 export const Player: FunctionComponent<{

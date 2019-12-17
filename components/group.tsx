@@ -12,7 +12,7 @@ import { Group as GroupModel } from '../models/group'
 import { Center, Padded, Spaced } from './layouts'
 import { Avatar, Background } from './photos'
 import { Row } from './player'
-import { teeChoices, methods, money, drinks } from './new_player'
+import { teeChoices, methods, money, drinks } from './player_form'
 import { Quote } from './text'
 import { Members } from './members_list'
 

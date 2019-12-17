@@ -63,7 +63,7 @@ export const Input: React.FunctionComponent<Props> = props => {
         theme={{ colors: { background: 'white' } }}
         style={{ marginBottom: sizes.base, ...context.inline && { flex: 1 },
           fontSize: sizes.base,
-          height: sizes.base * 3.33,
+          ...props.type !== 'multiline' && { height: sizes.base * 3.33 },
           ...props.disabled && { opacity: 0.5 },
         }}
         onChangeText={text => context.onChange(props.name, text)}

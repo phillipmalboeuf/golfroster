@@ -16,7 +16,7 @@ import { StoreContext } from './contexts/store'
 import { StylesContext } from './contexts/styles'
 
 import { GetStarted } from './components/getstarted'
-import { NewPlayer } from './components/new_player'
+import { PlayerForm } from './components/player_form'
 
 import { Navigation } from './components/navigation'
 import { Center } from './components/layouts'
@@ -70,7 +70,7 @@ const App = () => {
           ?  store.player.accepted_terms
             ? <NativeRouter><Portal.Host><Navigation /></Portal.Host></NativeRouter>
             : <View>
-              <NewPlayer onCancel={() => auth.signOut()} />
+              <PlayerForm onSubmit={() => undefined} onCancel={() => auth.signOut()} />
             </View>
           : <View>
             <GetStarted />
