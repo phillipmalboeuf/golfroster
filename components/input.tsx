@@ -5,7 +5,7 @@ import { pick } from 'dot-object'
 import { KeyboardTypeOptions, TextInputProps, Text, View, Picker } from 'react-native'
 import { TextInput, Checkbox, Caption } from 'react-native-paper'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
-
+import Slider from '@react-native-community/slider'
 
 import { StylesContext } from '../contexts/styles'
 import { FormContext } from './form'
@@ -35,16 +35,14 @@ export const Input: React.FunctionComponent<Props> = props => {
   {context => {
     const value = pick(props.name, context.values)
     return {
-      datetime: <DatetimePicker name={props.name}
+      datetime: <DatetimePicker value={value}
         onConfirm={date => context.onChange(props.name, date)}
-        value={value}
         style={{ marginBottom: sizes.base, fontSize: sizes.base }}
         label={props.label} />,
-      // slider: <Slider value={value}
-      //   step={0.1}
-      //   minimumValue={props.min}
-      //   maximumValue={props.max}
-      //   onValueChange={v => context.onChange(props.name, v)} />,
+      slider: <RangeSlider value={value}
+        onChange={v => context.onChange(props.name, v)}
+        min={props.min}
+        max={props.max} />,
       checkbox: <View style={{ 
         flexDirection: 'row',
         alignItems: 'center',
@@ -104,7 +102,6 @@ export const Input: React.FunctionComponent<Props> = props => {
 
 
 export const DatetimePicker: React.FunctionComponent<{
-  name: string
   onConfirm: (date: Date) => void
   value?: Date
   label?: string
@@ -134,5 +131,48 @@ export const DatetimePicker: React.FunctionComponent<{
         setVisibility(false)
       }}
       onCancel={() => setVisibility(false)} />
+  </>
+}
+
+export const RangeSlider: React.FunctionComponent<{
+  onChange: (value: number) => void
+  value?: number
+  min: number
+  max: number
+}> = props => {
+  const { colors, sizes } = useContext(StylesContext)
+
+  return <>
+    <Text style={{
+      color: colors.green,
+      textAlign: 'center',
+    }}>
+      {props.value}
+    </Text>
+    <View>
+      <Slider value={props.value}
+        minimumTrackTintColor={colors.green}
+        maximumTrackTintColor={colors.green}
+        step={0.1}
+        minimumValue={props.min}
+        maximumValue={props.max}
+        onValueChange={v => props.onChange(parseFloat(v.toFixed(1)))} />
+      {/* <Slider value={props.value}
+        // style={{ position: 'absolute', width: '100%' }}
+        inverted
+        minimumTrackTintColor={colors.green}
+        maximumTrackTintColor={colors.green}
+        step={0.1}
+        minimumValue={props.min}
+        maximumValue={props.max} /> */}
+    </View>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      {props.min && <Caption>
+        {props.min}
+      </Caption>}
+      {props.max && <Caption>
+        {props.max}
+      </Caption>}
+    </View>
   </>
 }
