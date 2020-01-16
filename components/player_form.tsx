@@ -254,7 +254,7 @@ export const PlayerForm: FunctionComponent<{
         </Title>
 
         <Subtitle>
-          Here, write down a little bit about yourself, on and off the gold course.
+          Here, write down a little bit about yourself, on and off the golf course.
         </Subtitle>
 
         <Input name='bio' type='multiline' label='Bio' />
