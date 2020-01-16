@@ -162,3 +162,10 @@ exports.indexPlayer = functions.firestore
       objectID: context.params.playerId,
     });
   });
+
+exports.unindexPlayer = functions.firestore
+  .document('players/{playerId}')
+  .onDelete(async (snapshot, context) => {
+    const index = search.initIndex('players');
+    return index.deleteObject(context.params.playerId);
+  });
