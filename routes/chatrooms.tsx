@@ -14,6 +14,7 @@ import { Avatar } from '../components/photos'
 import { Chatroom } from '../components/chatroom'
 import { List } from '../components/list'
 import { Instance } from 'mobx-state-tree'
+import { Empty } from '../components/empty'
 
 
 export const Chatrooms: FunctionComponent<{}> = props => {
@@ -40,7 +41,7 @@ export const Chatrooms: FunctionComponent<{}> = props => {
           <Appbar.Action icon='dots-vertical' />
         </Appbar.Header>
         <ScrollView>
-          <Observer>{() => <List sections={[
+          <Observer>{() => store.chatrooms.size ? <List sections={[
             {
               items: Array.from(store.chatrooms.values()).map(chatroom => ({
                 title: chatroomTitle(chatroom, store),
@@ -53,7 +54,7 @@ export const Chatrooms: FunctionComponent<{}> = props => {
                 right: <Caption>{chatroom.latest ? moment(chatroom.latest.date).fromNow() : 'New'}</Caption>,
               })),
             },
-          ]} />}</Observer>
+          ]} /> : <Empty label={'Your message threads will appear here.'} icon={'forum'} />}</Observer>
         </ScrollView>
       </>} />
     </Switch>
