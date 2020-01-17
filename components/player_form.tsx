@@ -27,10 +27,11 @@ export const timesOfDay = {
 }
 
 export const teeChoices = {
-  ladies: 'Ladies (5,600 or less)',
-  seniors: 'Seniors – Men’s Average (5,600 – 6,200 yds)',
-  men: 'Men – advanced (6,200 - 6,800 yds)',
-  championship: 'Championship / tips (6,800 yds +)',
+  ladies: 'Ladies / seniors (5,600 yds or less)',
+  seniors: 'Men\'s Average (5,600 – 6,100 yds)',
+  men: 'Men\'s advanced (6,100 - 6,600 yds)',
+  championship: 'Tournament tees (6,600 - 7,000 yds)',
+  tiger: 'Tiger Tees (7,000 yds or more)',
 }
 
 export const money = {
@@ -265,7 +266,7 @@ export const PlayerForm: FunctionComponent<{
         </Title>
 
         <Subtitle>
-          Ideally, pick one of you on the green.
+          Ideally, pick one of you on the course.
         </Subtitle>
 
         <FormContext.Consumer>

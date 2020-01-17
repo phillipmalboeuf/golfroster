@@ -29,7 +29,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
       </Title>
 
       <Subtitle>
-        Organize ideal tee-offs with minimal effort
+        Organize ideal tee-offs and connect with likeminded players with minimal effort
       </Subtitle>
 
       <Link to='/getstarted/1'>
