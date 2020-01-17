@@ -167,7 +167,7 @@ export const PlayerForm: FunctionComponent<{
         </Title>
 
         <Subtitle>
-          From where do you hail?
+          Where are you based?
         </Subtitle>
 
         <Input name='city' label='City' />
@@ -210,7 +210,7 @@ export const PlayerForm: FunctionComponent<{
         </Title>
 
         <Subtitle>
-          From where do you swing? (select all that apply)
+          From where do you play? (select all that apply)
         </Subtitle>
 
         {Object.keys(teeChoices)
