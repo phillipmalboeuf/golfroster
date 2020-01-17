@@ -36,23 +36,24 @@ const PlayerRoute: FunctionComponent<{
     <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
       <Link to='/players'><Appbar.BackAction /></Link>
       <Appbar.Content title={`${player.first_name}'s Profile`} />
-      <Appbar.Action icon='account-plus' />
-      <Appbar.Action icon='message-outline' onPress={async () => {
-        const chatroom = Array.from(store.chatrooms.values()).find(room =>
-          !room.event_id && !room.group_id
-          && room.players.includes(id))
+      {store.friends.has(id)
+        ? <Appbar.Action icon='message-outline' onPress={async () => {
+          const chatroom = Array.from(store.chatrooms.values()).find(room =>
+            !room.event_id && !room.group_id
+            && room.players.includes(id))
 
-        if (chatroom) {
-          // console.log(chatroom)
-          history.push(`/chatrooms/${chatroom.id}`)
-        } else {
-          await store.createChatroom({
-            players: [id],
-          }).then(room => {
-            history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
-          })
-        }
-      }} />
+          if (chatroom) {
+            // console.log(chatroom)
+            history.push(`/chatrooms/${chatroom.id}`)
+          } else {
+            await store.createChatroom({
+              players: [id],
+            }).then(room => {
+              history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
+            })
+          }
+        }} />
+        : <Appbar.Action icon='account-plus' />}
       <Appbar.Action icon='dots-vertical' />
     </Appbar.Header>
     <Player player={player} />
