@@ -37,7 +37,7 @@ export const Chatrooms: FunctionComponent<{}> = props => {
       <Route exact render={() => <>
         <Appbar.Header>
           <Appbar.Content title='Message Threads' />
-          <Appbar.Action icon='magnify' />
+          {/* <Appbar.Action icon='magnify' /> */}
           <Appbar.Action icon='dots-vertical' />
         </Appbar.Header>
         <ScrollView>

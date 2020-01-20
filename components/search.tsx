@@ -19,9 +19,11 @@ import { List } from './list'
 
 export const Search: FunctionComponent<{
   index: string
+  filters?: string
   visible: boolean
+  renderHit: (hit: any) => string
   onDismiss: () => void
-}> = ({ index, visible, onDismiss }) => {
+}> = ({ index, filters, visible, renderHit, onDismiss }) => {
   const { colors } = useContext(StylesContext)
   const { store } = useContext(StoreContext)
   const searchIndex = search.initIndex(index)
@@ -36,7 +38,7 @@ export const Search: FunctionComponent<{
             autoFocus autoCorrect={false}
             onChangeText={async text => {
               setQuery(text)
-              const response = await searchIndex.search({ query: text })
+              const response = await searchIndex.search({ query: text, filters })
               setHits(response.hits)
               // console.log(response)
             }} />
@@ -45,7 +47,7 @@ export const Search: FunctionComponent<{
           {hits.length 
             ? <List sections={[{
               items: hits.filter(hit => hit.objectID !== store.player.id).map(hit => ({
-                title: `${hit.first_name} ${hit.last_name}`,
+                title: renderHit(hit),
                 link: `/players/${hit.objectID}`,
               })),
             }]} />

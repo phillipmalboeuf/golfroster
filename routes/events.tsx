@@ -17,6 +17,7 @@ import { Full, Center } from '../components/layouts'
 import { Title, Subtitle } from '../components/text'
 import { EventForm } from '../components/event_form'
 import { Event as EventPage } from '../components/event'
+import { Search } from '../components/search'
 
 import { Dates } from '../components/dates'
 
@@ -32,6 +33,7 @@ export const Events: FunctionComponent<{}> = props => {
 
   const history = useHistory()
 
+  const [searching, setSearching] = useState(false)
   const [building, setBuilding] = useState(false)
   const [editing, setEditing] = useState(false)
 
@@ -68,9 +70,14 @@ export const Events: FunctionComponent<{}> = props => {
     <Route exact render={() => <>
       <Appbar.Header>
         <Appbar.Content title='Upcoming Events' />
-        <Appbar.Action icon='magnify' />
+        <Appbar.Action icon='magnify' onPress={() => setSearching(true)} />
         <Appbar.Action icon='dots-vertical' />
       </Appbar.Header>
+
+      <Search visible={searching} onDismiss={() => setSearching(false)} index='events'
+        filters={`attendees:${store.player.id}`}
+        renderHit={hit => `${hit.name}`} />
+
       <Observer>{() => {
         const dates = store.eventDates()
         const markedDates = {}

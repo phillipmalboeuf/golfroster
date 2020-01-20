@@ -169,3 +169,21 @@ exports.unindexPlayer = functions.firestore
     const index = search.initIndex('players');
     return index.deleteObject(context.params.playerId);
   });
+
+exports.indexEvent = functions.firestore
+  .document('events/{eventId}')
+  .onWrite(async (change, context) => {
+    const event = change.after.data();
+    const index = search.initIndex('events');
+    return index.saveObject({
+      ...event,
+      objectID: context.params.eventId,
+    });
+  });
+
+exports.unindexEvent = functions.firestore
+  .document('events/{eventId}')
+  .onDelete(async (snapshot, context) => {
+    const index = search.initIndex('events');
+    return index.deleteObject(context.params.eventId);
+  });

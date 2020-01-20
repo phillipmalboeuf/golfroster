@@ -117,7 +117,8 @@ export const Players: FunctionComponent<{}> = props => {
         <Appbar.Action icon='dots-vertical' />
       </Appbar.Header>
       
-      <Search visible={searching} onDismiss={() => setSearching(false)} index='players' />
+      <Search visible={searching} onDismiss={() => setSearching(false)} index='players'
+        renderHit={hit => `${hit.first_name} ${hit.last_name}`} />
 
       <ScrollView>
         <LookingForPlayers onPress={() => setSearching(true)} />
