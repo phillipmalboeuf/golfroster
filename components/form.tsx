@@ -15,55 +15,6 @@ export const FormContext = React.createContext({
   onChange(name: string, value: any): void { return },
 })
 
-// export const Form: FunctionComponent<{
-//   values?: { [key: string]: any }
-//   cta?: string | JSX.Element
-//   hideButton?: boolean
-//   inline?: boolean
-//   onSubmit: (values: { [key: string]: any }) => Promise<string | JSX.Element | void>
-// }> = props => {
-
-//   const [values, setValues] = useState(props.values || {})
-//   const [waiting, setWaiting] = useState(false)
-//   const [error, setError] = useState<string | JSX.Element>(undefined)
-
-//   this.submit = () => {
-//     setWaiting(true)
-//     setError(undefined)
-
-//     props.onSubmit(values)
-//       .catch(e => {
-//         setError(e.message)
-//       })
-//       .finally(() => {
-//         setWaiting(false)
-//       })
-//   }
-
-//   this.reset = () => {
-//     setValues({})
-//     setWaiting(false)
-//   }
-
-//   return <View style={{ ...props.inline && { flexDirection: 'row' }}}>
-//     <FormContext.Provider value={{
-//         onChange: (name: string, value: any) => {
-//           str(name, value, values)
-//           setValues(values)
-//         },
-//         inline: props.inline,
-//         values,
-//       }}>
-//         {props.children}
-//       </FormContext.Provider>
-//       {error && <HelperText type='error'>{error}</HelperText>}
-//       {!props.hideButton && (waiting
-//       ? <Button contained={!props.inline} disabled>{props.inline ? '...' : 'One moment...'}</Button>
-//       : <Button contained={!props.inline}
-//           onPress={() => this.submit()}>{props.cta || 'Save'}</Button>)}
-//   </View>
-// }
-
 
 interface Props {
   values?: { [key: string]: any }
