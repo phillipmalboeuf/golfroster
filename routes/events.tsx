@@ -24,6 +24,7 @@ import { Dates } from '../components/dates'
 import { Event } from '../models/event'
 import { Chatroom } from '../models/chatroom'
 import { FloatingButton } from '../components/button'
+import { Empty } from '../components/empty'
 
 
 export const Events: FunctionComponent<{}> = props => {
@@ -98,9 +99,15 @@ export const Events: FunctionComponent<{}> = props => {
               markedDates={markedDates}
               markingType='multi-dot' />
             {/* <Text>{JSON.stringify(dates)}</Text> */}
-            <ScrollView style={{ maxHeight: Dimensions.get('screen').height - 500 }}>
-              <Dates dates={dates} />
-            </ScrollView>
+            
+            {Object.keys(dates).length
+              ? <ScrollView style={{ maxHeight: Dimensions.get('screen').height - 500 }}>
+                <Dates dates={dates} />
+              </ScrollView>
+              : <View style={{ marginTop: -150 }}>
+                <Empty label='Your events will appear here.' icon={'calendar'} />
+              </View>}
+            
           </View>
       }}</Observer>
       
