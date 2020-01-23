@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
 
-import { Text, View, ScrollView } from 'react-native'
+import { Text, View, ScrollView, Dimensions } from 'react-native'
 import { Link, Route, Switch, useHistory } from 'react-router-native'
 import { Button, Appbar } from 'react-native-paper'
 import { Calendar, Agenda } from 'react-native-calendars'
@@ -98,7 +98,7 @@ export const Events: FunctionComponent<{}> = props => {
               markedDates={markedDates}
               markingType='multi-dot' />
             {/* <Text>{JSON.stringify(dates)}</Text> */}
-            <ScrollView>
+            <ScrollView style={{ maxHeight: Dimensions.get('screen').height - 500 }}>
               <Dates dates={dates} />
             </ScrollView>
           </View>
