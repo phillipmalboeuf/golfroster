@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
 
-import { Text, View, ScrollView } from 'react-native'
+import { Text, View, ScrollView, Dimensions } from 'react-native'
 import { Link, Route, Switch, useHistory } from 'react-router-native'
 import { Button, Appbar } from 'react-native-paper'
 import { Calendar, Agenda } from 'react-native-calendars'
@@ -17,12 +17,14 @@ import { Full, Center } from '../components/layouts'
 import { Title, Subtitle } from '../components/text'
 import { EventForm } from '../components/event_form'
 import { Event as EventPage } from '../components/event'
+import { Search } from '../components/search'
 
 import { Dates } from '../components/dates'
 
 import { Event } from '../models/event'
 import { Chatroom } from '../models/chatroom'
 import { FloatingButton } from '../components/button'
+import { Empty } from '../components/empty'
 
 
 export const Events: FunctionComponent<{}> = props => {
@@ -32,6 +34,7 @@ export const Events: FunctionComponent<{}> = props => {
 
   const history = useHistory()
 
+  const [searching, setSearching] = useState(false)
   const [building, setBuilding] = useState(false)
   const [editing, setEditing] = useState(false)
 
@@ -68,9 +71,14 @@ export const Events: FunctionComponent<{}> = props => {
     <Route exact render={() => <>
       <Appbar.Header>
         <Appbar.Content title='Upcoming Events' />
-        <Appbar.Action icon='magnify' />
+        <Appbar.Action icon='magnify' onPress={() => setSearching(true)} />
         <Appbar.Action icon='dots-vertical' />
       </Appbar.Header>
+
+      <Search visible={searching} onDismiss={() => setSearching(false)} index='events'
+        filters={`attendees:${store.player.id}`}
+        renderHit={hit => `${hit.name}`} />
+
       <Observer>{() => {
         const dates = store.eventDates()
         const markedDates = {}
@@ -91,9 +99,15 @@ export const Events: FunctionComponent<{}> = props => {
               markedDates={markedDates}
               markingType='multi-dot' />
             {/* <Text>{JSON.stringify(dates)}</Text> */}
-            <ScrollView>
-              <Dates dates={dates} />
-            </ScrollView>
+            
+            {Object.keys(dates).length
+              ? <ScrollView style={{ maxHeight: Dimensions.get('screen').height - 500 }}>
+                <Dates dates={dates} />
+              </ScrollView>
+              : <View style={{ marginTop: -150 }}>
+                <Empty label='Your events will appear here.' icon={'calendar'} />
+              </View>}
+            
           </View>
       }}</Observer>
       

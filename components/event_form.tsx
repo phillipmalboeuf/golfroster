@@ -72,7 +72,9 @@ export const EventForm: FunctionComponent<{
   return <Form ref={form} values={props.event && postprocess(props.event)} onSubmit={async ({invited, ...values}) => {
     if (!props.event) {
       const event = await store.createEvent(preprocess(values))
-      Object.keys(invited).filter(id => invited[id] === true).forEach(id => event.invite(id, store.player.id))
+      if (invited) {
+        Object.keys(invited).filter(id => invited[id] === true).forEach(id => event.invite(id, store.player.id))
+      }
       history.push(`/events/${event.id}`)
     } else {
       await props.event.save(preprocess(values))

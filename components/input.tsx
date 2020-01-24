@@ -25,6 +25,7 @@ interface Props {
   autoFocus?: boolean
   autoComplete?: string
   flat?: boolean
+  next?: boolean
   submitter?: boolean
 }
 
@@ -66,6 +67,7 @@ export const Input: React.FunctionComponent<Props> = props => {
         }}
         onChangeText={text => context.onChange(props.name, text)}
         defaultValue={value || props.value}
+        returnKeyType={props.next ? 'next' : 'default'}
         label={props.label}
         placeholder={props.placeholder}
         autoFocus={props.autoFocus}
@@ -109,13 +111,13 @@ export const DatetimePicker: React.FunctionComponent<{
   style?: any
 }> = props => {
   const [visible, setVisibility] = useState(false)
-  const input = useRef()
   
   return <>
-    <TextInput ref={input}
+    <TextInput
       mode='outlined'
       style={props.style}
-      onFocus={() => setVisibility(true)}
+      onTouchEnd={() => setVisibility(true)}
+      editable={false}
       value={props.value && props.value.toLocaleString('en-US', {
         year: 'numeric',
         month: 'long',
@@ -131,7 +133,9 @@ export const DatetimePicker: React.FunctionComponent<{
         props.onConfirm(date)
         setVisibility(false)
       }}
-      onCancel={() => setVisibility(false)} />
+      onCancel={() => {
+        setVisibility(false)
+      }} />
   </>
 }
 

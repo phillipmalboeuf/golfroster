@@ -46,7 +46,7 @@
     "react-native-typescript-transformer": "^1.2.13",
     "react-test-renderer": "16.8.6",
     "tslint": "^5.20.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.5"
   },
   "jest": {
     "preset": "react-native"

@@ -13,6 +13,7 @@ import { StoreContext } from '../contexts/store'
 
 import { Avatar } from '../components/photos'
 import { Popup } from '../components/popup'
+import { Empty } from '../components/empty'
 
 
 export const Notifications: FunctionComponent<{}> = props => {
@@ -39,7 +40,7 @@ export const Notifications: FunctionComponent<{}> = props => {
               await ({
                 group: () => store.joinGroup(notification.subject_id),
                 event: () => store.attendEvent(notification.subject_id),
-                player: () => store.player.requestFriend(notification.subject_id)
+                player: () => store.player.requestFriend(notification.subject_id),
               }[notification.type]())
 
               await notification.accept()
@@ -63,7 +64,7 @@ export const Notifications: FunctionComponent<{}> = props => {
         </Appbar.Header>
         
         <ScrollView>
-          <Observer>{() => <List.Section>
+          <Observer>{() => notifications.length ? <List.Section>
             {notifications.map(notification => <Link key={notification.id} to={`/${notification.type.replace('_accepted', '')}s/${notification.subject_id}`}>
               {{
                 group: () => <List.Item style={!notification.accepted && highlight} title={`${notification.subject_name}`}
@@ -85,7 +86,7 @@ export const Notifications: FunctionComponent<{}> = props => {
                   right={() => <Caption>{moment(notification.date).fromNow()}</Caption>} />,
               }[notification.type]()}
             </Link>)}
-          </List.Section>}</Observer>
+          </List.Section> : <Empty label={'Your notifications will appear here.'} icon={'bell'} />}</Observer>
         </ScrollView>
       </>
     }} />

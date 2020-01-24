@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
 
-import { Text, ScrollView } from 'react-native'
+import { Text, ScrollView, View } from 'react-native'
 import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-native'
 import { Appbar, Banner, Headline, Card, Paragraph, Colors } from 'react-native-paper'
 
@@ -22,6 +22,7 @@ import { GroupForm } from '../components/group_form'
 import { List } from '../components/list'
 import { Button, FloatingButton } from '../components/button'
 import { Full } from '../components/layouts'
+import { Empty } from '../components/empty'
 
 
 const PlayerRoute: FunctionComponent<{
@@ -36,23 +37,24 @@ const PlayerRoute: FunctionComponent<{
     <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
       <Link to='/players'><Appbar.BackAction /></Link>
       <Appbar.Content title={`${player.first_name}'s Profile`} />
-      <Appbar.Action icon='account-plus' />
-      <Appbar.Action icon='message-outline' onPress={async () => {
-        const chatroom = Array.from(store.chatrooms.values()).find(room =>
-          !room.event_id && !room.group_id
-          && room.players.includes(id))
+      {store.friends.has(id)
+        ? <Appbar.Action icon='message-outline' onPress={async () => {
+          const chatroom = Array.from(store.chatrooms.values()).find(room =>
+            !room.event_id && !room.group_id
+            && room.players.includes(id))
 
-        if (chatroom) {
-          // console.log(chatroom)
-          history.push(`/chatrooms/${chatroom.id}`)
-        } else {
-          await store.createChatroom({
-            players: [id],
-          }).then(room => {
-            history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
-          })
-        }
-      }} />
+          if (chatroom) {
+            // console.log(chatroom)
+            history.push(`/chatrooms/${chatroom.id}`)
+          } else {
+            await store.createChatroom({
+              players: [id],
+            }).then(room => {
+              history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
+            })
+          }
+        }} />
+        : <Appbar.Action icon='account-plus' />}
       <Appbar.Action icon='dots-vertical' />
     </Appbar.Header>
     <Player player={player} />
@@ -115,11 +117,12 @@ export const Players: FunctionComponent<{}> = props => {
         <Appbar.Action icon='dots-vertical' />
       </Appbar.Header>
       
-      <Search visible={searching} onDismiss={() => setSearching(false)} index='players' />
+      <Search visible={searching} onDismiss={() => setSearching(false)} index='players'
+        renderHit={hit => `${hit.first_name} ${hit.last_name}`} />
 
       <ScrollView>
         <LookingForPlayers onPress={() => setSearching(true)} />
-        <Observer>{() => <List sections={[{
+        <Observer>{() => (store.friends.size + store.groups.size) ? <List sections={[{
           items: [
             ...Array.from(store.friends.values()).map(friend => ({
               title: `${friend.first_name} ${friend.last_name}`,
@@ -131,7 +134,9 @@ export const Players: FunctionComponent<{}> = props => {
               link: `/groups/${group.id}`,
             })),
           ],
-        }]} />}</Observer>
+        }]} />  : <View style={{ marginTop: -100 }}>
+          <Empty label={'The golf players you find will appear here.'} icon={'account-group'} />
+        </View>}</Observer>
       </ScrollView>
 
       {building && <Full><GroupForm onSubmit={() => setBuilding(false)} onCancel={() => setBuilding(false)} /></Full>}

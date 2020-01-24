@@ -29,7 +29,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
       </Title>
 
       <Subtitle>
-        Organize ideal tee-offs with minimal effort
+        Organize ideal tee-offs and connect with likeminded players with minimal effort
       </Subtitle>
 
       <Link to='/getstarted/1'>
@@ -62,7 +62,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
           Welcome Back!
         </Title>
         <Subtitle>
-          Get back into your tee-off calendar by entering your password.
+          Get back into your GolfRoster account by entering your password.
         </Subtitle>
 
         <Form onSubmit={async values => {
