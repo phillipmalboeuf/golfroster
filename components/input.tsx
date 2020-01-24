@@ -75,6 +75,7 @@ export const Input: React.FunctionComponent<Props> = props => {
         blurOnSubmit={props.submitter}
         multiline={props.type === 'multiline'}
         secureTextEntry={props.type === 'password' || props.type === 'newpassword'}
+        returnKeyType="done"
         keyboardType={({
           email: 'email-address',
           phone: 'phone-pad',
