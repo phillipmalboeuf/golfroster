@@ -6,6 +6,7 @@ import { Button } from './button'
 
 
 export const Popup: FunctionComponent<{
+  visible?: boolean
   title?: string
   content: JSX.Element
   actions?: Array<{
@@ -16,13 +17,13 @@ export const Popup: FunctionComponent<{
 }> = props => {
 
   return <Portal>
-    <Dialog visible={true} style={{ backgroundColor: 'white' }} onDismiss={props.onDismiss}>
+    <Dialog visible={props.visible ?? true} style={{ backgroundColor: 'white' }} onDismiss={props.onDismiss}>
       {props.title && <Dialog.Title>{props.title}</Dialog.Title>}
       <Dialog.Content>
         {props.content}
       </Dialog.Content>
       <Dialog.Actions>
-        {props.actions.map(action => <Button key={action.label} onPress={action.onPress}>
+        {props.actions && props.actions.map(action => <Button key={action.label} onPress={action.onPress}>
           {action.label}
         </Button>)}
       </Dialog.Actions>

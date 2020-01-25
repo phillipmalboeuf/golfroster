@@ -37,6 +37,8 @@ export class Form extends React.Component<Props, State> {
       values: props.values || {},
       waiting: false,
     }
+
+    this.onChange = this.onChange.bind(this)
   }
   
 
@@ -72,7 +74,7 @@ export class Form extends React.Component<Props, State> {
   public render() {
     return <View style={{ ...this.props.inline && { flexDirection: 'row' }}}>
       <FormContext.Provider value={{
-        onChange: this.onChange.bind(this),
+        onChange: this.onChange,
         inline: this.props.inline,
         values: this.state.values,
       }}>

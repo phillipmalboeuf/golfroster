@@ -116,7 +116,7 @@ export const Players: FunctionComponent<{}> = props => {
         <Appbar.Action icon='magnify' onPress={() => setSearching(true)} />
         <Appbar.Action icon='dots-vertical' />
       </Appbar.Header>
-      
+
       <Search visible={searching} onDismiss={() => setSearching(false)} index='players'
         renderHit={hit => `${hit.first_name} ${hit.last_name}`} />
 
@@ -134,7 +134,7 @@ export const Players: FunctionComponent<{}> = props => {
               link: `/groups/${group.id}`,
             })),
           ],
-        }]} />  : <View style={{ marginTop: -100 }}>
+        }]} />  : <View style={{ marginTop: -100, zIndex: -1 }}>
           <Empty label={'The golf players you find will appear here.'} icon={'account-group'} />
         </View>}</Observer>
       </ScrollView>
