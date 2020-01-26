@@ -19,6 +19,7 @@ export const List: FunctionComponent<{
       left?: JSX.Element
       right?: JSX.Element
     }>
+    onItemClick?: () => void
   }>
 }> = ({ sections }) => {
   const { colors, sizes } = useContext(StylesContext)
@@ -26,7 +27,7 @@ export const List: FunctionComponent<{
   return <>
     {sections.map((section, index) => <PaperList.Section key={index} style={{ marginBottom: 0 }}>
       {section.title && <PaperList.Subheader>{section.title}</PaperList.Subheader>}
-      {section.items.map(item => <Link to={item.link} key={item.link}>
+      {section.items.map(item => <Link to={item.link} key={item.link} onPress={section.onItemClick}>
         <PaperList.Item style={{
           backgroundColor: 'white',
         }} title={item.title}

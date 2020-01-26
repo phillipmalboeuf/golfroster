@@ -13,7 +13,7 @@ export const StylesContext = createContext({
     greys: ['hsla(0, 0%, 60%, 0.20)', 'hsla(0, 0%, 85%, 0.80)'],
     green: '#007251',
     red: '#CF0F42',
-    yellow: '#FEF200',
+    yellow: 'hsla(57, 100%, 50%, 1)',
     faded: 'hsl(57, 100%, 90%)',
   },
 })

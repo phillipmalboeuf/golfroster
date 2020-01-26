@@ -76,7 +76,6 @@ export const Events: FunctionComponent<{}> = props => {
       </Appbar.Header>
 
       <Search visible={searching} onDismiss={() => setSearching(false)} index='events'
-        filters={`attendees:${store.player.id}`}
         renderHit={hit => `${hit.name}`} />
 
       <Observer>{() => {

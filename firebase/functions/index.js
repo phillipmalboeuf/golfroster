@@ -170,6 +170,24 @@ exports.unindexPlayer = functions.firestore
     return index.deleteObject(context.params.playerId);
   });
 
+exports.indexGroup = functions.firestore
+  .document('groups/{groupId}')
+  .onWrite(async (change, context) => {
+    const group = change.after.data();
+    const index = search.initIndex('players');
+    return index.saveObject({
+      ...group,
+      objectID: context.params.groupId,
+    });
+  });
+
+exports.unindexGroup = functions.firestore
+  .document('groups/{groupId}')
+  .onDelete(async (snapshot, context) => {
+    const index = search.initIndex('players');
+    return index.deleteObject(context.params.groupId);
+  });
+
 exports.indexEvent = functions.firestore
   .document('events/{eventId}')
   .onWrite(async (change, context) => {
