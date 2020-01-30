@@ -15,6 +15,7 @@ export const Button: FunctionComponent<{
   compact?: boolean
   icon?: string
   black?: boolean
+  facebook?: boolean
   onPress?: () => void
 }> = props => {
   const styles = useContext(StylesContext)
@@ -33,6 +34,7 @@ export const Button: FunctionComponent<{
       ...props.pill && { borderRadius: styles.sizes.base * 1.333 },
       ...props.icon && { paddingRight: styles.sizes.base / 2 },
       ...props.black && { backgroundColor: styles.colors.blacks[0] },
+      ...props.facebook && { backgroundColor: styles.colors.facebook },
     }}>
     {props.children}
   </PaperButton>

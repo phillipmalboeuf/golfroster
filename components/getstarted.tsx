@@ -2,17 +2,22 @@ import React, { useContext, useRef, useState } from 'react'
 import { FunctionComponent } from 'react'
 
 import { View, Text, Dimensions } from 'react-native'
-import { Button, Headline, Subheading } from 'react-native-paper'
 import { Link, Redirect } from 'react-router-native'
+
+import firebase, { User } from 'firebase'
+import 'firebase/auth'
+
+import fb from 'react-native-fbsdk'
 
 import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 
 import { Form } from './form'
 import { Input } from './input'
-import { Center } from './layouts'
+import { Center, Padded } from './layouts'
 import { Dots } from './dots'
 import { Title, Subtitle } from './text'
+import { Button } from './button'
 
 
 export const GetStarted: FunctionComponent<{}> = props => {
@@ -33,7 +38,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
       </Subtitle>
 
       <Link to='/getstarted/1'>
-        <Button mode='contained' uppercase={false}>
+        <Button contained>
           Get Started
         </Button>
       </Link>
@@ -53,6 +58,18 @@ export const GetStarted: FunctionComponent<{}> = props => {
       }} cta='Continue with Email'>
         <Input name='email' type='email' label='Email address' placeholder='player@golfroster.com' autoFocus={false} />
       </Form>
+
+      <Padded tight><Text style={{ textAlign: 'center' }}>– or –</Text></Padded>
+      <Button contained facebook
+          onPress={async () => {
+            const result = await fb.LoginManager.logInWithPermissions(['email', 'public_profile'])
+            
+            if (!result.isCancelled) {
+              const token = await fb.AccessToken.getCurrentAccessToken()
+              const credential = firebase.auth.FacebookAuthProvider.credential(token.accessToken)
+              await auth.signInWithCredential(credential)
+            }
+          }}>Continue with Facebook</Button>
 
       {exists !== undefined && <Redirect to='/getstarted/2' />}
     </Center>,
