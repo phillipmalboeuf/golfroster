@@ -17,7 +17,7 @@ import { Dots } from './dots'
 import { Title, Subtitle } from './text'
 import { Button } from './button'
 import { Avatar, Upload } from './photos'
-
+import { ClubsTable } from './clubs_table'
 
 export const timesOfDay = {
   early_morning: 'Early morning',
@@ -303,19 +303,8 @@ export const PlayerForm: FunctionComponent<{
           Now, could you find from this list the clubs to which you are a member or where you play?
         </Subtitle>
       </Padded>
-      <DataTable>
-        <DataTable.Header>
-          <Input type='checkbox' name='title' disabled />
-          <DataTable.Title>Club Name</DataTable.Title>
-          <DataTable.Title>City (State)</DataTable.Title>
-        </DataTable.Header>
-
-        <DataTable.Row>
-          <Input type='checkbox' name={`clubs.donnybrook`} />
-          <DataTable.Cell>Donnybrook CC</DataTable.Cell>
-          <DataTable.Cell>Berkshires (MA)</DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
+      
+      <ClubsTable />
     </Center>
 
     <Bottom>

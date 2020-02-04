@@ -62,7 +62,7 @@ export const Player: FunctionComponent<{
         <List sections={[{
           items: player.clubs.map(club => ({
             title: club,
-            link: `/clubs/${club}`,
+            // link: `/clubs/${club}`,
           })),
         }]} />
       </Padded>

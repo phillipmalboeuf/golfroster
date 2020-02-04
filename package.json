@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "ios": "react-native run-ios --simulator='iPhone 11'",
+    "ios": "react-native run-ios --simulator='iPhone 11 Pro'",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -21,7 +21,8 @@
     "react": "^16.11.0",
     "react-native": "^0.61.2",
     "react-native-calendars": "^1.212.0",
-    "react-native-image-picker": "^1.1.0",
+    "react-native-fbsdk": "^1.1.1",
+    "react-native-image-picker": "^2.2.1",
     "react-native-modal-datetime-picker": "^8.0.3",
     "react-native-paper": "^3.2.1",
     "react-native-vector-icons": "^6.6.0",
@@ -37,6 +38,7 @@
     "@types/react": "^16.9.11",
     "@types/react-native": "^0.60.22",
     "@types/react-native-calendars": "^1.20.7",
+    "@types/react-native-fbsdk": "^1.0.0",
     "@types/react-native-vector-icons": "^6.4.4",
     "@types/react-router-native": "^5.1.0",
     "babel-jest": "^24.9.0",

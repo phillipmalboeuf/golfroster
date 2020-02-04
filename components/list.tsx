@@ -14,7 +14,7 @@ export const List: FunctionComponent<{
     title?: string
     items: Array<{
       title: string | JSX.Element
-      link: string
+      link?: string
       description?: string| JSX.Element
       left?: JSX.Element
       right?: JSX.Element
@@ -27,7 +27,7 @@ export const List: FunctionComponent<{
   return <>
     {sections.map((section, index) => <PaperList.Section key={index} style={{ marginBottom: 0 }}>
       {section.title && <PaperList.Subheader>{section.title}</PaperList.Subheader>}
-      {section.items.map(item => <Link to={item.link} key={item.link} onPress={section.onItemClick}>
+      {section.items.map((item, i) => <Link to={item.link} key={i} onPress={section.onItemClick}>
         <PaperList.Item style={{
           backgroundColor: 'white',
         }} title={item.title}

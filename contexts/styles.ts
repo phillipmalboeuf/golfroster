@@ -15,5 +15,6 @@ export const StylesContext = createContext({
     red: '#CF0F42',
     yellow: 'hsla(57, 100%, 50%, 1)',
     faded: 'hsl(57, 100%, 90%)',
+    facebook: '#0277BD',
   },
 })
