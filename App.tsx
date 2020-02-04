@@ -21,6 +21,7 @@ import { PlayerForm } from './components/player_form'
 import { Navigation } from './components/navigation'
 import { Center } from './components/layouts'
 import { Title } from './components/text'
+import { players } from './helpers/generators'
 
 
 const db = app.firestore()
@@ -47,6 +48,8 @@ const App = () => {
   }
 
   useEffect(() => {
+
+    // players()
 
     auth.onAuthStateChanged(async u => {
       if (u) {

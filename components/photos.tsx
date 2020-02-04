@@ -15,7 +15,11 @@ function usePhotoURI(photo: string) {
 
   if (photo) {
     useEffect(() => {
-      storage.refFromURL(photo).getDownloadURL().then(url => setURI(url))
+      if (photo.indexOf('http') === 0) {
+        setURI(photo)
+      } else {
+        storage.refFromURL(photo).getDownloadURL().then(url => setURI(url))
+      }
     }, [photo])
   }
 
