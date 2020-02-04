@@ -20,7 +20,7 @@ import { Input } from './input'
 import { Avatar, Upload } from './photos'
 import { Title, Subtitle } from './text'
 import { FloatingButton } from './button'
-import { postprocess } from './event_form'
+import { postprocess, preprocess } from './event_form'
 import { states } from './player_form'
 
 
@@ -37,11 +37,13 @@ export const GroupForm: FunctionComponent<{
 
   return <Form ref={form} values={props.group && postprocess(props.group)} onSubmit={async ({invited, ...values}) => {
     if (!props.group) {
-      const group = await store.createGroup(values)
-      Object.keys(invited).filter(id => invited[id] === true).forEach(id => group.invite(id, store.player.id))
+      const group = await store.createGroup(preprocess(values))
+      if (invited) {
+        Object.keys(invited).filter(id => invited[id] === true).forEach(id => group.invite(id, store.player.id))
+      }
       history.push(`/groups/${group.id}`)
     } else {
-      await props.group.save(values)
+      await props.group.save(preprocess(values))
     }
     
     props.onSubmit()
