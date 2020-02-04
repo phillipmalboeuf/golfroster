@@ -123,17 +123,22 @@ export const Players: FunctionComponent<{}> = props => {
       <ScrollView>
         <LookingForPlayers onPress={() => setSearching(true)} />
         <Observer>{() => (store.friends.size + store.groups.size) ? <List sections={[{
-          items: [
+          items: ([
             ...Array.from(store.friends.values()).map(friend => ({
+              friend,
               title: `${friend.first_name} ${friend.last_name}`,
               link: `/players/${friend.id}`,
               left: <Avatar {...friend} small />,
             })),
             ...Array.from(store.groups.values()).map(group => ({
+              group,
               title: group.name,
               link: `/groups/${group.id}`,
             })),
-          ],
+          ]).sort((a: any, b: any) => {
+            return (a.friend ? a.friend.first_name : a.group.name) > (b.friend ? b.friend.first_name : b.group.name)
+              ? 1 : -1
+          }),
         }]} />  : <View style={{ marginTop: -100, zIndex: -1 }}>
           <Empty label={'The golf players you find will appear here.'} icon={'account-group'} />
         </View>}</Observer>
