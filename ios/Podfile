@@ -40,6 +40,7 @@ target 'golfroster' do
 
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
   target 'golfrosterTests' do
     inherit! :search_paths
