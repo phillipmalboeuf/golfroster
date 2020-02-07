@@ -112,9 +112,9 @@ const Store = types
 
       firebase.app().firestore().collection('players')
         .where('friends', 'array-contains', self.player.id)
-        .where(firestore.FieldPath.documentId(), 'in', self.player.friends)
+        // .where(firestore.FieldPath.documentId(), 'in', self.player.friends)
         .onSnapshot(snapshot => {
-          setDocs(snapshot, self.friends)
+          setDocs(snapshot, self.friends, undefined, change => self.player.friends.includes(change.doc.id))
         })
 
     }),
@@ -204,8 +204,13 @@ AsyncStorage.getItem(key).then(stored => {
 
 export const StoreContext = createContext({ store })
 
-const setDocs = (snapshot: firestore.QuerySnapshot, storeMap: Map<string, any>, more?: {}) => {
-  return snapshot.docChanges().forEach(change => {
+const setDocs = (
+  snapshot: firestore.QuerySnapshot,
+  storeMap: Map<string, any>,
+  more?: {},
+  filter?: (change: firestore.DocumentChange) => boolean
+) => {
+  return snapshot.docChanges().filter(change => filter ? filter(change) : true).forEach(change => {
     if (change.type === 'removed') {
       storeMap.delete(change.doc.id)
     } else {
