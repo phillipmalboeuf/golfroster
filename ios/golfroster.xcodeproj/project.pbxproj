@@ -8,34 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* golfrosterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* golfrosterTests.m */; };
-		0BD6B605C92141D79BE05938 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF7043E9AD824F8D8047498E /* Fontisto.ttf */; };
-		11F77ADD5611422BB5511C67 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0B1A47DDDC64B77B8B0D6C7 /* Foundation.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		16B66A67A3BD4645B72154CB /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD8DCC04AC674437A2D6C014 /* AntDesign.ttf */; };
 		16D551CE723BBF975C309E54 /* libPods-golfroster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6251ED5E30A0CFE448A02341 /* libPods-golfroster.a */; };
-		1A799460E5154FA9A94C91DC /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972F3FE8BB0142C88D2033A1 /* MaterialIcons.ttf */; };
+		1FEF1D525C364439B98B57D9 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8296977E5A0049D899576A61 /* SimpleLineIcons.ttf */; };
+		241E7E81A26F46E0B8408F67 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8CDB85BBF23406F8216F19C /* EvilIcons.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* golfrosterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* golfrosterTests.m */; };
-		2F35EC561B4044B481368DC5 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDD887739C9942CC98A6653B /* SimpleLineIcons.ttf */; };
-		37D83C034B2740E993802752 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B9759AEC495B834A98AC /* EvilIcons.ttf */; };
-		457C854587FC4307894EB55E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEF8AD2CBE74A7A97DEB7C6 /* FontAwesome.ttf */; };
-		47029DB4C8B0428199614979 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AADAEB8454EC4E7CB9678D43 /* FontAwesome5_Regular.ttf */; };
+		3488FE06D7B441F9BE74D9D9 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B4C861222E0D419D9410DB58 /* Zocial.ttf */; };
+		34E127FA5C7F4FB3B734C5C8 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FADF7A11D10F461AAE403B9A /* FontAwesome5_Brands.ttf */; };
 		4C1DF4AED91D1774347B457C /* libPods-golfroster-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C66D6C924F81FB5F2111F8F1 /* libPods-golfroster-tvOSTests.a */; };
-		55F4FCC4798845749A58ADB3 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF41844817484883841BE13A /* AntDesign.ttf */; };
-		5896DEEB5DEF47048C32E5C9 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC5C4952FB7145DC8C1F6E06 /* Entypo.ttf */; };
+		5DEEE488B7EB4ED1B8963B7F /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 369F5077899A466C95B36CD2 /* MaterialIcons.ttf */; };
 		644AEE997B54C894BB81BD66 /* libPods-golfrosterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE7412F0A97A9224D2F1CAD9 /* libPods-golfrosterTests.a */; };
-		664CA222088C45A292840A26 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6279DD03E27D4C8C82FB54A1 /* Feather.ttf */; };
-		66D24F258DBA48A98EDA2938 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D7E4FB77BD542A5B4AF73D5 /* Octicons.ttf */; };
-		9ADE7558CD244B11B9EF00BC /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EAD56DD04D4474EBDD86A1F /* FontAwesome5_Solid.ttf */; };
-		A6C965A5DAD4430DA5F766FF /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3E2BB1D52334E658D696AFA /* MaterialCommunityIcons.ttf */; };
-		C75C7A62A5394A41BCC42904 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E797356D53B74A7694CAAD64 /* Zocial.ttf */; };
-		D5D5A8F173EA4C94B638B6CF /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB58089C63DC46899BA40850 /* Ionicons.ttf */; };
+		66BA191D5A7C45BF906EA8E6 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD3F020489094E11ACD18BB0 /* Fontisto.ttf */; };
+		6F3E13A4B1A049DFAD47AA7F /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7732CFEA665341DD85719B85 /* Feather.ttf */; };
+		718FFA75D13D49C8A39AD47D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C308BE0146B4B18A27E382E /* MaterialCommunityIcons.ttf */; };
+		8171E00B1D484379AAFD2005 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFB0133D4EFE48F4A445886B /* Octicons.ttf */; };
+		A44CEE0F59914276A732EB28 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8FC8A1E06C04C3C9E5EBE8E /* Entypo.ttf */; };
+		C5D764627BDD4E44AEA6D337 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DCD6DC7F2B4E421884F3C203 /* FontAwesome5_Regular.ttf */; };
+		C630154F3D214D60BC5325D3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18480684618949869F7C004B /* Ionicons.ttf */; };
 		D89ED9A73513DC30A618E3F9 /* libPods-golfroster-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6197324982096E4B8F4AC145 /* libPods-golfroster-tvOS.a */; };
-		EF501A6509FF4ABF887A22CD /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9A6DECCD1334D7D82181685 /* FontAwesome5_Brands.ttf */; };
+		F076358015294A2CB3A5FE07 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB2CD1BCF8CD4E8FB8F7D131 /* Foundation.ttf */; };
+		F910D341327A41EFB5961D8A /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CA7E7051E2D42358352EDB5 /* FontAwesome.ttf */; };
+		FB5E23B748A547ECAF61BB21 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFD2B5DBF0FD48AB8CCD34F8 /* FontAwesome5_Solid.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,45 +60,45 @@
 		00E356EE1AD99517003FC87E /* golfrosterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = golfrosterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* golfrosterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = golfrosterTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* golfroster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = golfroster.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CA7E7051E2D42358352EDB5 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* golfrosterapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = golfrosterapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = golfroster/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = golfroster/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = golfroster/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = golfroster/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = golfroster/main.m; sourceTree = "<group>"; };
+		18480684618949869F7C004B /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* golfroster-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "golfroster-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* golfroster-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "golfroster-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D7E4FB77BD542A5B4AF73D5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		369F5077899A466C95B36CD2 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		3C308BE0146B4B18A27E382E /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		4CE527BFB07A5A6C95661EE8 /* Pods-golfroster-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOS.release.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOS/Pods-golfroster-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		5A3856D3EE6B75ED8E178042 /* Pods-golfroster-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOS/Pods-golfroster-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6197324982096E4B8F4AC145 /* libPods-golfroster-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfroster-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6251ED5E30A0CFE448A02341 /* libPods-golfroster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfroster.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6279DD03E27D4C8C82FB54A1 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		6D9FC6EC472E5BBB0374A0D6 /* Pods-golfroster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster.release.xcconfig"; path = "Target Support Files/Pods-golfroster/Pods-golfroster.release.xcconfig"; sourceTree = "<group>"; };
 		6F256217775359D4455954BC /* Pods-golfrosterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfrosterTests.debug.xcconfig"; path = "Target Support Files/Pods-golfrosterTests/Pods-golfrosterTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8EAD56DD04D4474EBDD86A1F /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		972F3FE8BB0142C88D2033A1 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		7732CFEA665341DD85719B85 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		8296977E5A0049D899576A61 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		97770F1181D46AD64E13B6B5 /* Pods-golfroster-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOSTests/Pods-golfroster-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		977A870BDE7894FB89F98677 /* Pods-golfrosterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfrosterTests.release.xcconfig"; path = "Target Support Files/Pods-golfrosterTests/Pods-golfrosterTests.release.xcconfig"; sourceTree = "<group>"; };
-		A9A6DECCD1334D7D82181685 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
-		AADAEB8454EC4E7CB9678D43 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		AC5C4952FB7145DC8C1F6E06 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		AF7043E9AD824F8D8047498E /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
-		AFEF8AD2CBE74A7A97DEB7C6 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		C3E2BB1D52334E658D696AFA /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		AB2CD1BCF8CD4E8FB8F7D131 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		B4C861222E0D419D9410DB58 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		BD8DCC04AC674437A2D6C014 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		C66D6C924F81FB5F2111F8F1 /* libPods-golfroster-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfroster-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70F61286E8BF0A855F0911E /* Pods-golfroster-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-golfroster-tvOSTests/Pods-golfroster-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		CD3F020489094E11ACD18BB0 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		CFB0133D4EFE48F4A445886B /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		D9BC03A3F99BB7AF3E3DFB88 /* Pods-golfroster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-golfroster.debug.xcconfig"; path = "Target Support Files/Pods-golfroster/Pods-golfroster.debug.xcconfig"; sourceTree = "<group>"; };
-		DB58089C63DC46899BA40850 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		DCD6DC7F2B4E421884F3C203 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		DE7412F0A97A9224D2F1CAD9 /* libPods-golfrosterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-golfrosterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DF41844817484883841BE13A /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
-		E0B1A47DDDC64B77B8B0D6C7 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		E797356D53B74A7694CAAD64 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
-		E8B5B9759AEC495B834A98AC /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		DFD2B5DBF0FD48AB8CCD34F8 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		E8CDB85BBF23406F8216F19C /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		FDD887739C9942CC98A6653B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		F8FC8A1E06C04C3C9E5EBE8E /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		FADF7A11D10F461AAE403B9A /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,7 +222,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* golfroster.app */,
+				13B07F961A680F5B00A75B9A /* golfrosterapp.app */,
 				00E356EE1AD99517003FC87E /* golfrosterTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* golfroster-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* golfroster-tvOSTests.xctest */,
@@ -233,22 +233,22 @@
 		888F9EE485F340559B07313B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DF41844817484883841BE13A /* AntDesign.ttf */,
-				AC5C4952FB7145DC8C1F6E06 /* Entypo.ttf */,
-				E8B5B9759AEC495B834A98AC /* EvilIcons.ttf */,
-				6279DD03E27D4C8C82FB54A1 /* Feather.ttf */,
-				AFEF8AD2CBE74A7A97DEB7C6 /* FontAwesome.ttf */,
-				A9A6DECCD1334D7D82181685 /* FontAwesome5_Brands.ttf */,
-				AADAEB8454EC4E7CB9678D43 /* FontAwesome5_Regular.ttf */,
-				8EAD56DD04D4474EBDD86A1F /* FontAwesome5_Solid.ttf */,
-				AF7043E9AD824F8D8047498E /* Fontisto.ttf */,
-				E0B1A47DDDC64B77B8B0D6C7 /* Foundation.ttf */,
-				DB58089C63DC46899BA40850 /* Ionicons.ttf */,
-				C3E2BB1D52334E658D696AFA /* MaterialCommunityIcons.ttf */,
-				972F3FE8BB0142C88D2033A1 /* MaterialIcons.ttf */,
-				2D7E4FB77BD542A5B4AF73D5 /* Octicons.ttf */,
-				FDD887739C9942CC98A6653B /* SimpleLineIcons.ttf */,
-				E797356D53B74A7694CAAD64 /* Zocial.ttf */,
+				BD8DCC04AC674437A2D6C014 /* AntDesign.ttf */,
+				F8FC8A1E06C04C3C9E5EBE8E /* Entypo.ttf */,
+				E8CDB85BBF23406F8216F19C /* EvilIcons.ttf */,
+				7732CFEA665341DD85719B85 /* Feather.ttf */,
+				0CA7E7051E2D42358352EDB5 /* FontAwesome.ttf */,
+				FADF7A11D10F461AAE403B9A /* FontAwesome5_Brands.ttf */,
+				DCD6DC7F2B4E421884F3C203 /* FontAwesome5_Regular.ttf */,
+				DFD2B5DBF0FD48AB8CCD34F8 /* FontAwesome5_Solid.ttf */,
+				CD3F020489094E11ACD18BB0 /* Fontisto.ttf */,
+				AB2CD1BCF8CD4E8FB8F7D131 /* Foundation.ttf */,
+				18480684618949869F7C004B /* Ionicons.ttf */,
+				3C308BE0146B4B18A27E382E /* MaterialCommunityIcons.ttf */,
+				369F5077899A466C95B36CD2 /* MaterialIcons.ttf */,
+				CFB0133D4EFE48F4A445886B /* Octicons.ttf */,
+				8296977E5A0049D899576A61 /* SimpleLineIcons.ttf */,
+				B4C861222E0D419D9410DB58 /* Zocial.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -293,7 +293,7 @@
 			);
 			name = golfroster;
 			productName = golfroster;
-			productReference = 13B07F961A680F5B00A75B9A /* golfroster.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* golfrosterapp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* golfroster-tvOS */ = {
@@ -348,6 +348,10 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 54469CP2UQ;
+						ProvisioningStyle = Automatic;
+					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -395,22 +399,22 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				55F4FCC4798845749A58ADB3 /* AntDesign.ttf in Resources */,
-				5896DEEB5DEF47048C32E5C9 /* Entypo.ttf in Resources */,
-				37D83C034B2740E993802752 /* EvilIcons.ttf in Resources */,
-				664CA222088C45A292840A26 /* Feather.ttf in Resources */,
-				457C854587FC4307894EB55E /* FontAwesome.ttf in Resources */,
-				EF501A6509FF4ABF887A22CD /* FontAwesome5_Brands.ttf in Resources */,
-				47029DB4C8B0428199614979 /* FontAwesome5_Regular.ttf in Resources */,
-				9ADE7558CD244B11B9EF00BC /* FontAwesome5_Solid.ttf in Resources */,
-				0BD6B605C92141D79BE05938 /* Fontisto.ttf in Resources */,
-				11F77ADD5611422BB5511C67 /* Foundation.ttf in Resources */,
-				D5D5A8F173EA4C94B638B6CF /* Ionicons.ttf in Resources */,
-				A6C965A5DAD4430DA5F766FF /* MaterialCommunityIcons.ttf in Resources */,
-				1A799460E5154FA9A94C91DC /* MaterialIcons.ttf in Resources */,
-				66D24F258DBA48A98EDA2938 /* Octicons.ttf in Resources */,
-				2F35EC561B4044B481368DC5 /* SimpleLineIcons.ttf in Resources */,
-				C75C7A62A5394A41BCC42904 /* Zocial.ttf in Resources */,
+				16B66A67A3BD4645B72154CB /* AntDesign.ttf in Resources */,
+				A44CEE0F59914276A732EB28 /* Entypo.ttf in Resources */,
+				241E7E81A26F46E0B8408F67 /* EvilIcons.ttf in Resources */,
+				6F3E13A4B1A049DFAD47AA7F /* Feather.ttf in Resources */,
+				F910D341327A41EFB5961D8A /* FontAwesome.ttf in Resources */,
+				34E127FA5C7F4FB3B734C5C8 /* FontAwesome5_Brands.ttf in Resources */,
+				C5D764627BDD4E44AEA6D337 /* FontAwesome5_Regular.ttf in Resources */,
+				FB5E23B748A547ECAF61BB21 /* FontAwesome5_Solid.ttf in Resources */,
+				66BA191D5A7C45BF906EA8E6 /* Fontisto.ttf in Resources */,
+				F076358015294A2CB3A5FE07 /* Foundation.ttf in Resources */,
+				C630154F3D214D60BC5325D3 /* Ionicons.ttf in Resources */,
+				718FFA75D13D49C8A39AD47D /* MaterialCommunityIcons.ttf in Resources */,
+				5DEEE488B7EB4ED1B8963B7F /* MaterialIcons.ttf in Resources */,
+				8171E00B1D484379AAFD2005 /* Octicons.ttf in Resources */,
+				1FEF1D525C364439B98B57D9 /* SimpleLineIcons.ttf in Resources */,
+				3488FE06D7B441F9BE74D9D9 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,7 +724,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/golfroster.app/golfroster";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/golfrosterapp.app/golfrosterapp";
 			};
 			name = Debug;
 		};
@@ -740,7 +744,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/golfroster.app/golfroster";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/golfrosterapp.app/golfrosterapp";
 			};
 			name = Release;
 		};
@@ -749,21 +753,55 @@
 			baseConfigurationReference = D9BC03A3F99BB7AF3E3DFB88 /* Pods-golfroster.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 54469CP2UQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = golfroster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBReactNativeSpec\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RCTTypeSafety\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNDateTimePicker\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNVectorIcons\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-CoreModules\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTActionSheet\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTAnimation\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTBlob\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTLinking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTNetwork\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTSettings\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTText\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTVibration\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsi\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsiexecutor\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Yoga\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-image-picker\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-slider\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
+				);
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = golfroster;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jessezorfas.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = golfrosterapp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -773,20 +811,25 @@
 			baseConfigurationReference = 6D9FC6EC472E5BBB0374A0D6 /* Pods-golfroster.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 54469CP2UQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = golfroster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = golfroster;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jessezorfas.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = golfrosterapp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -929,7 +972,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development: Jesse Zorfas (G6YATV9284)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Jesse Zorfas (G6YATV9284)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -949,6 +993,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -983,7 +1028,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development: Jesse Zorfas (G6YATV9284)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Jesse Zorfas (G6YATV9284)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -996,6 +1042,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
