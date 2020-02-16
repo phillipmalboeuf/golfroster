@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import { Observer } from 'mobx-react'
 import { SnapshotIn, SnapshotOrInstance, Instance } from 'mobx-state-tree'
 
-import { Text, View, ScrollView } from 'react-native'
+import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native'
 import { Appbar, List, Headline, Caption, Chip, Surface, Portal } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import moment from 'moment'
@@ -70,16 +70,28 @@ export const Chatroom: FunctionComponent<{
       </Observer>
     </Padded>
   </ScrollView>
+  
   <Portal>
-    <Bottom>
+    <KeyboardAvoidingView behavior='position' enabled style={{
+      height: 100,
+      width: '100%',
+      position: 'absolute',
+      left: 0,
+      bottom: 0,
+    }} contentContainerStyle={{
+      padding: 10,
+        backgroundColor: 'white',
+    }} keyboardVerticalOffset={-30}>
       <Form ref={form} onSubmit={async values => {
-        await chatroom.sendMessage(values.body, store.player.id)
+        if (values.body) {
+          await chatroom.sendMessage(values.body, store.player.id)
+        }
         form.current.reset()
       }}
         inline cta={<Icon name='send' size={33} />}>
         <Input name='body' placeholder='Message here...' flat />
       </Form>
-    </Bottom>
+    </KeyboardAvoidingView>
   </Portal>
   </>
 }
