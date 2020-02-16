@@ -171,7 +171,7 @@ export const EventForm: FunctionComponent<{
           Who would you like to invite to this event?
         </Subtitle>
 
-        <ScrollView>
+        <ScrollView style={{ maxHeight: '75%' }}>
           <FormContext.Consumer>
             {({ values, onChange }) =>
               <List.Section>

@@ -58,7 +58,7 @@ export const GroupForm: FunctionComponent<{
           Who would you like to invite to the group?
         </Subtitle>
 
-        <ScrollView>
+        <ScrollView style={{ maxHeight: '75%' }}>
           <FormContext.Consumer>
             {({ values, onChange }) =>
               <List.Section>
