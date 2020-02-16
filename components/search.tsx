@@ -36,7 +36,7 @@ export const Search: FunctionComponent<{
     <Modal contentContainerStyle={{
       marginBottom: 'auto',
     }} visible={visible} onDismiss={onDismiss}>
-      <Surface style={{ backgroundColor: colors.green }}>
+      <Surface style={{ backgroundColor: colors.green, maxHeight: '100%' }}>
         <Padded tight>
           <Searchbar value={query} placeholder={`Search ${index}`} style={{ backgroundColor: 'white' }}
             autoFocus autoCorrect={false}
