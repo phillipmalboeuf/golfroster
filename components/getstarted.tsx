@@ -45,7 +45,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
     </Center>,
     <Center>
       <Title>
-        First Things First
+        Sign In
       </Title>
 
       <Subtitle>
