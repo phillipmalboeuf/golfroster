@@ -6,6 +6,7 @@ import { KeyboardTypeOptions, TextInputProps, Text, View, Picker } from 'react-n
 import { TextInput, Checkbox, Caption } from 'react-native-paper'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Slider from '@react-native-community/slider'
+import MultiSlider from '@ptomasroos/react-native-multi-slider'
 
 import { StylesContext } from '../contexts/styles'
 import { FormContext } from './form'
@@ -40,10 +41,12 @@ export const Input: React.FunctionComponent<Props> = props => {
         onConfirm={date => context.onChange(props.name, date)}
         style={{ marginBottom: sizes.base, fontSize: sizes.base }}
         label={props.label} />,
-      slider: <RangeSlider value={value}
-        onChange={v => context.onChange(props.name, v)}
-        min={props.min}
-        max={props.max} />,
+      slider: <>
+        <RangeSlider value={value}
+          onChange={v => context.onChange(props.name, v)}
+          min={props.min}
+          max={props.max} />
+      </>,
       checkbox: <View style={{ 
         flexDirection: 'row',
         alignItems: 'center',
@@ -67,7 +70,7 @@ export const Input: React.FunctionComponent<Props> = props => {
         }}
         onChangeText={text => context.onChange(props.name, text)}
         defaultValue={value || props.value}
-        returnKeyType={props.next ? 'next' : 'default'}
+        returnKeyType={props.next ? 'next' : 'done'}
         label={props.label}
         placeholder={props.placeholder}
         autoFocus={props.autoFocus}
@@ -77,7 +80,6 @@ export const Input: React.FunctionComponent<Props> = props => {
         blurOnSubmit={props.submitter}
         multiline={props.type === 'multiline'}
         secureTextEntry={props.type === 'password' || props.type === 'newpassword'}
-        returnKeyType="done"
         keyboardType={({
           email: 'email-address',
           phone: 'phone-pad',
@@ -148,20 +150,28 @@ export const RangeSlider: React.FunctionComponent<{
   const { colors, sizes } = useContext(StylesContext)
 
   return <>
-    <Text style={{
+    {/* <Text style={{
       color: colors.green,
       textAlign: 'center',
     }}>
       {props.value}
-    </Text>
+    </Text> */}
     <View>
-      <Slider value={props.value}
+      <MultiSlider values={[props.value]} enableLabel={true} customLabel={RangeSliderLabel} enabledTwo={false}
+        min={props.min}
+        max={props.max}
+        step={0.1}
+        onValuesChange={values => props.onChange(parseFloat(values[0].toFixed(1)))}
+        trackStyle={{ backgroundColor: colors.greys[1] }}
+        selectedStyle={{ backgroundColor: colors.green }}
+        pressedMarkerStyle={{ shadowOffset: { height: 2 } }} />
+      {/* <Slider value={props.value}
         minimumTrackTintColor={colors.green}
         maximumTrackTintColor={colors.green}
         step={0.1}
         minimumValue={props.min}
         maximumValue={props.max}
-        onValueChange={v => props.onChange(parseFloat(v.toFixed(1)))} />
+        onValueChange={v => props.onChange(parseFloat(v.toFixed(1)))} /> */}
       {/* <Slider value={props.value}
         // style={{ position: 'absolute', width: '100%' }}
         inverted
@@ -173,11 +183,34 @@ export const RangeSlider: React.FunctionComponent<{
     </View>
     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
       {props.min && <Caption>
-        {props.min}
+        {props.min.toFixed(1).replace('-', '+')}
       </Caption>}
       {props.max && <Caption>
-        {props.max}
+        {props.max.toFixed(1).replace('-', '+')}
       </Caption>}
     </View>
   </>
+}
+
+export const RangeSliderLabel: React.FunctionComponent<{
+  oneMarkerPressed: boolean
+  twoMarkerPressed: boolean
+  oneMarkerValue: number
+  twoMarkerValue: number
+  oneMarkerLeftPosition: number
+  twoMarkerLeftPosition: number
+}> = props => {
+  const one = props.oneMarkerValue !== undefined
+  const two = props.twoMarkerValue !== undefined
+
+  return (one || two) ? <Caption style={{
+    position: 'absolute',
+    bottom: '100%',
+    left: (props.oneMarkerLeftPosition || props.twoMarkerLeftPosition || 0),
+    transform: [],
+  }}>
+    {(one 
+      ? props.oneMarkerValue
+      : props.twoMarkerValue).toFixed(1).replace('-', '+')}
+  </Caption> : null
 }
