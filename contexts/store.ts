@@ -27,6 +27,7 @@ const Store = types
       notifications: types.maybe(types.number),
     }),
     lookingForPlayers: types.optional(types.boolean, true),
+    askingForPro: types.optional(types.boolean, true),
   })
   .views(self => ({
     eventDates(): {[key: string]: Array<Instance<typeof EventModel>>} {
@@ -187,6 +188,9 @@ const Store = types
       self.lookingForPlayers = false
     },
     
+    stopAskingForPro: () => {
+      self.askingForPro = false
+    },
   }))
 
 const store = Store.create({ badges: {} })

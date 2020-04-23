@@ -2,9 +2,15 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const algoliasearch = require('algoliasearch');
 
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
 admin.initializeApp();
 
-const CONFIG = functions.config();
+let CONFIG = functions.config();
+const stripe = require('stripe')(CONFIG.stripe.key);
+
 
 exports.newUser = functions.auth.user().onCreate(async user => {
   return await admin
@@ -205,3 +211,44 @@ exports.unindexEvent = functions.firestore
     const index = search.initIndex('events');
     return index.deleteObject(context.params.eventId);
   });
+
+const server = express();
+
+server.use(cors({ origin: true }))
+server.use(bodyParser.raw({type: 'application/json'}))
+server.post('/', async (request, response) => {
+  const sig = request.headers['stripe-signature'];
+
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(request.rawBody, sig, CONFIG.stripe.webhook);
+  } catch (err) {
+    return response.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  const subscription = event.data.object;
+  const customer = await stripe.customers.retrieve(subscription.customer)
+  
+  const player = (await admin
+    .firestore()
+    .collection('players')
+    .where('email', '==', customer.email)
+    .get()).docs[0]
+
+  const doc = admin
+    .firestore()
+    .collection('players')
+    .doc(player.id)
+
+  if (event.type === 'customer.subscription.created') {
+    await doc.set({ pro: true, subscription: subscription.id }, { merge: true })
+    
+  } else if (event.type === 'customer.subscription.deleted') {
+    await doc.set({ pro: false, subscription: subscription.id }, { merge: true })
+  }
+
+  return response.json({received: true});
+})
+
+exports.subscription = functions.https.onRequest(server)
