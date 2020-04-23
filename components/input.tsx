@@ -97,7 +97,7 @@ export const Input: React.FunctionComponent<Props> = props => {
           return <Picker selectedValue={value || props.value}
             onValueChange={text => context.onChange(props.name, text)}
             itemStyle={{ textAlign: 'left', marginHorizontal: sizes.base }}>
-            <Picker.Item label={' '} value={undefined} />
+            {props.optional && <Picker.Item label={' '} value={undefined} />}
             {props.options.map(option => <Picker.Item key={option.value} label={option.label} value={option.value} />)}
           </Picker>
         } }} />
