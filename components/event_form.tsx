@@ -22,6 +22,7 @@ import { Avatar, Upload } from './photos'
 import { Title, Subtitle } from './text'
 import { FloatingButton } from './button'
 import { money, drinks, methods, teeChoices } from './player_form'
+import { Subscribe } from './subscribe'
 
 export const list = (values: {[key: string]: boolean}) => {
   return values
@@ -69,7 +70,8 @@ export const EventForm: FunctionComponent<{
 
   const form = useRef<Form>()
 
-  return <Form ref={form} values={props.event && postprocess(props.event)} onSubmit={async ({invited, ...values}) => {
+  return store.player.pro
+  ? <Form ref={form} values={props.event && postprocess(props.event)} onSubmit={async ({invited, ...values}) => {
     if (!props.event) {
       const event = await store.createEvent(preprocess(values))
       if (invited) {
@@ -213,4 +215,5 @@ export const EventForm: FunctionComponent<{
       </Center>,
     ].filter(element => element as any as boolean !== false)} />
   </Form>
+  : <Subscribe label='Event Creation' onCancel={props.onCancel} />
 }

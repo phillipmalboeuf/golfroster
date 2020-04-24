@@ -22,7 +22,7 @@ import { Title, Subtitle } from './text'
 import { FloatingButton } from './button'
 import { postprocess, preprocess } from './event_form'
 import { states } from './player_form'
-
+import { Subscribe } from './subscribe'
 
 export const GroupForm: FunctionComponent<{
   group?: Instance<typeof Group>
@@ -35,7 +35,8 @@ export const GroupForm: FunctionComponent<{
   const form = useRef<Form>()
   
 
-  return <Form ref={form} values={props.group && postprocess(props.group)} onSubmit={async ({invited, ...values}) => {
+  return store.player.pro
+  ? <Form ref={form} values={props.group && postprocess(props.group)} onSubmit={async ({invited, ...values}) => {
     if (!props.group) {
       const group = await store.createGroup(preprocess(values))
       if (invited) {
@@ -117,5 +118,5 @@ export const GroupForm: FunctionComponent<{
         <Input name='is_public' type='checkbox' label='Is this group public?' />
       </>,
     ].filter(element => element as any as boolean !== false)} />
-  </Form>
+  </Form> : <Subscribe label='Group Creation' onCancel={props.onCancel} />
 }

@@ -15,6 +15,7 @@ export const Button: FunctionComponent<{
   compact?: boolean
   icon?: string
   black?: boolean
+  grey?: boolean
   facebook?: boolean
   onPress?: () => void
 }> = props => {
@@ -28,6 +29,7 @@ export const Button: FunctionComponent<{
     icon={props.icon}
     labelStyle={{
       fontSize: styles.sizes.base,
+      ...props.grey && { color: styles.colors.blacks[1] },
       // lineHeight: styles.sizes.base * 1.25,
     }}
     style={{

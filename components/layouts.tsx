@@ -68,3 +68,14 @@ export const Spaced: FunctionComponent<{}> = props => {
     {props.children}
   </View>
 }
+
+export const TopRight: FunctionComponent<{}> = props => {
+  return <View style={{
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    padding: 10,
+  }}>
+    {props.children}
+  </View>
+}
