@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react'
 import { FunctionComponent } from 'react'
 
-import { View, Text, Dimensions } from 'react-native'
+import { View, Text, Dimensions, Image } from 'react-native'
 import { Link, Redirect } from 'react-router-native'
 
 import firebase, { User } from 'firebase'
@@ -29,6 +29,10 @@ export const GetStarted: FunctionComponent<{}> = props => {
 
   return <Dots path='getstarted' hideButtons items={[
     <Center>
+      <View style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>
+        <Image style={{ width: 66, height: 66 }} source={require('../icon-ios.png')} />
+      </View>
+      
       <Title>
         GolfRoster
       </Title>
