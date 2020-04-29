@@ -4,12 +4,10 @@ import { FunctionComponent } from 'react'
 import { View, Text, Dimensions, Image } from 'react-native'
 import { Link, Redirect } from 'react-router-native'
 
-import firebase, { User } from 'firebase'
-import 'firebase/auth'
+import auth from '@react-native-firebase/auth'
 
 import fb from 'react-native-fbsdk'
 
-import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 
 import { Form } from './form'
@@ -21,7 +19,6 @@ import { Button } from './button'
 
 
 export const GetStarted: FunctionComponent<{}> = props => {
-  const { user, auth } = useContext(FirebaseContext)
   const { store } = useContext(StoreContext)
 
   const [email, setEmail] = useState<string>(undefined)
@@ -70,8 +67,8 @@ export const GetStarted: FunctionComponent<{}> = props => {
             
             if (!result.isCancelled) {
               const token = await fb.AccessToken.getCurrentAccessToken()
-              const credential = firebase.auth.FacebookAuthProvider.credential(token.accessToken)
-              await auth.signInWithCredential(credential)
+              const credential = auth.FacebookAuthProvider.credential(token.accessToken)
+              await auth().signInWithCredential(credential)
             }
           }}>Continue with Facebook</Button>
 
@@ -87,7 +84,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
         </Subtitle>
 
         <Form onSubmit={async values => {
-          await auth.signInWithEmailAndPassword(email, values.password)
+          await auth().signInWithEmailAndPassword(email, values.password)
         }} cta='Log me in'>
           <Input name='password' type='password' label='Your password' placeholder='********' />
         </Form>
@@ -101,7 +98,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
         </Subtitle>
 
         <Form onSubmit={async values => {
-          await auth.createUserWithEmailAndPassword(email, values.password)
+          await auth().createUserWithEmailAndPassword(email, values.password)
         }} cta='Sign me up'>
           <Input name='password' type='newpassword' label='New password' placeholder='********' />
         </Form>

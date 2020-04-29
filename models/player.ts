@@ -1,6 +1,4 @@
-import firebase, { firestore } from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 import { types, flow } from 'mobx-state-tree'
 
 import { Club } from './club'
@@ -29,26 +27,26 @@ export const Player = types.model({
 })
   .actions(self => ({
     fetch: flow(function* fetch() {
-      const snapshot: firestore.DocumentSnapshot = yield firebase.app().firestore().collection('players')
+      const snapshot: FirebaseFirestoreTypes.DocumentSnapshot = yield firestore().collection('players')
         .doc(self.id).get()
       const data = snapshot.data()
 
       Object.keys(data).forEach(key => self[key] = data[key])
     }),
     
-    save: flow(function* save(data: firestore.DocumentData) {
+    save: flow(function* save(data: any) {
       Object.keys(data).forEach(key => (data[key] === undefined) && delete data[key])
-      yield firebase.app().firestore().collection('players').doc(self.id).set(data, { merge: true })
+      yield firestore().collection('players').doc(self.id).set(data, { merge: true })
 
       Object.keys(data).forEach(key => self[key] = data[key])
     }),
 
     unfriend: flow(function* unfriend(friendId: string) {
       yield Promise.all([
-        firebase.app().firestore().collection('players').doc(self.id).update({
+        firestore().collection('players').doc(self.id).update({
           friends: firestore.FieldValue.arrayRemove(friendId),
         }),
-        firebase.app().firestore().collection('players').doc(friendId).update({
+        firestore().collection('players').doc(friendId).update({
           friends: firestore.FieldValue.arrayRemove(self.id),
         }),
       ])
@@ -57,7 +55,7 @@ export const Player = types.model({
     }),
 
     requestFriend: flow(function* requestFriend(friendId: string) {
-      yield firebase.app().firestore().collection('players').doc(self.id).update({
+      yield firestore().collection('players').doc(self.id).update({
         friends: firestore.FieldValue.arrayUnion(friendId),
       })
 

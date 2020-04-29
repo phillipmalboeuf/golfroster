@@ -9,7 +9,6 @@ import { Link } from 'react-router-native'
 
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 
@@ -20,7 +19,6 @@ import { List } from './list'
 export const Dates: FunctionComponent<{
   dates: {[key: string]: Array<Instance<typeof EventModel>>}
 }> = ({ dates }) => {
-  // const { user, auth } = useContext(FirebaseContext)
   const { store } = useContext(StoreContext)
   const { colors } = useContext(StylesContext)
 

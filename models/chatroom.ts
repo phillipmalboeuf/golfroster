@@ -1,13 +1,12 @@
-import firebase, { firestore } from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
+
 import { types, flow } from 'mobx-state-tree'
 
 import { Message } from './message'
 import { dateType } from './event'
 
 export const Chatroom = types.model({
-  id: types.optional(types.identifier, () => firebase.app().firestore().collection('events').doc().id),
+  id: types.optional(types.identifier, () => firestore().collection('events').doc().id),
   players: types.array(types.string),
   event_id: types.maybeNull(types.string),
   group_id: types.maybeNull(types.string),
@@ -22,14 +21,14 @@ export const Chatroom = types.model({
     create: flow(function* create() {
       delete self.messages
       delete self.latest
-      yield firebase.app().firestore().collection('chatrooms').doc(self.id).set(self, { merge: true })
+      yield firestore().collection('chatrooms').doc(self.id).set(self, { merge: true })
 
       return self
     }),
 
     listMessages: flow(function* listChatrooms() {
 
-      firebase.app().firestore().collection('chatrooms').doc(self.id).collection('messages')
+      firestore().collection('chatrooms').doc(self.id).collection('messages')
         .onSnapshot(snapshot => {
           snapshot.docs.forEach(doc => {
             self.messages.set(doc.id, {

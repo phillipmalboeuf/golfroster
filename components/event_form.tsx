@@ -8,7 +8,6 @@ import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-nati
 import { Button, Appbar, List } from 'react-native-paper'
 import { pick } from 'dot-object'
 
-import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 

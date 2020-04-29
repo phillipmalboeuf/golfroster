@@ -6,7 +6,6 @@ import { Headline, Subheading, Caption, DataTable } from 'react-native-paper'
 import { Link, Redirect } from 'react-router-native'
 import { Observer } from 'mobx-react'
 
-import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 

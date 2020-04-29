@@ -5,7 +5,6 @@ import { Observer } from 'mobx-react'
 import { Text, View } from 'react-native'
 import { Button, Appbar, List, Headline, Caption, Menu } from 'react-native-paper'
 
-import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 
 import { Center, Padded, Spaced, Full } from '../components/layouts'
@@ -15,7 +14,6 @@ import { PlayerForm } from '../components/player_form'
 
 
 export const Profile: FunctionComponent<{}> = props => {
-  const { user, auth } = useContext(FirebaseContext)
   const { store: { player, logout } } = useContext(StoreContext)
 
   const [editing, setEditing] = useState(false)

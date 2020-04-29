@@ -7,7 +7,6 @@ import { Text, ScrollView } from 'react-native'
 import { NativeRouter, Switch, Route, Link } from 'react-router-native'
 import { Button, Appbar, Caption } from 'react-native-paper'
 
-import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 
 import { Avatar } from '../components/photos'

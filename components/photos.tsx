@@ -4,13 +4,12 @@ import { FunctionComponent } from 'react'
 import { Text, View, Image, Dimensions } from 'react-native'
 import { Button, Appbar, Avatar as RNAvatar, ActivityIndicator } from 'react-native-paper'
 import ImagePicker from 'react-native-image-picker'
+import storage from '@react-native-firebase/storage'
 
-import { FirebaseContext } from '../contexts/firebase'
 import { StylesContext } from '../contexts/styles'
 import { Center, Padded } from './layouts'
 
 function usePhotoURI(photo: string) {
-  const { storage } = useContext(FirebaseContext)
   const [uri, setURI] = useState(undefined)
 
   if (photo) {
@@ -18,7 +17,7 @@ function usePhotoURI(photo: string) {
       if (photo.indexOf('http') === 0) {
         setURI(photo)
       } else {
-        storage.refFromURL(photo).getDownloadURL().then(url => setURI(url))
+        storage().refFromURL(photo).getDownloadURL().then(url => setURI(url))
       }
     }, [photo])
   }
@@ -26,10 +25,10 @@ function usePhotoURI(photo: string) {
   return uri
 }
 
-async function uploadPhoto(uri: string, filename: string, contentType: string, storage: firebase.storage.Storage) {
+async function uploadPhoto(uri: string, filename: string, contentType: string) {
   const image = await fetch(uri)
-  const ref = storage.ref(filename)
-  await storage.ref(filename).put(await image.blob(), { contentType })
+  const ref = storage().ref(filename)
+  await storage().ref(filename).put(await image.blob(), { contentType })
   
   return {
     storageURL: `gs://${ref.bucket}/${ref.fullPath}`,
@@ -82,7 +81,6 @@ export const Upload: FunctionComponent<{
   onUpload: (url: string) => void
   avatar?: boolean
 }> = ({ onUpload, avatar }) => {
-  const { storage } = useContext(FirebaseContext)
   const { colors } = useContext(StylesContext)
 
   const [uploaded, setUploaded] = useState<string>(undefined)
@@ -110,7 +108,7 @@ export const Upload: FunctionComponent<{
           setLoading(true)
 
           const { storageURL, downloadURL } = await uploadPhoto(response.uri,
-            `${new Date().getTime()}/${response.fileName}`, response.type, storage)
+            `${new Date().getTime()}/${response.fileName}`, response.type)
 
           setLoading(false)
           setUploaded(downloadURL)

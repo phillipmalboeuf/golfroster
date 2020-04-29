@@ -1,11 +1,9 @@
-import firebase, { firestore } from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 import { types, flow } from 'mobx-state-tree'
 import { Player } from './player'
 
 export const Group = types.model({
-  id: types.optional(types.identifier, () => firebase.app().firestore().collection('groups').doc().id),
+  id: types.optional(types.identifier, () => firestore().collection('groups').doc().id),
   organizer_id: types.string,
   name: types.string,
   description: types.maybeNull(types.string),
@@ -21,21 +19,21 @@ export const Group = types.model({
 })
   .actions(self => ({
     fetch: flow(function* fetch() {
-      const snapshot: firestore.DocumentSnapshot = yield firebase.app().firestore().collection('groups')
+      const snapshot: FirebaseFirestoreTypes.DocumentSnapshot = yield firestore().collection('groups')
         .doc(self.id).get()
       const data = snapshot.data()
 
       Object.keys(data).forEach(key => self[key] = data[key])
     }),
-    save: flow(function* save(data: firestore.DocumentData) {
+    save: flow(function* save(data: any) {
       Object.keys(data).forEach(key => (data[key] === undefined) && delete data[key])
-      yield firebase.app().firestore().collection('groups').doc(self.id).set(data, { merge: true })
+      yield firestore().collection('groups').doc(self.id).set(data, { merge: true })
       
       Object.keys(data).forEach(key => self[key] = data[key])
     }),
     // tslint:disable-next-line: variable-name
     invite: flow(function* save(player_id: string, invited_by: string) {
-      yield firebase.app().firestore().collection('groups').doc(self.id)
+      yield firestore().collection('groups').doc(self.id)
         .collection('invitations').add({
           player_id,
           invited_by,

@@ -4,12 +4,9 @@ import { DefaultTheme, Provider as PaperProvider, Colors, Theme, Headline, Porta
 import { Observer } from 'mobx-react'
 import { NativeRouter } from 'react-router-native'
 
-import firebase, { User } from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'firebase/storage'
-
-import app from './clients/firebase'
+import firestore from '@react-native-firebase/firestore'
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+import storage from '@react-native-firebase/storage'
 
 import { FirebaseContext } from './contexts/firebase'
 import { StoreContext } from './contexts/store'
@@ -24,13 +21,8 @@ import { Title } from './components/text'
 import { players } from './helpers/generators'
 
 
-const db = app.firestore()
-const auth = app.auth()
-const storage = app.storage()
-
-
 const App = () => {
-  const [user, setUser] = useState<User>(undefined)
+  const [user, setUser] = useState<FirebaseAuthTypes.User>(undefined)
   const { store } = useContext(StoreContext)
   const { colors } = useContext(StylesContext)
 
@@ -51,7 +43,7 @@ const App = () => {
 
     // players()
 
-    auth.onAuthStateChanged(async u => {
+    auth().onAuthStateChanged(async u => {
       if (u) {
         await store.login(u.uid)
         store.listEvents()
@@ -66,14 +58,14 @@ const App = () => {
   }, [])
   
   return <PaperProvider theme={theme}>
-    <FirebaseContext.Provider value={{ db, auth, user, storage }}>
+    <FirebaseContext.Provider value={{ user }}>
       {user === undefined
         ? <Center><Title>One moment...</Title></Center>
         : <Observer>{() => (user !== null && store.player)
           ?  store.player.accepted_terms
             ? <NativeRouter><Portal.Host><Navigation /></Portal.Host></NativeRouter>
             : <View>
-              <PlayerForm onSubmit={() => undefined} onCancel={() => auth.signOut()} />
+              <PlayerForm onSubmit={() => undefined} onCancel={() => auth().signOut()} />
             </View>
           : <View>
             <GetStarted />

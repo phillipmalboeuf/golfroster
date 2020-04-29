@@ -7,7 +7,6 @@ import { Text, ScrollView, View } from 'react-native'
 import { NativeRouter, Switch, Route, Link, useHistory } from 'react-router-native'
 import { Appbar, Banner, Headline, Card, Paragraph, Colors } from 'react-native-paper'
 
-import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 import { usePlayer, useGroup } from '../helpers/hooks'

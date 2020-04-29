@@ -9,7 +9,6 @@ import { Button, Appbar } from 'react-native-paper'
 import { Calendar, Agenda } from 'react-native-calendars'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import { FirebaseContext } from '../contexts/firebase'
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 
@@ -28,7 +27,6 @@ import { Empty } from '../components/empty'
 
 
 export const Events: FunctionComponent<{}> = props => {
-  // const { user, auth } = useContext(FirebaseContext)
   const { store } = useContext(StoreContext)
   const { colors } = useContext(StylesContext)
 

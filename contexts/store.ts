@@ -1,6 +1,7 @@
-import firebase, { firestore } from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
+
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+
 import { createContext } from 'react'
 import { AsyncStorage } from 'react-native'
 import { types, flow, unprotect, onSnapshot, applySnapshot, Instance, castFlowReturn } from 'mobx-state-tree'
@@ -52,7 +53,7 @@ const Store = types
 
     login: flow(function* login(id: string) {
       const waitForPlayer = new Promise((resolve, reject) => {
-        const unsubscribe = firebase.app().firestore().collection('players').doc(id)
+        const unsubscribe = firestore().collection('players').doc(id)
           .onSnapshot({
             next: doc => {
               if (doc.data()) {
@@ -66,22 +67,23 @@ const Store = types
             },
           })
       })
-      const data: firestore.DocumentSnapshot = yield waitForPlayer
+      const data: FirebaseFirestoreTypes.DocumentSnapshot = yield waitForPlayer
       self.player = Player.create({ id, ...data })
     }),
 
     logout: flow(function* logout() {
-      yield firebase.app().auth().signOut()
+      yield auth().signOut()
       applySnapshot(self, { badges: {} })
     }),
 
     exists: flow(function* exists(email: string) {
-      const snapshot: firestore.QuerySnapshot = yield firebase.app().firestore().collection('players').where('email', '==', email).get()
+      const snapshot: FirebaseFirestoreTypes.QuerySnapshot = yield firestore().collection('players')
+        .where('email', '==', email).get()
       return !snapshot.empty
     }),
 
     listEvents: flow(function* listEvents() {
-      firebase.app().firestore().collection('events')
+      firestore().collection('events')
         .where('attendees', 'array-contains', self.player.id).onSnapshot(snapshot => {
           setDocs(snapshot, self.events)
         })
@@ -98,7 +100,7 @@ const Store = types
     }),
 
     attendEvent: flow(function* exists(eventId: string) {
-      yield firebase.app().firestore().collection('events').doc(eventId).update({
+      yield firestore().collection('events').doc(eventId).update({
         attendees: firestore.FieldValue.arrayUnion(self.player.id),
       })
     }),
@@ -111,7 +113,7 @@ const Store = types
 
     listFriends: flow(function* listFriends() {
 
-      firebase.app().firestore().collection('players')
+      firestore().collection('players')
         .where('friends', 'array-contains', self.player.id)
         // .where(firestore.FieldPath.documentId(), 'in', self.player.friends)
         .onSnapshot(snapshot => {
@@ -130,7 +132,7 @@ const Store = types
 
     listChatrooms: flow(function* listChatrooms() {
 
-      firebase.app().firestore().collection('chatrooms').where('players', 'array-contains', self.player.id)
+      firestore().collection('chatrooms').where('players', 'array-contains', self.player.id)
         .onSnapshot(snapshot => {
           setDocs(snapshot, self.chatrooms)
 
@@ -143,7 +145,7 @@ const Store = types
 
     listGroups: flow(function* listGroups() {
 
-      firebase.app().firestore().collection('groups').where('members', 'array-contains', self.player.id)
+      firestore().collection('groups').where('members', 'array-contains', self.player.id)
         .onSnapshot(snapshot => {
           setDocs(snapshot, self.groups)
         })
@@ -167,14 +169,14 @@ const Store = types
     }),
 
     joinGroup: flow(function* exists(groupId: string) {
-      yield firebase.app().firestore().collection('groups').doc(groupId).update({
+      yield firestore().collection('groups').doc(groupId).update({
         members: firestore.FieldValue.arrayUnion(self.player.id),
       })
     }),
 
     listNotifications: flow(function* listNotifications() {
 
-      firebase.app().firestore().collection('players').doc(self.player.id)
+      firestore().collection('players').doc(self.player.id)
         .collection('notifications')
         .onSnapshot(snapshot => {
           setDocs(snapshot, self.notifications, { player_id: self.player.id })
@@ -209,10 +211,10 @@ AsyncStorage.getItem(key).then(stored => {
 export const StoreContext = createContext({ store })
 
 const setDocs = (
-  snapshot: firestore.QuerySnapshot,
+  snapshot: FirebaseFirestoreTypes.QuerySnapshot,
   storeMap: Map<string, any>,
   more?: {},
-  filter?: (change: firestore.DocumentChange) => boolean
+  filter?: (change: FirebaseFirestoreTypes.DocumentChange) => boolean
 ) => {
   return snapshot.docChanges().filter(change => filter ? filter(change) : true).forEach(change => {
     if (change.type === 'removed') {

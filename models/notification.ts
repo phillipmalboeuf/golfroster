@@ -1,6 +1,4 @@
-import firebase, { firestore } from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 import { types, flow, destroy } from 'mobx-state-tree'
 
 import { dateType } from './event'
@@ -19,17 +17,17 @@ export const Notification = types.model({
 })
   .actions(self => ({
     accept: flow(function* accept() {
-      yield firebase.app().firestore().collection('players').doc(self.player_id)
+      yield firestore().collection('players').doc(self.player_id)
         .collection('notifications').doc(self.id).update({ accepted: true })
     }),
     hide: flow(function* hide() {
-      yield firebase.app().firestore().collection('players').doc(self.player_id)
+      yield firestore().collection('players').doc(self.player_id)
         .collection('notifications').doc(self.id).delete()
         
       destroy(self)
     }),
     see: flow(function* see() {
-      yield firebase.app().firestore().collection('players').doc(self.player_id)
+      yield firestore().collection('players').doc(self.player_id)
         .collection('notifications').doc(self.id).update({ seen: true })
     }),
   }))

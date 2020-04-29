@@ -1,6 +1,4 @@
-import firebase, { firestore } from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 import { types, flow } from 'mobx-state-tree'
 
 import { dateType } from './event'
@@ -14,7 +12,7 @@ export const Message = types.model({
 })
   .actions(self => ({
     send: flow(function* send() {
-      yield firebase.app().firestore().collection('chatrooms').doc(self.chatroom_id)
+      yield firestore().collection('chatrooms').doc(self.chatroom_id)
         .collection('messages').add(self)
     }),
   }))
