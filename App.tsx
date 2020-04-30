@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { View, Text } from 'react-native'
 import { DefaultTheme, Provider as PaperProvider, Colors, Theme, Headline, Portal } from 'react-native-paper'
 import { Observer } from 'mobx-react'
+import 'mobx-react-lite/batchingForReactNative'
 import { NativeRouter } from 'react-router-native'
 
 import firestore from '@react-native-firebase/firestore'

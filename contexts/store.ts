@@ -186,6 +186,12 @@ const Store = types
 
     }),
 
+    addToken: flow(function* exists(token: string) {
+      yield firestore().collection('players').doc(self.player.id).update({
+        tokens: firestore.FieldValue.arrayUnion(token),
+      })
+    }),
+
     stopLookingForPlayers: () => {
       self.lookingForPlayers = false
     },

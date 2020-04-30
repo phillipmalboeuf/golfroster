@@ -1,7 +1,7 @@
 import React, { useContext, useState, useRef, Component, ComponentElement } from 'react'
 import { FunctionComponent } from 'react'
 
-import { View, Text, Dimensions, ScrollView } from 'react-native'
+import { View, Text, Dimensions, ScrollView, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Modal, Dialog, Portal, Surface, Searchbar, Caption, Chip } from 'react-native-paper'
 
@@ -42,8 +42,7 @@ export const Search: FunctionComponent<{
             autoFocus autoCorrect={false}
             onChangeText={async text => {
               setQuery(text)
-              const response = await searchIndex.search({ 
-                query: text,
+              const response = await searchIndex.search(text, { 
                 ...filters && { filters: filters.join(' AND ') },
               })
               setHits(response.hits)
@@ -51,8 +50,7 @@ export const Search: FunctionComponent<{
           <Caption style={{ color: 'white' }}><Icon name='filter-variant' size={sizes.small} /> Search filters</Caption>
           <Filters onChange={async values => {
             setFilters(values)
-            const response = await searchIndex.search({
-              query,
+            const response = await searchIndex.search(query, {
               filters: values.join(' AND '),
             })
             setHits(response.hits)

@@ -5,7 +5,6 @@ import { Instance } from 'mobx-state-tree'
 
 import { Text, View, ScrollView, Linking } from 'react-native'
 import { Appbar, Headline, Caption, Card, Paragraph, Chip } from 'react-native-paper'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'

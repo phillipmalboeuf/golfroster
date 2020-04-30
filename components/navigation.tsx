@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, FunctionComponent } from 'react
 import { View } from 'react-native'
 import { useHistory } from 'react-router'
 import { BottomNavigation, DefaultTheme } from 'react-native-paper'
-import CommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Observer } from 'mobx-react'
 
 import { StoreContext } from '../contexts/store'

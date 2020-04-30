@@ -7,7 +7,6 @@ import { Text, View, ScrollView, Dimensions } from 'react-native'
 import { Link, Route, Switch, useHistory } from 'react-router-native'
 import { Button, Appbar } from 'react-native-paper'
 import { Calendar, Agenda } from 'react-native-calendars'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
