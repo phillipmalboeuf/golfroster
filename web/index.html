@@ -3,6 +3,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Golf Roster</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+    }
+    
+    main {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    section {
+      padding: 1rem;
+      width: 42ch;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin: 0.5em 0;
+    }
+
+    h3 {
+      font-size: 22px;
+      font-weight: normal;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      
+      font-size: 14px;
+      padding: 1rem;
+      border-top: 1px solid hsla(0, 0%, 0%, 0.2);
+    }
+
+    small {
+      font-size: 14px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0;
+      margin: 0.5rem 0;
+
+      font-size: 22px;
+    }
+
+    a {
+      color: #007251;
+    }
+
+    nav a {
+      padding: 0.5rem;
+    }
+
+    @media all and (max-width:1024px) {
+      footer nav {
+        width: 100%;
+        order: -1;
+        margin-left: -0.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <main id="main"></main>
