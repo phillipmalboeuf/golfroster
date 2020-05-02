@@ -26,7 +26,7 @@ export const Subscribe: FunctionComponent<{
           color={styles.colors.blacks[2]} style={{ textAlign: 'center' }} />
         <Subtitle>The {props.label} functionaliy is only available to Pro Members.</Subtitle>
         <Button contained black pill icon='account-card-details-outline' onPress={() => {
-          Linking.openURL(`http://localhost:8080?email=${store.player.email}`)
+          Linking.openURL(`http://localhost:8080/checkout?email=${store.player.email}`)
         }}>Sign Up</Button>
         <Button grey compact onPress={props.onCancel}>Cancel {props.label}</Button>
       </Padded>
@@ -60,7 +60,7 @@ export const MembershipCard: FunctionComponent<{
         borderTopWidth: 1,
       }}>
         <Button contained black pill icon='account-card-details-outline' onPress={() => {
-          Linking.openURL(`http://localhost:8080?email=${store.player.email}`)
+          Linking.openURL(`http://localhost:8080/checkout?email=${store.player.email}`)
         }}>Sign Up</Button>
         <Button onPress={() => {
           store.stopAskingForPro()

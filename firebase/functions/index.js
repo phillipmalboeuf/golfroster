@@ -11,7 +11,6 @@ admin.initializeApp();
 let CONFIG = functions.config();
 const stripe = require('stripe')(CONFIG.stripe.key);
 
-
 exports.newUser = functions.auth.user().onCreate(async user => {
   return await admin
     .firestore()
@@ -79,6 +78,54 @@ async function sendNotification(
       date: new Date(),
     });
 }
+
+exports.sendCloudNotification = functions.firestore
+  .document('players/{playerId}/notifications/{id}')
+  .onCreate(async (snapshot, {params}) => {
+    const notification = snapshot.data();
+    const player = (await admin
+      .firestore()
+      .collection('players')
+      .doc(params.playerId)
+      .get()).data();
+
+    return (
+      player.tokens &&
+      (await admin.messaging().sendMulticast({
+        tokens: player.tokens,
+        notification: {
+          group: {
+            title: `Group Invitation`,
+            body: `You were invited to join ${notification.subject_name}.`,
+          },
+          event: {
+            title: `Event Invitation`,
+            body: `You were invited to attend ${notification.subject_name}.`,
+          },
+          player: {
+            title: `Friend Request`,
+            body: `${notification.subject_name} has sent you a friend request.`,
+          },
+          group_accepted: {
+            title: `Group Accepted`,
+            body: `${
+              notification.sent_by_name
+            } has accepted your invitation to join ${
+              notification.subject_name
+            }!`,
+          },
+          event_accepted: {
+            title: `Event Accepted`,
+            body: `${
+              notification.sent_by_name
+            } has accepted your invitation to attend ${
+              notification.subject_name
+            }`,
+          },
+        }[notification.type],
+      }))
+    );
+  });
 
 exports.inviteToGroup = functions.firestore
   .document('groups/{groupId}/invitations/{id}')
@@ -214,41 +261,44 @@ exports.unindexEvent = functions.firestore
 
 const server = express();
 
-server.use(cors({ origin: true }))
-server.use(bodyParser.raw({type: 'application/json'}))
+server.use(cors({origin: true}));
+server.use(bodyParser.raw({type: 'application/json'}));
 server.post('/', async (request, response) => {
   const sig = request.headers['stripe-signature'];
 
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(request.rawBody, sig, CONFIG.stripe.webhook);
+    event = stripe.webhooks.constructEvent(
+      request.rawBody,
+      sig,
+      CONFIG.stripe.webhook,
+    );
   } catch (err) {
     return response.status(400).send(`Webhook Error: ${err.message}`);
   }
 
   const subscription = event.data.object;
-  const customer = await stripe.customers.retrieve(subscription.customer)
-  
+  const customer = await stripe.customers.retrieve(subscription.customer);
+
   const player = (await admin
     .firestore()
     .collection('players')
     .where('email', '==', customer.email)
-    .get()).docs[0]
+    .get()).docs[0];
 
   const doc = admin
     .firestore()
     .collection('players')
-    .doc(player.id)
+    .doc(player.id);
 
   if (event.type === 'customer.subscription.created') {
-    await doc.set({ pro: true, subscription: subscription.id }, { merge: true })
-    
+    await doc.set({pro: true, subscription: subscription.id}, {merge: true});
   } else if (event.type === 'customer.subscription.deleted') {
-    await doc.set({ pro: false, subscription: subscription.id }, { merge: true })
+    await doc.set({pro: false, subscription: subscription.id}, {merge: true});
   }
 
   return response.json({received: true});
-})
+});
 
-exports.subscription = functions.https.onRequest(server)
+exports.subscription = functions.https.onRequest(server);

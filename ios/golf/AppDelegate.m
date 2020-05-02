@@ -6,6 +6,7 @@
 
 #import <Firebase.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <RNNotifications.h>
 
 #if DEBUG
 #import <FlipperKit/FlipperClient.h>
@@ -51,6 +52,8 @@ static void InitializeFlipper(UIApplication *application) {
     [FIRApp configure];
   }
 
+  [RNNotifications startMonitorNotifications];
+
   return YES;
 }
 
@@ -61,6 +64,14 @@ static void InitializeFlipper(UIApplication *application) {
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  [RNNotifications didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+  [RNNotifications didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 @end

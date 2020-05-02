@@ -53,7 +53,7 @@ export const GetStarted: FunctionComponent<{}> = props => {
         Let’s connect by entering your email address or by logging in with your Facebook account.
       </Subtitle>
 
-      <Form onSubmit={async values => {
+      <Form values={{ email: 'phil+3@phils.computer' }} onSubmit={async values => {
         setExists(await store.exists(values.email))
         setEmail(values.email)
       }} cta='Continue with Email'>

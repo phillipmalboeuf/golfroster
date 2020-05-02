@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import { useHistory } from 'react-router'
 import { BottomNavigation, DefaultTheme } from 'react-native-paper'
 import { Observer } from 'mobx-react'
+import messaging from '@react-native-firebase/messaging'
 
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
@@ -41,6 +42,12 @@ export const Navigation: FunctionComponent<{}> = props => {
     const root = history.location.pathname.split('/')[1]
     setIndex(routes.findIndex(route => route.key.includes(root === 'groups' ? 'players' : root)))
   }, [history.location])
+
+  useEffect(() => {
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      history.push(`/notifications`)
+    })
+  }, [])
 
   return <BottomNavigation
     shifting={false}

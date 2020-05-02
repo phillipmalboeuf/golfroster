@@ -3,7 +3,8 @@ import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firest
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 
 import { createContext } from 'react'
-import { AsyncStorage } from 'react-native'
+import { Alert } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { types, flow, unprotect, onSnapshot, applySnapshot, Instance, castFlowReturn } from 'mobx-state-tree'
 
 import { Player } from '../models/player'
@@ -31,7 +32,7 @@ const Store = types
     askingForPro: types.optional(types.boolean, true),
   })
   .views(self => ({
-    eventDates(): {[key: string]: Array<Instance<typeof EventModel>>} {
+    eventDates(): {[key: string]: Instance<typeof EventModel>[]} {
       return Array.from(self.events.values()).reduce((dates, event) => {
         const start = event.start_date.toISOString().split('T')[0]
         // const end = event.end_date.toISOString().split('T')[0]
