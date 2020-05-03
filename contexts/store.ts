@@ -187,7 +187,7 @@ const Store = types
 
     }),
 
-    addToken: flow(function* exists(token: string) {
+    addToken: flow(function* addToken(token: string) {
       yield firestore().collection('players').doc(self.player.id).update({
         tokens: firestore.FieldValue.arrayUnion(token),
       })
@@ -200,6 +200,16 @@ const Store = types
     stopAskingForPro: () => {
       self.askingForPro = false
     },
+
+    sendFeedback: flow(function* sendFeedback(subject: string, body: string) {
+      yield firestore().collection('feedback').add({
+        player_id: self.player.id,
+        player_name: `${self.player.first_name} ${self.player.last_name}`,
+        player_email: self.player.email,
+        subject,
+        body,
+      })
+    }),
   }))
 
 const store = Store.create({ badges: {} })

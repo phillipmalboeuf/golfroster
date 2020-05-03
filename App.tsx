@@ -73,7 +73,6 @@ const App = () => {
       messaging()
         .getToken()
         .then(async token => {
-          Alert.alert(token)
           return store.addToken(token)
         })
 
@@ -101,7 +100,7 @@ const App = () => {
       {user === undefined
         ? <Center><Title>One moment...</Title></Center>
         : <Observer>{() => (user !== null && store.player)
-          ?  store.player.accepted_terms
+          ?  !store.player.accepted_terms
             ? <NativeRouter><Portal.Host><Navigation /></Portal.Host></NativeRouter>
             : <View>
               <PlayerForm onSubmit={() => undefined} onCancel={() => auth().signOut()} />

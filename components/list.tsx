@@ -10,17 +10,17 @@ import { StylesContext } from '../contexts/styles'
 
 
 export const List: FunctionComponent<{
-  sections: Array<{
+  sections: {
     title?: string
-    items: Array<{
+    items: {
       title: string | JSX.Element
       link?: string
       description?: string| JSX.Element
       left?: JSX.Element
       right?: JSX.Element
-    }>
+    }[]
     onItemClick?: () => void
-  }>
+  }[]
 }> = ({ sections }) => {
   const { colors, sizes } = useContext(StylesContext)
 

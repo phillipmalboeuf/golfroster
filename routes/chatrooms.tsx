@@ -14,6 +14,7 @@ import { Chatroom } from '../components/chatroom'
 import { List } from '../components/list'
 import { Instance } from 'mobx-state-tree'
 import { Empty } from '../components/empty'
+import { Menu, MenuItem } from '../components/menu'
 
 
 export const Chatrooms: FunctionComponent<{}> = props => {
@@ -28,7 +29,7 @@ export const Chatrooms: FunctionComponent<{}> = props => {
           <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
             <Link to='/chatrooms'><Appbar.BackAction /></Link>
             <Appbar.Content title={chatroomTitle(chatroom, store)} />
-            <Appbar.Action icon='dots-vertical' />
+            <Menu light />
           </Appbar.Header>
           <Chatroom chatroom={chatroom} />
         </Fragment>
@@ -37,7 +38,7 @@ export const Chatrooms: FunctionComponent<{}> = props => {
         <Appbar.Header>
           <Appbar.Content title='Message Threads' />
           {/* <Appbar.Action icon='magnify' /> */}
-          <Appbar.Action icon='dots-vertical' />
+          <Menu />
         </Appbar.Header>
         <ScrollView>
           <Observer>{() => store.chatrooms.size ? <List sections={[

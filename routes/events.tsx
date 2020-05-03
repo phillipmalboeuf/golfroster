@@ -23,6 +23,7 @@ import { Event } from '../models/event'
 import { Chatroom } from '../models/chatroom'
 import { FloatingButton } from '../components/button'
 import { Empty } from '../components/empty'
+import { Menu, MenuItem } from '../components/menu'
 
 
 export const Events: FunctionComponent<{}> = props => {
@@ -57,7 +58,7 @@ export const Events: FunctionComponent<{}> = props => {
               })
             }
           }} />
-          <Appbar.Action icon='dots-vertical' />
+          <Menu light />
         </Appbar.Header>
 
         <EventPage event={event} />
@@ -69,7 +70,7 @@ export const Events: FunctionComponent<{}> = props => {
       <Appbar.Header>
         <Appbar.Content title='Upcoming Events' />
         <Appbar.Action icon='magnify' onPress={() => setSearching(true)} />
-        <Appbar.Action icon='dots-vertical' />
+        <Menu />
       </Appbar.Header>
 
       <Search visible={searching} onDismiss={() => setSearching(false)} index='events'

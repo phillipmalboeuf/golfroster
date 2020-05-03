@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { FunctionComponent } from 'react'
 
-import { View, Text, Dimensions } from 'react-native'
-import { Headline, Subheading } from 'react-native-paper'
+import { View, Text, Dimensions, TouchableHighlight, TouchableNativeFeedback } from 'react-native'
+import { Headline, Subheading, Button } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { StylesContext } from '../contexts/styles'
@@ -72,4 +72,13 @@ export const Quote: FunctionComponent<{
       <Text style={{ flex: 1, fontSize: sizes.base, lineHeight: sizes.base * 1.33 }}>{props.children}</Text>
     </View>
   </Padded>
+}
+
+export const Underline: FunctionComponent<{
+  onPress: () => void
+}> = ({ onPress, children }) => {
+  const { sizes, colors } = useContext(StylesContext)
+  return <TouchableNativeFeedback><Text onPress={onPress} style={{
+    color: colors.green,
+  }}>{children}</Text></TouchableNativeFeedback>
 }

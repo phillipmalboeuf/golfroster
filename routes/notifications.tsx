@@ -13,7 +13,7 @@ import { StoreContext } from '../contexts/store'
 import { Avatar } from '../components/photos'
 import { Popup } from '../components/popup'
 import { Empty } from '../components/empty'
-
+import { Menu, MenuItem } from '../components/menu'
 
 export const Notifications: FunctionComponent<{}> = props => {
   const { store } = useContext(StoreContext)
@@ -59,7 +59,7 @@ export const Notifications: FunctionComponent<{}> = props => {
       return <>
         <Appbar.Header>
           <Appbar.Content title='Notifications & Invitations' />
-          <Appbar.Action icon='dots-vertical' />
+          <Menu />
         </Appbar.Header>
         
         <ScrollView>

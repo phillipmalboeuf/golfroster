@@ -119,7 +119,7 @@ export const Row: FunctionComponent<{
   italicTitle?: boolean
   boldItems?: boolean
   title: string
-  items: Array<string | number>
+  items: (string | number)[]
   labels?: {[key: string]: string}
 }> = ({ italicTitle, boldItems, title, items, labels }) => {
   return items && items.length ? <View style={{

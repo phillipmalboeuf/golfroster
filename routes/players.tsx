@@ -22,7 +22,7 @@ import { List } from '../components/list'
 import { Button, FloatingButton } from '../components/button'
 import { Full } from '../components/layouts'
 import { Empty } from '../components/empty'
-
+import { Menu, MenuItem } from '../components/menu'
 
 const PlayerRoute: FunctionComponent<{
   id: string
@@ -54,7 +54,7 @@ const PlayerRoute: FunctionComponent<{
           }
         }} />
         : <Appbar.Action icon='account-plus' />}
-      <Appbar.Action icon='dots-vertical' />
+      <Menu light />
     </Appbar.Header>
     <Player player={player} />
   </> : null
@@ -88,7 +88,7 @@ const GroupRoute: FunctionComponent<{
               })
             }
           }} />
-      <Appbar.Action icon='dots-vertical' />
+      <Menu light />
     </Appbar.Header>
     <Group group={group} />
     {editing && <Full><GroupForm group={group} 
@@ -113,7 +113,7 @@ export const Players: FunctionComponent<{}> = props => {
       <Appbar.Header>
         <Appbar.Content title='Friends & Groups' />
         <Appbar.Action icon='magnify' onPress={() => setSearching(true)} />
-        <Appbar.Action icon='dots-vertical' />
+        <Menu />
       </Appbar.Header>
 
       <Search visible={searching} onDismiss={() => setSearching(false)} index='players'
