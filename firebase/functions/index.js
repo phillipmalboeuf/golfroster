@@ -293,9 +293,9 @@ server.post('/', async (request, response) => {
     .doc(player.id);
 
   if (event.type === 'customer.subscription.created') {
-    await doc.set({pro: true, subscription: subscription.id}, {merge: true});
+    await doc.update({pro: true, subscription: subscription.id});
   } else if (event.type === 'customer.subscription.deleted') {
-    await doc.set({pro: false, subscription: subscription.id}, {merge: true});
+    await doc.update({pro: false, subscription: subscription.id});
   }
 
   return response.json({received: true});

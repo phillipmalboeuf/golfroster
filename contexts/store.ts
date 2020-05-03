@@ -53,23 +53,12 @@ const Store = types
   .actions(self => ({
 
     login: flow(function* login(id: string) {
-      const waitForPlayer = new Promise((resolve, reject) => {
-        const unsubscribe = firestore().collection('players').doc(id)
-          .onSnapshot({
-            next: doc => {
-              if (doc.data()) {
-                unsubscribe()
-                resolve(doc.data())
-              }
-            },
-            error: error => {
-              unsubscribe()
-              reject(error)
-            },
-          })
+      self.player = Player.create({ id })
+      yield self.player.fetch()
+      
+      firestore().collection('players').doc(id).onSnapshot(doc => {
+        self.player.set(doc.data())
       })
-      const data: FirebaseFirestoreTypes.DocumentSnapshot = yield waitForPlayer
-      self.player = Player.create({ id, ...data })
     }),
 
     logout: flow(function* logout() {
@@ -215,14 +204,14 @@ const Store = types
 const store = Store.create({ badges: {} })
 unprotect(store)
 
-onSnapshot(store, snapshot => {
-  AsyncStorage.setItem(key, JSON.stringify(snapshot))
-})
-
 AsyncStorage.getItem(key).then(stored => {
   if (stored) {
     applySnapshot(store, JSON.parse(stored))
   }
+})
+
+onSnapshot(store, snapshot => {
+  AsyncStorage.setItem(key, JSON.stringify(snapshot))
 })
 
 export const StoreContext = createContext({ store })

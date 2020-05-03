@@ -21,7 +21,7 @@ export const Chatroom = types.model({
     create: flow(function* create() {
       delete self.messages
       delete self.latest
-      yield firestore().collection('chatrooms').doc(self.id).set(self, { merge: true })
+      yield firestore().collection('chatrooms').doc(self.id).update(self)
 
       return self
     }),

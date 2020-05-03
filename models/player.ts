@@ -26,6 +26,9 @@ export const Player = types.model({
   pro: types.maybe(types.boolean),
 })
   .actions(self => ({
+    set: flow(function* set(data) {
+      Object.keys(data).forEach(key => self[key] = data[key])
+    }),
     fetch: flow(function* fetch() {
       const snapshot: FirebaseFirestoreTypes.DocumentSnapshot = yield firestore().collection('players')
         .doc(self.id).get()
@@ -36,7 +39,7 @@ export const Player = types.model({
     
     save: flow(function* save(data: any) {
       Object.keys(data).forEach(key => (data[key] === undefined) && delete data[key])
-      yield firestore().collection('players').doc(self.id).set(data, { merge: true })
+      yield firestore().collection('players').doc(self.id).update(data)
 
       Object.keys(data).forEach(key => self[key] = data[key])
     }),

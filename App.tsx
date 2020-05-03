@@ -23,6 +23,8 @@ import { Title } from './components/text'
 import { players } from './helpers/generators'
 
 
+firestore().settings({ persistence: false })
+firestore().enableNetwork()
 messaging().requestPermission()
 
 async function onMessageReceived(message) {
@@ -100,7 +102,7 @@ const App = () => {
       {user === undefined
         ? <Center><Title>One moment...</Title></Center>
         : <Observer>{() => (user !== null && store.player)
-          ?  !store.player.accepted_terms
+          ?  store.player.accepted_terms
             ? <NativeRouter><Portal.Host><Navigation /></Portal.Host></NativeRouter>
             : <View>
               <PlayerForm onSubmit={() => undefined} onCancel={() => auth().signOut()} />
