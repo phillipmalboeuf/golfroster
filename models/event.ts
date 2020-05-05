@@ -29,7 +29,7 @@ export const Event = types.model({
   .actions(self => ({
     save: flow(function* save(data: any) {
       Object.keys(data).forEach(key => (data[key] === undefined) && delete data[key])
-      yield firestore().collection('events').doc(self.id).update(data)
+      yield firestore().collection('events').doc(self.id).set(data, { merge: true })
       
       Object.keys(data).forEach(key => self[key] = data[key])
     }),

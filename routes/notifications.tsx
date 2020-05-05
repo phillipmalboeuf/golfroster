@@ -76,7 +76,10 @@ export const Notifications: FunctionComponent<{}> = props => {
                     ? `${notification.sent_by_name} invited you to attend`
                     : 'You were invited to attend'}
                   right={() => <AcceptButton notification={notification} />} />,
-                player: () => <List.Item style={!notification.accepted && highlight} title={`${notification.subject_name}`}
+                player: () => store.friends.has(notification.subject_id) 
+                ? <List.Item style={!notification.accepted && highlight} title={`${notification.subject_name}`}
+                  description={'has accepted your friend request!'} />
+                : <List.Item style={!notification.accepted && highlight} title={`${notification.subject_name}`}
                   description={'has sent you a friend request'}
                   right={() => <AcceptButton notification={notification} />} />,
                 group_accepted: () => <List.Item title={`${notification.sent_by_name} has accepted your invitation to join ${notification.subject_name}!`} />,

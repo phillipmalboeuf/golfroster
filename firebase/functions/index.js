@@ -62,6 +62,8 @@ async function sendNotification(
       .doc(sent_by_id)
       .get()).data();
 
+  console.log('SENDING', player_id);
+
   return admin
     .firestore()
     .collection('players')
@@ -173,6 +175,8 @@ exports.friendRequest = functions.firestore
     const friends = player.friends.filter(
       friend => !previous.friends.includes(friend),
     );
+
+    console.log(friends);
 
     return friends.map(friend => {
       return sendNotification(

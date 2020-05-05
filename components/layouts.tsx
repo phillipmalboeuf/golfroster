@@ -79,3 +79,14 @@ export const TopRight: FunctionComponent<{}> = props => {
     {props.children}
   </View>
 }
+
+export const BottomRight: FunctionComponent<{}> = props => {
+  return <View style={{
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    padding: 10,
+  }}>
+    {props.children}
+  </View>
+}

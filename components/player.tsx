@@ -42,16 +42,6 @@ export const Player: FunctionComponent<{
               {player.first_name} {player.last_name}
             </Headline>
             <Caption style={{ color: 'white', fontSize: sizes.base }}>{player.city}, {player.state}</Caption>
-            {player.id !== store.player.id && (store.player.friends.includes(player.id)
-              ? player.friends.includes(store.player.id)
-                ? <Button outlined
-                    onPress={() => store.player.unfriend(player.id)}>Unfriend</Button>
-                : <Button outlined disabled>Friend Request Sent</Button>
-              : player.friends.includes(store.player.id)
-                ? <Button outlined
-                    onPress={() => store.player.requestFriend(player.id)}>Respond to Friend Request</Button>
-                : <Button outlined
-                    onPress={() => store.player.requestFriend(player.id)}>Send a Friend Request</Button>)}
           </View>
 
           {player.pro && <TopRight>
@@ -65,6 +55,26 @@ export const Player: FunctionComponent<{
       </Background>
         
       {player.bio && <Quote>{player.bio}</Quote>}
+
+      {player.id !== store.player.id && <Padded tight>
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <Subheader>Friend Request Status</Subheader>
+        {(store.player.friends.includes(player.id)
+          ? player.friends.includes(store.player.id)
+            ? <Button contained
+                onPress={() => store.player.unfriend(player.id)}>Unfriend</Button>
+            : <Button contained disabled>Friend Request Sent</Button>
+          : player.friends.includes(store.player.id)
+            ? <Button contained
+                onPress={() => store.player.requestFriend(player.id)}>Respond to Friend Request</Button>
+            : <Button contained
+                onPress={() => store.player.requestFriend(player.id)}>Send a Friend Request</Button>)}
+        </View>
+      </Padded>}
 
       <Padded tight>
         <Subheader>{player.first_name}'s Clubs</Subheader>

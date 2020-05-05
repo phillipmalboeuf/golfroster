@@ -54,7 +54,8 @@ const PlayerRoute: FunctionComponent<{
           }
         }} />
         : <Appbar.Action icon='account-plus' />}
-      <Menu light />
+      <Menu light>
+      </Menu>
     </Appbar.Header>
     <Player player={player} />
   </> : null
@@ -113,7 +114,9 @@ export const Players: FunctionComponent<{}> = props => {
       <Appbar.Header>
         <Appbar.Content title='Friends & Groups' />
         <Appbar.Action icon='magnify' onPress={() => setSearching(true)} />
-        <Menu />
+        <Menu>
+          <MenuItem onPress={() => setBuilding(true)} title='Create a New Group' />
+        </Menu>
       </Appbar.Header>
 
       <Search visible={searching} onDismiss={() => setSearching(false)} index='players'
@@ -143,7 +146,9 @@ export const Players: FunctionComponent<{}> = props => {
         </View>}</Observer>
       </ScrollView>
 
-      {building && <Full><GroupForm onSubmit={() => setBuilding(false)} onCancel={() => setBuilding(false)} /></Full>}
+      {building && <Full><GroupForm onSubmit={() => {
+        setBuilding(false)
+      }} onCancel={() => setBuilding(false)} /></Full>}
       <FloatingButton
         icon='plus'
         onPress={() => setBuilding(true)}

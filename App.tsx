@@ -28,7 +28,7 @@ firestore().enableNetwork()
 messaging().requestPermission()
 
 async function onMessageReceived(message) {
-  Alert.alert(JSON.stringify(message))
+  // Alert.alert(JSON.stringify(message))
 }
 
 messaging().onMessage(onMessageReceived)
