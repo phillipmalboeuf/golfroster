@@ -10,7 +10,7 @@ import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 import { Player as PlayerModel } from '../models/player'
 
-import { Center, Padded, TopRight } from './layouts'
+import { Center, Padded, TopRight, Spaced } from './layouts'
 import { Avatar, Background } from './photos'
 import { Button } from './button'
 import { Subheader, Italic, Bold, Quote } from './text'
@@ -57,23 +57,19 @@ export const Player: FunctionComponent<{
       {player.bio && <Quote>{player.bio}</Quote>}
 
       {player.id !== store.player.id && <Padded tight>
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
+        <Spaced>
         <Subheader>Friend Request Status</Subheader>
         {(store.player.friends.includes(player.id)
           ? player.friends.includes(store.player.id)
-            ? <Button contained
+            ? <Button outlined compact
                 onPress={() => store.player.unfriend(player.id)}>Unfriend</Button>
-            : <Button contained disabled>Friend Request Sent</Button>
+            : <Button outlined compact disabled>Friend Request Sent</Button>
           : player.friends.includes(store.player.id)
-            ? <Button contained
+            ? <Button outlined compact
                 onPress={() => store.player.requestFriend(player.id)}>Respond to Friend Request</Button>
-            : <Button contained
+            : <Button outlined compact
                 onPress={() => store.player.requestFriend(player.id)}>Send a Friend Request</Button>)}
-        </View>
+        </Spaced>
       </Padded>}
 
       <Padded tight>

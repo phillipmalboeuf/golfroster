@@ -30,9 +30,11 @@ export const Button: FunctionComponent<{
     labelStyle={{
       fontSize: styles.sizes.base,
       ...props.grey && { color: styles.colors.blacks[1] },
+      ...props.compact && { marginTop: styles.sizes.base/3 },
       // lineHeight: styles.sizes.base * 1.25,
     }}
     style={{
+      ...props.compact && { height: styles.sizes.base*2 },
       ...props.pill && { borderRadius: styles.sizes.base * 1.333 },
       ...props.icon && { paddingRight: styles.sizes.base / 2 },
       ...props.black && { backgroundColor: styles.colors.blacks[0] },

@@ -10,6 +10,7 @@ import moment from 'moment'
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
 import { Event as EventModel } from '../models/event'
+import { Group } from '../models/group'
 
 import { Center, Padded, Spaced } from './layouts'
 import { Avatar, Background } from './photos'
@@ -49,7 +50,7 @@ export const Event: FunctionComponent<{
         
       {event.description && <Quote>{event.description}</Quote>}
 
-      <Members label='Members' ids={event.attendees} organizer={event.organizer_id} />
+      <Members label='Attendees' ids={event.members} organizer={event.organizer_id} group={event as unknown as Instance<typeof Group>} />
 
       <Padded tight>
         <Subheader>Club Location</Subheader>

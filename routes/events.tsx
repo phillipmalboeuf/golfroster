@@ -52,7 +52,7 @@ export const Events: FunctionComponent<{}> = props => {
             } else {
               await store.createChatroom({
                 event_id: match.params.id,
-                players: event.attendees.filter(attendee => attendee !== store.player.id),
+                players: event.members.filter(attendee => attendee !== store.player.id),
               }).then(room => {
                 history.push(`/chatrooms/${(room as any as Instance<typeof Chatroom>).id}`)
               })

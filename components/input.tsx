@@ -22,7 +22,7 @@ interface Props {
   disabled?: boolean
   min?: number
   max?: number
-  options?: Array<{ label: string, value: string }>
+  options?: { label: string, value: string }[]
   autoFocus?: boolean
   autoComplete?: string
   flat?: boolean
@@ -131,6 +131,7 @@ export const DatetimePicker: React.FunctionComponent<{
     <DateTimePickerModal
       isVisible={visible}
       mode='datetime'
+      minuteInterval={15}
       onConfirm={date => {
         props.onConfirm(date)
         setVisibility(false)
@@ -164,7 +165,7 @@ export const RangeSlider: React.FunctionComponent<{
         onValuesChange={values => props.onChange(parseFloat(values[0].toFixed(1)))}
         trackStyle={{ backgroundColor: colors.greys[1] }}
         selectedStyle={{ backgroundColor: colors.green }}
-        pressedMarkerStyle={{ shadowOffset: { height: 2 } }} />
+        pressedMarkerStyle={{ shadowOffset: { width: 0, height: 2 } }} />
       {/* <Slider value={props.value}
         minimumTrackTintColor={colors.green}
         maximumTrackTintColor={colors.green}

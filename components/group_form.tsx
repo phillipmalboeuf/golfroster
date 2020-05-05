@@ -22,6 +22,7 @@ import { FloatingButton } from './button'
 import { postprocess, preprocess } from './event_form'
 import { states } from './player_form'
 import { Subscribe } from './subscribe'
+import { InvitesList } from './invites_form'
 
 export const GroupForm: FunctionComponent<{
   group?: Instance<typeof Group>
@@ -58,23 +59,7 @@ export const GroupForm: FunctionComponent<{
           Who would you like to invite to the group?
         </Subtitle>
 
-        <ScrollView style={{ maxHeight: '75%' }}>
-          <FormContext.Consumer>
-            {({ values, onChange }) =>
-              <List.Section>
-                <List.Subheader style={{ textAlign: 'right' }}>{values.invited
-                  ? Object.keys(values.invited).filter(id => values.invited[id] === true).length
-                  : 0} invited</List.Subheader>
-                {Array.from(store.friends.values()).map(friend => {
-                  const name = `invited.${friend.id}`
-                  return <List.Item key={friend.id} title={`${friend.first_name} ${friend.last_name}`}
-                    onPress={() => onChange(name, pick(name, values) !== undefined ? !pick(name, values) : true)}
-                    left={() => <Avatar {...friend} small />}
-                    right={() => <Input name={`invited.${friend.id}`} type='checkbox' />} />
-                })}
-              </List.Section>
-          }</FormContext.Consumer>
-        </ScrollView>
+        <InvitesList />
       </>,
       <Center>
         <Title>

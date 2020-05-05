@@ -22,6 +22,7 @@ import { Title, Subtitle } from './text'
 import { FloatingButton } from './button'
 import { money, drinks, methods, teeChoices } from './player_form'
 import { Subscribe } from './subscribe'
+import { InvitesList } from './invites_form'
 
 export const list = (values: {[key: string]: boolean}) => {
   return values
@@ -71,8 +72,11 @@ export const EventForm: FunctionComponent<{
 
   return store.player.pro
   ? <Form ref={form} values={props.event && postprocess(props.event)} onSubmit={async ({invited, ...values}) => {
+    console.log('submit?')
     if (!props.event) {
+      console.log(preprocess(values))
       const event = await store.createEvent(preprocess(values))
+      console.log(event)
       if (invited) {
         Object.keys(invited).filter(id => invited[id] === true).forEach(id => event.invite(id, store.player.id))
       }
@@ -81,6 +85,7 @@ export const EventForm: FunctionComponent<{
       await props.event.save(preprocess(values))
     }
 
+    console.log('done?')
     props.onSubmit()
   }} hideButton>
     <Dots path='new_event' onCancel={() => props.onCancel()} onFinish={() => form.current.submit()} items={[
@@ -172,27 +177,7 @@ export const EventForm: FunctionComponent<{
           Who would you like to invite to this event?
         </Subtitle>
 
-        <ScrollView style={{ maxHeight: '75%' }}>
-          <FormContext.Consumer>
-            {({ values, onChange }) =>
-              <List.Section>
-                <List.Subheader style={{ textAlign: 'right' }}>{values.invited
-                  ? Object.keys(values.invited).filter(id => values.invited[id] === true).length
-                  : 0} invited</List.Subheader>
-                {Array.from(store.friends.values()).map(friend => {
-                  const name = `invited.${friend.id}`
-                  return <List.Item key={friend.id} title={`${friend.first_name} ${friend.last_name}`}
-                    onPress={() => onChange(name, pick(name, values) !== undefined ? !pick(name, values) : true)}
-                    left={() => <Avatar {...friend} small />}
-                    right={() => <Input name={`invited.${friend.id}`} type='checkbox' />} />
-                })}
-                {/* {Array.from(store.groups.values()).map(group =>
-                  <List.Item key={group.id} title={group.name}
-                    right />
-                )} */}
-              </List.Section>
-          }</FormContext.Consumer>
-        </ScrollView>
+        <InvitesList />
       </>,
       <Center>
         <Title>

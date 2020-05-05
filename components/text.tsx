@@ -69,7 +69,7 @@ export const Quote: FunctionComponent<{
     <View style={{ flexDirection: 'row' }}>
       <Icon style={{ marginRight: sizes.base / 2 }}
         name='format-quote-open' size={sizes.big} />
-      <Text style={{ flex: 1, fontSize: sizes.base, lineHeight: sizes.base * 1.33 }}>{props.children}</Text>
+      <Text style={{ flex: 1, fontSize: sizes.base, lineHeight: sizes.base * 1.33, marginTop: sizes.base / 2 }}>{props.children}</Text>
     </View>
   </Padded>
 }

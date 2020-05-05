@@ -48,7 +48,7 @@ export const Group: FunctionComponent<{
 
       {group.description && <Quote>{group.description}</Quote>}
       
-      <Members label='Members' ids={group.members} organizer={group.organizer_id} />
+      <Members label='Members' ids={group.members} organizer={group.organizer_id} group={group} />
 
       <Padded tight>
           {/* <Row boldItems title='GHIN Index'

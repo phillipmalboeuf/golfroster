@@ -74,7 +74,7 @@ const Store = types
 
     listEvents: flow(function* listEvents() {
       firestore().collection('events')
-        .where('attendees', 'array-contains', self.player.id).onSnapshot(snapshot => {
+        .where('members', 'array-contains', self.player.id).onSnapshot(snapshot => {
           setDocs(snapshot, self.events)
         })
     }),
@@ -83,15 +83,16 @@ const Store = types
       const event = EventModel.create({
         ...data,
         organizer_id: self.player.id,
-        attendees: [self.player.id],
+        members: [self.player.id],
       })
+      console.log(event)
       yield event.save(event)
       return event
     }),
 
     attendEvent: flow(function* exists(eventId: string) {
       yield firestore().collection('events').doc(eventId).update({
-        attendees: firestore.FieldValue.arrayUnion(self.player.id),
+        members: firestore.FieldValue.arrayUnion(self.player.id),
       })
     }),
 
