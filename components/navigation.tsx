@@ -45,7 +45,11 @@ export const Navigation: FunctionComponent<{}> = props => {
 
   useEffect(() => {
     messaging().onNotificationOpenedApp(remoteMessage => {
-      history.push(`/notifications`)
+      if (remoteMessage.data.type === 'notification') {
+        history.push(`/notifications`)
+      } else if (remoteMessage.data.type === 'chat') {
+        history.push(`/chatrooms/${remoteMessage.data.id}`)
+      }
     })
   }, [])
 

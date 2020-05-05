@@ -125,7 +125,54 @@ exports.sendCloudNotification = functions.firestore
             }`,
           },
         }[notification.type],
+        data: {
+          type: 'notification',
+        },
       }))
+    );
+  });
+
+exports.sendCloudChat = functions.firestore
+  .document('chatrooms/{chatroomId}/messages/{id}')
+  .onCreate(async (snapshot, {params}) => {
+    const message = snapshot.data();
+    const chatroom = (await admin
+      .firestore()
+      .collection('chatrooms')
+      .doc(params.chatroomId)
+      .get()).data();
+
+    const players = await Promise.all(
+      chatroom.players.map(async player_id =>
+        (await admin
+          .firestore()
+          .collection('players')
+          .doc(player_id)
+          .get()).data(),
+      ),
+    );
+
+    console.log(players);
+
+    const sender = await players.find(
+      player => message.player_id === player.id,
+    );
+    console.log(sender);
+
+    return players.map(
+      async player =>
+        player.tokens &&
+        (await admin.messaging().sendMulticast({
+          tokens: player.tokens,
+          notification: {
+            title: `${sender.first_name} ${sender.last_name}`,
+            body: message.body,
+          },
+          data: {
+            type: 'chat',
+            id: chatroom.id,
+          },
+        })),
     );
   });
 

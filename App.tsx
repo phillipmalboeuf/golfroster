@@ -22,13 +22,13 @@ import { Center } from './components/layouts'
 import { Title } from './components/text'
 import { players } from './helpers/generators'
 
-
+// @ts-ignore
 firestore().settings({ persistence: false })
 firestore().enableNetwork()
 messaging().requestPermission()
 
 async function onMessageReceived(message) {
-  // Alert.alert(JSON.stringify(message))
+  console.log('MESSAGE', message)
 }
 
 messaging().onMessage(onMessageReceived)
