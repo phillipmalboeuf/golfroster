@@ -86,6 +86,8 @@ export const Notifications: FunctionComponent<{}> = props => {
                 event_accepted: () => <List.Item title={`${notification.sent_by_name} has accepted your invitation to attend ${notification.subject_name}!`}
                   titleNumberOfLines={2}
                   right={() => <Caption>{moment(notification.date).fromNow()}</Caption>} />,
+                upcoming_event: () => <List.Item title={`${notification.subject_name}`}
+                  description={`is upcoming ${moment(notification.subject_date).fromNow()}!`} />,
               }[notification.type]()}
             </Link>)}
           </List.Section> : <Empty label={'Your notifications will appear here.'} icon={'bell'} />}</Observer>

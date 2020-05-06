@@ -9,6 +9,7 @@ export const Notification = types.model({
   type: types.string,
   subject_id: types.string,
   subject_name: types.string,
+  subject_date: types.maybe(dateType),
   sent_by_id: types.maybe(types.string),
   sent_by_name: types.maybe(types.string),
   date: dateType,

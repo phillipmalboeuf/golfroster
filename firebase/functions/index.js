@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const algoliasearch = require('algoliasearch');
+const moment = require('moment');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -53,6 +54,7 @@ async function sendNotification(
   type,
   subject_id,
   subject_name,
+  subject_date,
 ) {
   const sent_by =
     sent_by_id &&
@@ -61,8 +63,6 @@ async function sendNotification(
       .collection('players')
       .doc(sent_by_id)
       .get()).data();
-
-  console.log('SENDING', player_id);
 
   return admin
     .firestore()
@@ -77,6 +77,7 @@ async function sendNotification(
         sent_by_id,
         sent_by_name: `${sent_by.first_name} ${sent_by.last_name}`,
       }),
+      ...(subject_date && {subject_date}),
       date: new Date(),
     });
 }
@@ -124,6 +125,12 @@ exports.sendCloudNotification = functions.firestore
               notification.subject_name
             }`,
           },
+          upcoming_event: {
+            title: `Upcoming Event`,
+            body: `${notification.subject_name} is upcoming ${moment(
+              notification.subject_date,
+            ).fromNow()}`,
+          },
         }[notification.type],
         data: {
           type: 'notification',
@@ -152,12 +159,9 @@ exports.sendCloudChat = functions.firestore
       ),
     );
 
-    console.log(players);
-
     const sender = await players.find(
       player => message.player_id === player.id,
     );
-    console.log(sender);
 
     return players.map(
       async player =>
@@ -223,8 +227,6 @@ exports.friendRequest = functions.firestore
       friend => !previous.friends.includes(friend),
     );
 
-    console.log(friends);
-
     return friends.map(friend => {
       return sendNotification(
         friend,
@@ -252,6 +254,47 @@ exports.acceptedNotification = functions.firestore
         notification.subject_name,
       )
     );
+  });
+
+async function notifyEvents(date) {
+  const from = moment(date).subtract(5, 'minutes');
+  const to = moment(date).add(5, 'minutes');
+
+  const events = (await admin
+    .firestore()
+    .collection('events')
+    .where('start_date', '>=', from.toDate())
+    .where('start_date', '<=', to.toDate())
+    .get()).docs;
+
+  events.forEach(event => {
+    const data = event.data();
+    data.members.forEach(player_id => {
+      sendNotification(
+        player_id,
+        null,
+        'upcoming_event',
+        event.id,
+        data.name,
+        data.start_date,
+      );
+    });
+  });
+}
+
+// exports.upcoming = functions.https.onRequest((req, res) => {
+exports.upcomingEvents = functions.pubsub
+  .schedule('every 15 minutes')
+  .onRun(() => {
+    const date = new Date();
+
+    const tomorrow = moment(date).add(1, 'days');
+    const soon = moment(date).add(1, 'hours');
+
+    notifyEvents(tomorrow.toDate());
+    notifyEvents(soon.toDate());
+
+    return null;
   });
 
 const search = algoliasearch(CONFIG.algolia.id, CONFIG.algolia.key);

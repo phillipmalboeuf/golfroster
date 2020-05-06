@@ -5,7 +5,7 @@ import { Player } from './player'
 
 export const dateType = types.snapshotProcessor(types.Date, {
   preProcessor(d: FirebaseFirestoreTypes.Timestamp | Date) {
-    return (d as FirebaseFirestoreTypes.Timestamp).toDate
+    return (d && (d as FirebaseFirestoreTypes.Timestamp).toDate)
       ? (d as FirebaseFirestoreTypes.Timestamp).toDate() : d as any as Date
   },
 })
