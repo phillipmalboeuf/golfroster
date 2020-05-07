@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { FunctionComponent } from 'react'
 
-import { View, Text, Dimensions, Linking } from 'react-native'
+import { View, Text, Dimensions, Linking, Alert } from 'react-native'
 import { Button as PaperButton, FAB, Card, Paragraph } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { IconSource } from 'react-native-paper/lib/typescript/src/components/Icon'
+import { Observer } from 'mobx-react'
 
 import { StoreContext } from '../contexts/store'
 import { StylesContext } from '../contexts/styles'
@@ -20,7 +21,7 @@ export const Subscribe: FunctionComponent<{
   const styles = useContext(StylesContext)
   const { store } = useContext(StoreContext)
 
-  return <Center>
+  return <Observer>{() =><Center>
       <Padded>
         <Icon name={props.icon || 'account-card-details-outline'} size={66}
           color={styles.colors.blacks[2]} style={{ textAlign: 'center' }} />
@@ -30,7 +31,7 @@ export const Subscribe: FunctionComponent<{
         }}>Sign Up</Button>
         <Button grey compact onPress={props.onCancel}>Cancel {props.label}</Button>
       </Padded>
-    </Center>
+    </Center>}</Observer>
 }
 
 export const MembershipCard: FunctionComponent<{
@@ -38,6 +39,7 @@ export const MembershipCard: FunctionComponent<{
   const [visible, setVisible] = useState(true)
   const { sizes, colors } = useContext(StylesContext)
   const { store } = useContext(StoreContext)
+
 
   return (store.askingForPro && visible)
     ? <Card style={{ backgroundColor: colors.faded, paddingTop: sizes.base, shadowOpacity: 0 }}>
