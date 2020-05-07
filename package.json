@@ -7,7 +7,7 @@
     "ios": "react-native run-ios --simulator='iPhone 11'",
     "start": "react-native start --reset-cache",
     "web": "parcel web/index.html -p 8080 --open",
-    "build": "parcel build web/index.html",
+    "build": "parcel build web/index.html && cp web/_redirects dist/_redirects",
     "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'",
     "test": "jest",
     "lint": "eslint ."
