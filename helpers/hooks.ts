@@ -1,5 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import { StoreContext } from '../contexts/store'
+import { Group as GroupModel } from '../models/group'
+import { Instance } from 'mobx-state-tree'
 
 export function usePlayer(id: string) {
   const { store } = useContext(StoreContext)
@@ -17,6 +19,19 @@ export function usePlayer(id: string) {
   }, [])
 
   return player
+}
+
+export function usePlayerGroups(id: string) {
+  const { store } = useContext(StoreContext)
+  const [groups, setGroups] = useState<Instance<typeof GroupModel>[]>([])
+
+  useEffect(() => {
+    store.fetchPlayerGroups(id)
+      .then(setGroups)
+
+  }, [])
+
+  return groups
 }
 
 export function useGroup(id: string) {

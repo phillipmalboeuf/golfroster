@@ -85,7 +85,6 @@ const Store = types
         organizer_id: self.player.id,
         members: [self.player.id],
       })
-      console.log(event)
       yield event.save(event)
       return event
     }),
@@ -147,6 +146,13 @@ const Store = types
       const group = Group.create({ id })
       self.groups.set(id, group)
       yield group.fetch()
+    }),
+
+    fetchPlayerGroups: flow(function* fetchPlayerGroups(id: string) {
+      const snapshot: FirebaseFirestoreTypes.QuerySnapshot = yield firestore().collection('groups')
+        .where('members', 'array-contains', id)
+        .get()
+      return snapshot.docs.map(doc => doc.data() as Instance<typeof Group>)
     }),
 
     createGroup: flow(function* exists(data: typeof Group.CreationType) {

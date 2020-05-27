@@ -17,6 +17,7 @@ import { Subheader, Italic, Bold, Quote } from './text'
 import { List } from './list'
 import { timesOfDay, teeChoices, methods, money, drinks } from './player_form'
 import { MembershipCard } from './subscribe'
+import { usePlayerGroups } from '../helpers/hooks'
 
 
 export const Player: FunctionComponent<{
@@ -25,6 +26,8 @@ export const Player: FunctionComponent<{
   const { store } = useContext(StoreContext)
   const { colors, sizes } = useContext(StylesContext)
 
+  const groups = usePlayerGroups(player.id)
+  
   return <ScrollView>
     <Observer>
     {() => <>
@@ -82,15 +85,16 @@ export const Player: FunctionComponent<{
         }]} />
       </Padded>
 
-      <Padded tight>
+      {groups && groups.length && <Padded tight>
         <Subheader>{player.first_name}'s Player Groups</Subheader>
-        {/* <List sections={[{
-          items: player.clubs.map(club => ({
-            title: club,
-            link: `/clubs/${club}`,
+        <List sections={[{
+          items: groups.map(group => ({
+            title: group.name,
+            description: `${group.city}, ${group.state}`,
+            link: `/groups/${group.id}`,
           })),
-        }]} /> */}
-      </Padded>
+        }]} />
+      </Padded>}
 
       <Padded tight>
         <Subheader>{player.first_name} prefers to play</Subheader>
