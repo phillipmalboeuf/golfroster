@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>golf</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -30,7 +30,9 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>9</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>GolfRoster would access the Photo Library, solely for players to be able to upload profile photos to their accounts and to upload banners for their player groups and events. It&apos;s a matter of visual recognition between our golf players.</string>
 	<key>FacebookAppID</key>
 	<string>289945265312951</string>
 	<key>FacebookDisplayName</key>

@@ -48,7 +48,7 @@
 		00E356F21AD99517003FC87E /* golfTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = golfTests.m; sourceTree = "<group>"; };
 		02D39116245DBB4700DA196D /* golf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = golf.entitlements; path = golf/golf.entitlements; sourceTree = "<group>"; };
 		02D39119245DCF0400DA196D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../_ignore/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* golf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = golf.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* GolfRoster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GolfRoster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = golf/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = golf/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* golf.app */,
+				13B07F961A680F5B00A75B9A /* GolfRoster.app */,
 				00E356EE1AD99517003FC87E /* golfTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* golf-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* golf-tvOSTests.xctest */,
@@ -253,7 +253,7 @@
 			);
 			name = golf;
 			productName = golf;
-			productReference = 13B07F961A680F5B00A75B9A /* golf.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* GolfRoster.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* golf-tvOS */ = {
@@ -308,9 +308,9 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 7RR6T7XV64;
+						DevelopmentTeam = 54469CP2UQ;
 						LastSwiftMigration = 1120;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -764,10 +764,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = golf/golf.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7RR6T7XV64;
+				DEVELOPMENT_TEAM = 54469CP2UQ;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -780,9 +780,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = golfrosterapp;
-				PRODUCT_NAME = golf;
-				PROVISIONING_PROFILE_SPECIFIER = "GolfRoster Profile";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jessezorfas.golfrosterapp;
+				PRODUCT_NAME = GolfRoster;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -796,10 +796,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = golf/golf.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7RR6T7XV64;
+				DEVELOPMENT_TEAM = 54469CP2UQ;
 				INFOPLIST_FILE = golf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -807,9 +807,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = golfrosterapp;
-				PRODUCT_NAME = golf;
-				PROVISIONING_PROFILE_SPECIFIER = "GolfRoster Profile";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jessezorfas.golfrosterapp;
+				PRODUCT_NAME = GolfRoster;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
