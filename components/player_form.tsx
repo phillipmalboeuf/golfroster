@@ -17,6 +17,7 @@ import { Title, Subtitle } from './text'
 import { Button } from './button'
 import { Avatar, Upload } from './photos'
 import { ClubsTable } from './clubs_table'
+import { terms, privacy, disclaimer } from '../helpers/terms'
 
 export const timesOfDay = {
   early_morning: 'Early morning',
@@ -274,7 +275,7 @@ export const PlayerForm: FunctionComponent<{
           }} />}
         </FormContext.Consumer>
       </Center>,
-      !store.player.accepted_terms && <Center>
+      store.player.accepted_terms && <Center>
         <Title>
           Terms and Privacy
         </Title>
@@ -283,8 +284,9 @@ export const PlayerForm: FunctionComponent<{
           By continuing you agree to our Terms of Use and Privacy Policy.
         </Subtitle>
 
-        <Input disabled name='terms' label='Terms of Use' value={'Terms go here.'} />
-        <Input disabled name='privacy' label='Privacy Policy' value={'Privacy Policy goes here.'} />
+        <Input disabled type='multiline' name='terms' label='Terms of Use' value={terms} />
+        <Input disabled type='multiline' name='privacy' label='Privacy Policy' value={privacy} />
+        <Input disabled type='multiline' name='disclaimer' label='Disclaimer' value={disclaimer} />
       </Center>,
     ].filter(element => element as any as boolean !== false)} />
   </Form> : <Form ref={form} hideButton onSubmit={async values => {

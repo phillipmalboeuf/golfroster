@@ -15,6 +15,8 @@ import { PlayerForm } from '../components/player_form'
 import { Menu, MenuItem } from '../components/menu'
 import { List } from '../components/list'
 import { ContactForm } from '../components/contact_form'
+import { Input } from '../components/input'
+import { terms, privacy, disclaimer } from '../helpers/terms'
 
 
 export const Profile: FunctionComponent<{}> = props => {
@@ -24,6 +26,18 @@ export const Profile: FunctionComponent<{}> = props => {
   const [editing, setEditing] = useState(false)
 
   return <Switch>
+    <Route exact path='/profile/settings/terms'>
+      <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
+        <Link to='/profile/settings'><Appbar.BackAction /></Link>
+        <Appbar.Content title='Privacy & Terms of Use' />
+      </Appbar.Header>
+
+      <Padded>
+        <Input disabled type='multiline' name='terms' label='Terms of Use' value={terms} />
+        <Input disabled type='multiline' name='privacy' label='Privacy Policy' value={privacy} />
+        <Input disabled type='multiline' name='disclaimer' label='Disclaimer' value={disclaimer} />
+      </Padded>
+    </Route>
     <Route exact path='/profile/settings/help'>
       <Appbar.Header dark={false} style={{ backgroundColor: 'white' }}>
         <Link to='/profile/settings'><Appbar.BackAction /></Link>
@@ -75,6 +89,7 @@ export const Profile: FunctionComponent<{}> = props => {
             title: 'Privacy & Terms of Use',
             description: 'Review our Privacy Policy & Terms of Use',
             left: <PaperList.Icon icon='file-multiple' />,
+            link: '/profile/settings/terms',
           },
         ],
       }]} />
