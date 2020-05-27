@@ -27,7 +27,7 @@ export const Player: FunctionComponent<{
   const { colors, sizes } = useContext(StylesContext)
 
   const groups = usePlayerGroups(player.id)
-  
+
   return <ScrollView>
     <Observer>
     {() => <>
@@ -85,7 +85,7 @@ export const Player: FunctionComponent<{
         }]} />
       </Padded>
 
-      {groups && groups.length && <Padded tight>
+      {groups && !!groups.length && <Padded tight>
         <Subheader>{player.first_name}'s Player Groups</Subheader>
         <List sections={[{
           items: groups.map(group => ({
